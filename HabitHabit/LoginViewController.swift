@@ -1,0 +1,161 @@
+//
+//  ViewController.swift
+//  HabitHabit
+//
+//  Created by Ishav Desai on 3/26/21.
+//
+
+import UIKit
+import Firebase
+import GoogleSignIn
+
+class LoginViewController: UIViewController, GIDSignInDelegate {
+
+    private var onLoginSegment: Bool = true
+    private let loginSuccessSegue: String = "LoginSuccessSegue"
+    
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var confirmPasswordField: UITextField!
+    @IBOutlet weak var loginSegment: UISegmentedControl!
+    @IBOutlet weak var signInUpButton: UIButton!
+    @IBOutlet weak var loginStatus: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupGoogleLogin()
+        self.setupCustomUsernamePassword()
+    }
+    
+    private func setupGoogleLogin() -> Void {
+        GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.clientID = "789038255534-q4goruaca6g9813aroqqgugfeq6cd0ug.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.")
+            } else {
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+            }
+            return
+          }
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error, authResult == nil {
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+            } else {
+                self.loginAttempt(success: true, errorMessage: nil)
+            }
+        }
+    }
+    
+    private func setupCustomUsernamePassword() -> Void {
+        self.usernameField?.placeholder = "Username"
+        self.passwordField?.placeholder = "Password"
+        self.confirmPasswordField?.placeholder = "Confirm Password"
+        if self.onLoginSegment {
+            self.confirmPasswordField?.isHidden = true
+            self.signInUpButton?.setTitle("Sign In", for: .normal)
+        }
+        self.loginStatus?.text = ""
+        self.loginStatus?.textColor = .red
+    }
+    
+    @IBAction func changeLoginView(_ sender: Any) {
+        self.loginStatus?.text = ""
+        switch self.loginSegment.selectedSegmentIndex {
+        case 0:
+            self.onLoginSegment = true
+            self.confirmPasswordField.isHidden = true
+            self.signInUpButton?.setTitle("Sign In", for: .normal)
+        case 1:
+            self.onLoginSegment = false
+            self.confirmPasswordField.isHidden = false
+            self.signInUpButton?.setTitle("Sign Up", for: .normal)
+        default: break
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    private func checkFieldAccuracy() -> Bool {
+        if self.usernameField?.text == "" {
+            self.loginStatus?.text = "Login Failed: No Username Entered"
+            return false
+        } else if self.passwordField?.text == "" {
+            self.loginStatus?.text = "Login Failed: No Password Entered"
+            return false
+        } else if !self.onLoginSegment && self.confirmPasswordField?.text == "" {
+            self.loginStatus?.text = "Sign Up Failed: Please confirm your password"
+            return false
+        } else if !self.onLoginSegment && self.confirmPasswordField?.text != self.passwordField?.text {
+            self.loginStatus?.text = "Sign Up Failed: Please ensure the Password matches the Confirmed Password"
+            return false
+        }
+        return true
+    }
+    
+    private func loginAttempt(success: Bool, errorMessage: String?) -> Void {
+        if !success {
+            self.loginStatus?.text = "Sign In Failed: \(errorMessage!)"
+        } else {
+            self.loginStatus?.text = "Login Success"
+            performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
+        }
+    }
+    
+    private func handleSignIn(sender: Any) -> Void {
+        guard let username = self.usernameField?.text,
+              let password = self.passwordField?.text,
+              username.count > 0,
+              password.count > 0 else { return }
+        Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
+            user, error in
+            if let error = error, user == nil {
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+            } else {
+                self.loginAttempt(success: true, errorMessage: nil)
+            }
+        }
+    }
+    
+    private func handleSignUp(sender: Any) -> Void {
+        guard let username = self.usernameField?.text,
+              let password = self.passwordField?.text,
+              let confirmPassword = self.confirmPasswordField?.text,
+              username.count > 0,
+              password.count > 0,
+              confirmPassword.count > 0,
+              password == confirmPassword else { return }
+        Auth.auth().createUser(withEmail: username + "@habithabit.com", password: password) {
+            user, error in
+            if error == nil {
+                Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
+                    user, error in
+                    if let error = error, user == nil {
+                        self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                    } else {
+                        self.loginAttempt(success: true, errorMessage: nil)
+                    }
+                }
+            } else if let error = error, user == nil {
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+            }
+        }
+    }
+    
+    @IBAction func signInUpButtonPressed(_ sender: Any) {
+        if self.checkFieldAccuracy() {
+            self.onLoginSegment ? self.handleSignIn(sender: sender) : self.handleSignUp(sender: sender)
+        }
+    }
+    
+}
