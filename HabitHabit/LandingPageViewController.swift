@@ -8,6 +8,7 @@
 //REFERENCE: https://www.linkedin.com/pulse/using-ios-pageviewcontroller-without-storyboards-paul-tangen
 
 import UIKit
+import FirebaseDatabase
 
 class LandingPageViewController: UIPageViewController,
                                  UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -17,6 +18,8 @@ class LandingPageViewController: UIPageViewController,
     let pageControl = UIPageControl()
     var currentIndex: Int?
     private var pendingIndex: Int?
+    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let database: DatabaseReference = Database.database().reference()
     
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
@@ -85,28 +88,38 @@ class LandingPageViewController: UIPageViewController,
         self.delegate = self
         let initialPage = 0
         
-        let page1 = VariableViewController(pageNum:1, habitName: "running:", streak:25)
-        let page2 = VariableViewController(pageNum:2, habitName: "early rising", streak:15)
-        let page3 = VariableViewController(pageNum:3, habitName: "money moves", streak:2)
-        
-        // add the individual viewControllers to the pageViewController
-        self.pages.append(page1)
-        self.pages.append(page2)
-        self.pages.append(page3)
-        setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
-        
-        // pageControl
-        self.pageControl.frame = CGRect()
-        self.pageControl.currentPageIndicatorTintColor = UIColor.black
-        self.pageControl.pageIndicatorTintColor = UIColor.lightGray
-        self.pageControl.numberOfPages = self.pages.count
-        self.pageControl.currentPage = initialPage
-        self.view.addSubview(self.pageControl)
-        
-        self.pageControl.translatesAutoresizingMaskIntoConstraints = false
-        self.pageControl.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
-        self.pageControl.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
-        self.pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        self.pageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        var pagesToAdd: [VariableViewController] = []
+        self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
+            snapshot in
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? [String: String] else {
+                    return
+                }
+                let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
+                let streak: Int = Int(value["streak"] ?? "") ?? -1
+                if habit != "NO_HABIT_EXISTS" && streak != -1 {
+                    pagesToAdd.append(VariableViewController(pageNum: pagesToAdd.count + 1, habitName: habit, streak: streak))
+                }
+            }
+            // add the individual viewControllers to the pageViewController
+            for variableVC in pagesToAdd {
+                self.pages.append(variableVC)
+            }
+            self.setViewControllers([self.pages[initialPage]], direction: .forward, animated: true, completion: nil)
+            
+            // pageControl
+            self.pageControl.frame = CGRect()
+            self.pageControl.currentPageIndicatorTintColor = UIColor.black
+            self.pageControl.pageIndicatorTintColor = UIColor.lightGray
+            self.pageControl.numberOfPages = self.pages.count
+            self.pageControl.currentPage = initialPage
+            self.view.addSubview(self.pageControl)
+            
+            self.pageControl.translatesAutoresizingMaskIntoConstraints = false
+            self.pageControl.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
+            self.pageControl.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
+            self.pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            self.pageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        }
     }
 }
