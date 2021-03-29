@@ -38,9 +38,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.")
+                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.", usernameKey: nil)
             } else {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             }
             return
           }
@@ -48,9 +48,10 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error, authResult == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             } else {
-                self.loginAttempt(success: true, errorMessage: nil)
+                let userID: String = user.userID
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: userID)
             }
         }
     }
@@ -103,16 +104,18 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         return true
     }
     
-    private func loginAttempt(success: Bool, errorMessage: String?) -> Void {
+    private func loginAttempt(success: Bool, errorMessage: String?, usernameKey: String?) -> Void {
         if !success {
             self.loginStatus?.text = "Sign In Failed: \(errorMessage!)"
         } else {
+            let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
+            defaults.setValue(usernameKey!, forKey: "kUsernameDatabaseKey")
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
     }
     
-    private func handleSignIn(sender: Any) -> Void {
+    private func handleSignIn() -> Void {
         guard let username = self.usernameField?.text,
               let password = self.passwordField?.text,
               username.count > 0,
@@ -120,14 +123,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
             user, error in
             if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             } else {
-                self.loginAttempt(success: true, errorMessage: nil)
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
             }
         }
     }
     
-    private func handleSignUp(sender: Any) -> Void {
+    private func handleSignUp() -> Void {
         guard let username = self.usernameField?.text,
               let password = self.passwordField?.text,
               let confirmPassword = self.confirmPasswordField?.text,
@@ -141,20 +144,20 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                 Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
                     user, error in
                     if let error = error, user == nil {
-                        self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                        self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
                     } else {
-                        self.loginAttempt(success: true, errorMessage: nil)
+                        self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
                     }
                 }
             } else if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             }
         }
     }
     
     @IBAction func signInUpButtonPressed(_ sender: Any) {
         if self.checkFieldAccuracy() {
-            self.onLoginSegment ? self.handleSignIn(sender: sender) : self.handleSignUp(sender: sender)
+            self.onLoginSegment ? self.handleSignIn() : self.handleSignUp()
         }
     }
     

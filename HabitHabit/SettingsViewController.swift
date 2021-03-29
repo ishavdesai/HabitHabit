@@ -7,26 +7,32 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-
+class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    let settingsList: [String] = ["Habits"]
+    let segueIdentifiers: [String] = ["HabitScreenSegueIdentifier"]
+    let settingsTableViewCellIdentifier: String = "SettingsTableViewCell"
+    
+    @IBOutlet weak var settingsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "SETTINGS"
-        //self.tabBarItem.image = UIImage(named: "item")
-        //self.tabBarItem.selectedImage = UIImage(named: "item_selected")
-
-        // Do any additional setup after loading the view.
+        self.settingsTableView.delegate = self
+        self.settingsTableView.dataSource = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.settingsList.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.settingsTableView.dequeueReusableCell(withIdentifier: self.settingsTableViewCellIdentifier, for: indexPath as IndexPath)
+        cell.textLabel?.text = self.settingsList[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: self.segueIdentifiers[indexPath.row], sender: nil)
+    }
 
 }
