@@ -32,7 +32,6 @@ class ViewHabitsViewController: UIViewController, UITableViewDataSource, UITable
         self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) { snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else {
-                    print("ERROR IN FETCHING DATA")
                     return
                 }
                 let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
