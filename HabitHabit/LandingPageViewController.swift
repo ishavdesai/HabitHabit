@@ -101,6 +101,12 @@ class LandingPageViewController: UIPageViewController,
                     pagesToAdd.append(VariableViewController(pageNum: pagesToAdd.count + 1, habitName: habit, streak: streak))
                 }
             }
+            
+            // TODO Make a new view controller in case there are no habits for an account
+            if pagesToAdd.count == 0 {
+                pagesToAdd.append(VariableViewController(pageNum: -1, habitName: "ERROR: No habits, default view controller WIP", streak: -1))
+            }
+            
             // add the individual viewControllers to the pageViewController
             for variableVC in pagesToAdd {
                 self.pages.append(variableVC)
