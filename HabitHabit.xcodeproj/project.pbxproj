@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CB0548A2613DA9000912B0E /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB054892613DA9000912B0E /* HabitTableViewCell.swift */; };
+		0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */; };
 		3B36E99C3902D4F63AE69E87 /* Pods_HabitHabit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */; };
 		91330414260E6C780062DD7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330413260E6C780062DD7E /* AppDelegate.swift */; };
 		91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330415260E6C780062DD7E /* SceneDelegate.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CB054892613DA9000912B0E /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
+		0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeViewController.swift; sourceTree = "<group>"; };
 		15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HabitHabit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91330410260E6C780062DD7E /* HabitHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91330413260E6C780062DD7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,16 +94,18 @@
 				913305CD260E9E200062DD7E /* PeerTableViewController.swift */,
 				91330417260E6C780062DD7E /* LoginViewController.swift */,
 				913305C7260E9D840062DD7E /* VariableViewController.swift */,
-				917E27F62612722A00E6D920 /* ViewHabitsViewController.swift */,
-				913305C4260E9D4A0062DD7E /* LandingPageViewController.swift */,
 				913305CA260E9DFE0062DD7E /* SettingsViewController.swift */,
 				917E27912612322F00E6D920 /* HabitSettingsViewController.swift */,
+				91330424260E6C7A0062DD7E /* Info.plist */,
 				91330419260E6C780062DD7E /* Main.storyboard */,
 				91330451260E6F220062DD7E /* GoogleService-Info.plist */,
 				9133041F260E6C7A0062DD7E /* Assets.xcassets */,
 				91330421260E6C7A0062DD7E /* LaunchScreen.storyboard */,
-				91330424260E6C7A0062DD7E /* Info.plist */,
 				9133041C260E6C780062DD7E /* HabitHabit.xcdatamodeld */,
+				913305C4260E9D4A0062DD7E /* LandingPageViewController.swift */,
+				917E27F62612722A00E6D920 /* ViewHabitsViewController.swift */,
+				0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */,
+				0CB054892613DA9000912B0E /* HabitTableViewCell.swift */,
 			);
 			path = HabitHabit;
 			sourceTree = "<group>";
@@ -260,11 +266,13 @@
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
 				91330414260E6C780062DD7E /* AppDelegate.swift in Sources */,
+				0CB0548A2613DA9000912B0E /* HabitTableViewCell.swift in Sources */,
 				917E278F26122DEE00E6D920 /* Habit.swift in Sources */,
 				91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */,
 				917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */,
 				91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */,
 				917E27F72612722B00E6D920 /* ViewHabitsViewController.swift in Sources */,
+				0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */,
 				9133041E260E6C780062DD7E /* HabitHabit.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

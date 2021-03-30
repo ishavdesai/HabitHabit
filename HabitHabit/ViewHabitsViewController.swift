@@ -13,7 +13,7 @@ class ViewHabitsViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var habitsTableView: UITableView!
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
-    private var habitsList: [Habit] = []
+    public var habitsList: [Habit] = []
     private let habitCellIdentifier: String = "HabitCellIdentifier"
     
     override func viewDidLoad() {

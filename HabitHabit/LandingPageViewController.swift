@@ -110,6 +110,7 @@ class LandingPageViewController: UIPageViewController,
             // add the individual viewControllers to the pageViewController
             for variableVC in pagesToAdd {
                 self.pages.append(variableVC)
+                print(self.pages.count)
             }
             self.setViewControllers([self.pages[initialPage]], direction: .forward, animated: true, completion: nil)
             
