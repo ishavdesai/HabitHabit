@@ -96,6 +96,7 @@ class VariableViewController: UIViewController {
         let labelInst = UILabel()
         self.view.addSubview(labelInst)
         labelInst.text = "Habit \(self.pageNum)"
+        labelInst.textColor = .black
         labelInst.translatesAutoresizingMaskIntoConstraints = false
         labelInst.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50).isActive = true
         labelInst.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
