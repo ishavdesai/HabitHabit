@@ -10,6 +10,7 @@
 		0CB0548A2613DA9000912B0E /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB054892613DA9000912B0E /* HabitTableViewCell.swift */; };
 		0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */; };
 		3B36E99C3902D4F63AE69E87 /* Pods_HabitHabit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */; };
+		9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9110926926198110007900BE /* ProfileSettingsViewController.swift */; };
 		91330414260E6C780062DD7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330413260E6C780062DD7E /* AppDelegate.swift */; };
 		91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330415260E6C780062DD7E /* SceneDelegate.swift */; };
 		91330418260E6C780062DD7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330417260E6C780062DD7E /* LoginViewController.swift */; };
@@ -24,7 +25,6 @@
 		913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913305CD260E9E200062DD7E /* PeerTableViewController.swift */; };
 		917E278F26122DEE00E6D920 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E278E26122DEE00E6D920 /* Habit.swift */; };
 		917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E27912612322F00E6D920 /* HabitSettingsViewController.swift */; };
-		917E27F72612722B00E6D920 /* ViewHabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E27F62612722A00E6D920 /* ViewHabitsViewController.swift */; };
 		91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +32,7 @@
 		0CB054892613DA9000912B0E /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
 		0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeViewController.swift; sourceTree = "<group>"; };
 		15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HabitHabit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9110926926198110007900BE /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		91330410260E6C780062DD7E /* HabitHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91330413260E6C780062DD7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91330415260E6C780062DD7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		913305CD260E9E200062DD7E /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		917E278E26122DEE00E6D920 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		917E27912612322F00E6D920 /* HabitSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsViewController.swift; sourceTree = "<group>"; };
-		917E27F62612722A00E6D920 /* ViewHabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHabitsViewController.swift; sourceTree = "<group>"; };
 		91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		CD0276060810527DFA18B40A /* Pods-HabitHabit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHabit.release.xcconfig"; path = "Target Support Files/Pods-HabitHabit/Pods-HabitHabit.release.xcconfig"; sourceTree = "<group>"; };
 		FEE583D82C09C3D40DFC59B1 /* Pods-HabitHabit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHabit.debug.xcconfig"; path = "Target Support Files/Pods-HabitHabit/Pods-HabitHabit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +95,7 @@
 				91330417260E6C780062DD7E /* LoginViewController.swift */,
 				913305C7260E9D840062DD7E /* VariableViewController.swift */,
 				913305CA260E9DFE0062DD7E /* SettingsViewController.swift */,
+				9110926926198110007900BE /* ProfileSettingsViewController.swift */,
 				917E27912612322F00E6D920 /* HabitSettingsViewController.swift */,
 				91330424260E6C7A0062DD7E /* Info.plist */,
 				91330419260E6C780062DD7E /* Main.storyboard */,
@@ -103,7 +104,6 @@
 				91330421260E6C7A0062DD7E /* LaunchScreen.storyboard */,
 				9133041C260E6C780062DD7E /* HabitHabit.xcdatamodeld */,
 				913305C4260E9D4A0062DD7E /* LandingPageViewController.swift */,
-				917E27F62612722A00E6D920 /* ViewHabitsViewController.swift */,
 				0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */,
 				0CB054892613DA9000912B0E /* HabitTableViewCell.swift */,
 			);
@@ -263,6 +263,7 @@
 				913305C8260E9D840062DD7E /* VariableViewController.swift in Sources */,
 				913305C5260E9D4A0062DD7E /* LandingPageViewController.swift in Sources */,
 				913305CB260E9DFE0062DD7E /* SettingsViewController.swift in Sources */,
+				9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */,
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
 				91330414260E6C780062DD7E /* AppDelegate.swift in Sources */,
@@ -271,7 +272,6 @@
 				91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */,
 				917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */,
 				91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */,
-				917E27F72612722B00E6D920 /* ViewHabitsViewController.swift in Sources */,
 				0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */,
 				9133041E260E6C780062DD7E /* HabitHabit.xcdatamodeld in Sources */,
 			);

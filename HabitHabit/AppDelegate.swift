@@ -9,12 +9,23 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert],
+            completionHandler: {
+                (success, error) in
+                if success {
+                    print("Notifications Approved")
+                } else {
+                    print("Error: \(error!.localizedDescription)")
+                }
+            })
         return true
     }
     

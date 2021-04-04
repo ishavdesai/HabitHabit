@@ -273,7 +273,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xjp-Tb-Neh" userLabel="Settings Table">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <rect key="frame" x="20" y="268" width="374" height="594"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -296,21 +296,27 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c1j-ea-Gga">
+                                <rect key="frame" x="20" y="99" width="240" height="161"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qZV-Vx-X1e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="qBy-dZ-o5u"/>
                     <connections>
+                        <outlet property="profilePicture" destination="c1j-ea-Gga" id="j7J-he-WWI"/>
                         <outlet property="settingsTableView" destination="xjp-Tb-Neh" id="5Vt-EB-v5r"/>
-                        <segue destination="bwq-6R-ZFR" kind="show" identifier="HabitScreenSegueIdentifier" id="CQ7-UF-PrU"/>
+                        <segue destination="bwq-6R-ZFR" kind="show" identifier="HabitScreenSegueIdentifier" id="vz8-s7-qZ6"/>
+                        <segue destination="Xuf-tL-eYt" kind="show" identifier="ProfileScreenSegueIdentifier" id="RG0-sb-zXQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMK-uJ-ZS0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1031.8840579710145" y="525.66964285714289"/>
         </scene>
-        <!--Habit Settings View Controller-->
+        <!--Habits-->
         <scene sceneID="oEd-NO-l5l">
             <objects>
                 <viewController id="bwq-6R-ZFR" customClass="HabitSettingsViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
@@ -318,57 +324,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYl-Ix-mGP">
-                                <rect key="frame" x="166" y="235" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="View Habits"/>
-                                <connections>
-                                    <segue destination="zOL-JF-6Bx" kind="show" id="s5A-7f-R8E"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92h-8G-8xd">
-                                <rect key="frame" x="63" y="176" width="288" height="30"/>
-                                <state key="normal" title="Add a new Habit"/>
-                                <connections>
-                                    <action selector="addNewHabit:" destination="bwq-6R-ZFR" eventType="touchUpInside" id="Xn5-6c-0GT"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="IYf-Pl-A7R"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="92h-8G-8xd" firstAttribute="leading" secondItem="IYf-Pl-A7R" secondAttribute="leading" constant="151" id="0eA-kk-sdS"/>
-                            <constraint firstItem="92h-8G-8xd" firstAttribute="centerX" secondItem="bp4-7d-Xwi" secondAttribute="centerX" id="Y4r-uU-sTW"/>
-                            <constraint firstItem="92h-8G-8xd" firstAttribute="top" secondItem="IYf-Pl-A7R" secondAttribute="top" constant="31" id="hMd-jh-J2b"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="vw9-Gr-jin"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A6z-zH-mOu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1984.057971014493" y="525.66964285714289"/>
-        </scene>
-        <!--View Habits View Controller-->
-        <scene sceneID="OTF-8I-b2V">
-            <objects>
-                <viewController id="zOL-JF-6Bx" customClass="ViewHabitsViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BbU-Jd-8xd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t71-2F-WvK" userLabel="Habits Table">
-                                <rect key="frame" x="20" y="20" width="374" height="793"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7NB-HF-rqz" userLabel="Habit Table View">
+                                <rect key="frame" x="20" y="234" width="374" height="229"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="229" id="Sk4-aE-eTY"/>
+                                </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HabitCellIdentifier" textLabel="YSl-dH-jos" style="IBUITableViewCellStyleDefault" id="aGl-HB-2iW" userLabel="Habit Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HabitTableCell" textLabel="MDO-5p-dVn" style="IBUITableViewCellStyleDefault" id="4rR-Kd-xCZ">
                                         <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aGl-HB-2iW" id="x0s-k5-ZPk">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4rR-Kd-xCZ" id="rB1-Vm-5jJ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YSl-dH-jos">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MDO-5p-dVn">
                                                     <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -380,18 +350,60 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ddF-j1-LD4" userLabel="Habit Text Field">
+                                <rect key="frame" x="20" y="471" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W3g-2p-kAR" userLabel="Time Picker">
+                                <rect key="frame" x="20" y="513" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Gk-ZA-eEU">
+                                <rect key="frame" x="20" y="88" width="374" height="116"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current habits:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkd-Eb-lRe">
+                                <rect key="frame" x="166" y="212" width="82.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92h-8G-8xd">
+                                <rect key="frame" x="63" y="555" width="288" height="30"/>
+                                <state key="normal" title="Add a new Habit"/>
+                                <connections>
+                                    <action selector="addNewHabit:" destination="bwq-6R-ZFR" eventType="touchUpInside" id="Xn5-6c-0GT"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="KL5-lJ-nKc"/>
+                        <viewLayoutGuide key="safeArea" id="IYf-Pl-A7R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="92h-8G-8xd" firstAttribute="leading" secondItem="IYf-Pl-A7R" secondAttribute="leading" constant="63" id="0eA-kk-sdS"/>
+                            <constraint firstItem="92h-8G-8xd" firstAttribute="centerX" secondItem="bp4-7d-Xwi" secondAttribute="centerX" id="Y4r-uU-sTW"/>
+                            <constraint firstItem="7NB-HF-rqz" firstAttribute="leading" secondItem="bp4-7d-Xwi" secondAttribute="leadingMargin" id="eHu-L2-NFM"/>
+                            <constraint firstItem="92h-8G-8xd" firstAttribute="top" secondItem="IYf-Pl-A7R" secondAttribute="top" constant="467" id="hMd-jh-J2b"/>
+                            <constraint firstItem="7NB-HF-rqz" firstAttribute="centerX" secondItem="xkd-Eb-lRe" secondAttribute="centerX" id="hdh-Kx-S6A"/>
+                            <constraint firstItem="xkd-Eb-lRe" firstAttribute="top" secondItem="IYf-Pl-A7R" secondAttribute="top" constant="124" id="mSM-hs-jgq"/>
+                            <constraint firstItem="xkd-Eb-lRe" firstAttribute="centerX" secondItem="92h-8G-8xd" secondAttribute="centerX" id="nkB-9C-QS3"/>
+                            <constraint firstItem="7NB-HF-rqz" firstAttribute="top" secondItem="xkd-Eb-lRe" secondAttribute="bottom" constant="8" id="ym3-ig-wqK"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="zoW-qp-EZO"/>
+                    <navigationItem key="navigationItem" title="Habits" id="vw9-Gr-jin"/>
                     <connections>
-                        <outlet property="habitsTableView" destination="t71-2F-WvK" id="c4w-Fz-4kG"/>
+                        <outlet property="habitTextField" destination="ddF-j1-LD4" id="sK3-ok-jJK"/>
+                        <outlet property="habitsTableView" destination="7NB-HF-rqz" id="buS-hn-UOH"/>
+                        <outlet property="profilePicture" destination="3Gk-ZA-eEU" id="etn-Eq-QV1"/>
+                        <outlet property="timePicker" destination="W3g-2p-kAR" id="vpv-av-8SO"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C2h-RU-e4q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A6z-zH-mOu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984.057971014493" y="1251.5625"/>
+            <point key="canvasLocation" x="1984.057971014493" y="525.66964285714289"/>
         </scene>
         <!--Item-->
         <scene sceneID="eae-ga-6LV">
@@ -461,6 +473,47 @@
             </objects>
             <point key="canvasLocation" x="-1807.2463768115942" y="669.64285714285711"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="2kG-8h-Y1u">
+            <objects>
+                <viewController id="Xuf-tL-eYt" customClass="ProfileSettingsViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pLC-B3-oOV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-8x-J4F">
+                                <rect key="frame" x="20" y="115" width="374" height="355"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnU-uT-MUr">
+                                <rect key="frame" x="135" y="542" width="145" height="30"/>
+                                <state key="normal" title="Change Profile Photo">
+                                    <color key="titleColor" systemColor="systemOrangeColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeProfilePicture:" destination="Xuf-tL-eYt" eventType="touchUpInside" id="X5U-2E-KcD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="717-nq-9CR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QnU-uT-MUr" firstAttribute="centerX" secondItem="pLC-B3-oOV" secondAttribute="centerX" id="GaM-64-HXf"/>
+                            <constraint firstItem="Mcm-8x-J4F" firstAttribute="centerX" secondItem="QnU-uT-MUr" secondAttribute="centerX" id="IJ5-PS-G2f"/>
+                            <constraint firstItem="Mcm-8x-J4F" firstAttribute="leading" secondItem="717-nq-9CR" secondAttribute="leading" constant="20" id="JQk-gX-riV"/>
+                            <constraint firstItem="Mcm-8x-J4F" firstAttribute="top" secondItem="717-nq-9CR" secondAttribute="top" constant="27" id="RLb-Pq-sIC"/>
+                            <constraint firstItem="QnU-uT-MUr" firstAttribute="top" secondItem="Mcm-8x-J4F" secondAttribute="bottom" constant="72" id="irX-rZ-E9n"/>
+                            <constraint firstItem="717-nq-9CR" firstAttribute="bottom" secondItem="QnU-uT-MUr" secondAttribute="bottom" constant="241" id="jac-ld-Fzj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="D0B-Xo-e1T"/>
+                    <connections>
+                        <outlet property="profilePicture" destination="Mcm-8x-J4F" id="4Ek-eg-HXy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tun-TQ-8ge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031.8840579710145" y="1293.75"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
@@ -468,6 +521,9 @@
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
