@@ -20,7 +20,7 @@ class LandingPageViewController: UIPageViewController,
     private var pendingIndex: Int?
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
-    
+    private var habitsList: [Habit] = []
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return pages.count
@@ -30,7 +30,7 @@ class LandingPageViewController: UIPageViewController,
         return 0
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         pendingIndex = navigationController?.viewControllers.firstIndex(of: self)
     }
 
@@ -78,16 +78,19 @@ class LandingPageViewController: UIPageViewController,
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "HOME"
-        //self.tabBarItem.image = UIImage(named: "item")
-        //self.tabBarItem.selectedImage = UIImage(named: "item_selected")
-        // Do any additional setup after loading the view.
-        self.dataSource = self
-        self.delegate = self
+    private func makeHabit(value: [String: String]) -> (Bool, Habit?) {
+        let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
+        let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"
+        let streak: Int = Int(value["streak"] ?? "") ?? -1
+        let dateString: String = value["dates"] ?? ""
+        let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
+        let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
+        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind) : nil
+        return (habitExists, habitResult)
+    }
+    
+    private func readFromDatabase() -> Void {
         let initialPage = 0
-        
         var pagesToAdd: [VariableViewController] = []
         self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
             snapshot in
@@ -95,30 +98,28 @@ class LandingPageViewController: UIPageViewController,
                 guard let value = child.value as? [String: String] else {
                     return
                 }
-                let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
-                let streak: Int = Int(value["streak"] ?? "") ?? -1
-                if habit != "NO_HABIT_EXISTS" && streak != -1 {
-                    pagesToAdd.append(VariableViewController(pageNum: pagesToAdd.count + 1, habitName: habit, streak: streak))
+                let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: value)
+                if habitExists {
+                    self.habitsList.append(habit!)
                 }
             }
             
-            // TODO Make a new view controller in case there are no habits for an account
-            if pagesToAdd.count == 0 {
-                pagesToAdd.append(VariableViewController(pageNum: -1, habitName: "Default Screen", streak: -1))
+            for (index, habit) in self.habitsList.enumerated() {
+                pagesToAdd.append(VariableViewController(pageNum: index + 1, habitName: habit.habit, streak: habit.streak))
             }
+            pagesToAdd.append(VariableViewController(pageNum: self.habitsList.count + 1, habitName: "Add a habit", streak: -1))
             
             // add the individual viewControllers to the pageViewController
             for variableVC in pagesToAdd {
                 self.pages.append(variableVC)
                 print(self.pages.count)
             }
-            self.setViewControllers([self.pages[initialPage]], direction: .forward, animated: true, completion: nil)
-            
+            self.setViewControllers([self.pages[initialPage]], direction: .forward, animated: false, completion: nil)
             // pageControl
             self.pageControl.frame = CGRect()
             self.pageControl.currentPageIndicatorTintColor = UIColor.black
             self.pageControl.pageIndicatorTintColor = UIColor.lightGray
-            self.pageControl.numberOfPages = self.pages.count
+            self.pageControl.numberOfPages = self.habitsList.count
             self.pageControl.currentPage = initialPage
             self.view.addSubview(self.pageControl)
             
@@ -128,5 +129,24 @@ class LandingPageViewController: UIPageViewController,
             self.pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
             self.pageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "HOME"
+        self.dataSource = self
+        self.delegate = self
+        self.readFromDatabase()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.readFromDatabase()
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.habitsList.removeAll()
+        self.pages.removeAll()
+        super.viewDidDisappear(animated)
     }
 }
