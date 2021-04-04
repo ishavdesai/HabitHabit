@@ -32,7 +32,7 @@ class VariableViewController: UIViewController {
 
     let updateBtn:UIButton = {
         let btn = UIButton(type:.system)
-        btn.backgroundColor = .blue
+        btn.backgroundColor = .systemBlue
         btn.setTitle("Update Habit", for: .normal)
         btn.tintColor = .white
         btn.layer.cornerRadius = 5
@@ -46,6 +46,7 @@ class VariableViewController: UIViewController {
         header.text = "Your habit streak is:"
         header.translatesAutoresizingMaskIntoConstraints = false
         header.font = UIFont(name:"GillSans", size: 25.0)
+        header.textColor = .black
         return header
     }()
     
