@@ -92,7 +92,8 @@ class LandingPageViewController: UIPageViewController,
     private func readFromDatabase() -> Void {
         let initialPage = 0
         var pagesToAdd: [VariableViewController] = []
-        self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
+
+        self.database.child(self.databaseUsernameKey).child("Habit").observe(.value) {
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else {
@@ -105,15 +106,30 @@ class LandingPageViewController: UIPageViewController,
             }
             
             for (index, habit) in self.habitsList.enumerated() {
+                // dont change pagenum:index+1
                 pagesToAdd.append(VariableViewController(pageNum: index + 1, habitName: habit.habit, streak: habit.streak))
             }
+            
+            // uundo to this
+            /* NOTE FROM ZACH: Commenting might break, testing
             pagesToAdd.append(VariableViewController(pageNum: self.habitsList.count + 1, habitName: "Add a habit", streak: -1))
+            */
             
             // add the individual viewControllers to the pageViewController
             for variableVC in pagesToAdd {
                 self.pages.append(variableVC)
                 print(self.pages.count)
             }
+            
+            if self.pages.count == 0 {
+                self.pages.append(CreateHabitVariableViewController())
+                self.pages.append(CreateHabitVariableViewController())
+            }
+            
+            if self.pages.count == 1 {
+                self.pages.append(CreateHabitVariableViewController())
+            }
+            
             self.setViewControllers([self.pages[initialPage]], direction: .forward, animated: false, completion: nil)
             // pageControl
             self.pageControl.frame = CGRect()
@@ -133,20 +149,43 @@ class LandingPageViewController: UIPageViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "HOME"
         self.dataSource = self
         self.delegate = self
-        self.readFromDatabase()
+        
+        //self.readFromDatabase()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.readFromDatabase()
+        self.dataSource = self
         super.viewDidAppear(animated)
+        print("Reading from database")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         self.habitsList.removeAll()
         self.pages.removeAll()
-        super.viewDidDisappear(animated)
+        self.dataSource = nil
+        print("Cleared local data")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.dataSource = self
+        print("Tachibana Rui")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dataSource = nil
+    }
+    
+    func refreshView() {
+        self.habitsList.removeAll()
+        self.pages.removeAll()
+        self.dataSource = nil
+        self.dataSource = self
+        self.readFromDatabase()
+        print("Refreshed!")
+    }
+    
 }

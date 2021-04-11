@@ -20,6 +20,17 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var timePicker: UITextField!
     let timePickerView: UIDatePicker = UIDatePicker()
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var addHabitButton: UIButton!
+    @IBOutlet weak var currentHabitsLabel: UILabel!
+    
+    
+    func configureConstraints() {
+        currentHabitsLabel.topAnchor.constraint(equalTo: habitsTableView.bottomAnchor, constant:10).isActive = true
+        habitsTableView.topAnchor.constraint(equalTo: currentHabitsLabel.bottomAnchor, constant:10).isActive = true
+        habitTextField.bottomAnchor.constraint(equalTo: timePicker.topAnchor, constant:15).isActive = true
+        timePicker.topAnchor.constraint(equalTo: habitTextField.bottomAnchor, constant:10).isActive = true
+        addHabitButton.topAnchor.constraint(equalTo:timePicker.bottomAnchor, constant:55).isActive = true
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -30,14 +41,26 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         self.habitsTableView.delegate = self
         self.habitsTableView.dataSource = self
         self.setupTextFields()
+        //self.configureConstraints()
         self.setupPicture()
         self.readHabitsFromDatabase()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupPicture()
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let storyboard = UIStoryboard(name:"Main", bundle:nil)
+        let landingPageView = storyboard.instantiateViewController(withIdentifier: "LandingPageVCID") as? LandingPageViewController
+        landingPageView?.refreshView()
+    }
+
     
     private func setupPicture() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
@@ -248,5 +271,4 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
     }
-    
 }

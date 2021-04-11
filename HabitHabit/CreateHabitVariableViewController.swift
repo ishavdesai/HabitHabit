@@ -1,26 +1,18 @@
 //
-//  LandingPageViewController.swift
-//  HabitHabit-Zach
+//  CreateHabitVariableViewController.swift
+//  HabitHabit
 //
-//  Created by Zach on 3/26/21.
+//  Created by Ally on 4/4/21.
 //
-//Reference: https://www.softauthor.com/create-uiviewcontroller-programmatically-swift/
 
 import UIKit
 
-class VariableViewController: UIViewController {
+class CreateHabitVariableViewController: UIViewController {
+
+    var habitText:String = "Try adding more habits."
     
-    var pageNum:Int = 0
-    var habitName:String = "null"
-    var streak:Int = 0
-    var habitText:String = "placeholder"
-    
-    convenience init(pageNum:Int, habitName:String, streak:Int) {
+    convenience init() {
         self.init(nibName:nil, bundle:nil)
-        self.pageNum = pageNum
-        self.habitName = habitName
-        self.habitText = "Your \(habitName) streak is:"
-        self.streak = streak
     }
     
     private let loginContentView:UIView = {
@@ -33,18 +25,16 @@ class VariableViewController: UIViewController {
     let updateBtn:UIButton = {
         let btn = UIButton(type:.system)
         btn.backgroundColor = .systemBlue
-        btn.setTitle("Update Habit", for: .normal)
+        btn.setTitle("Manage Habits", for: .normal)
         btn.tintColor = .white
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(onPressUpdate), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(createHabitButtonPress), for: .allTouchEvents)
         return btn
     }()
     
-    @objc func onPressUpdate() {
-        print("i")
-        
+    @objc func createHabitButtonPress() {
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
         let habitManagerView = storyboard.instantiateViewController(withIdentifier: "HabitSettingsVCID")
         self.present(habitManagerView, animated:true, completion:nil)
@@ -52,7 +42,7 @@ class VariableViewController: UIViewController {
     
     private let headerLabel:UILabel = {
         let header = UILabel()
-        header.text = "Your habit streak is:"
+        header.text = ""
         header.translatesAutoresizingMaskIntoConstraints = false
         header.font = UIFont(name:"GillSans", size: 25.0)
         header.textColor = .black
@@ -61,7 +51,7 @@ class VariableViewController: UIViewController {
     
     private let streakLabel:UILabel = {
         let streak = UILabel()
-        streak.text = "Placeholder Streak"
+        streak.text = ""
         streak.font = UIFont(name:"GillSans", size: 45.0)
         streak.translatesAutoresizingMaskIntoConstraints = false
         return streak
@@ -75,7 +65,6 @@ class VariableViewController: UIViewController {
         loginContentView.addSubview(headerLabel)
         headerLabel.text = self.habitText
         loginContentView.addSubview(streakLabel)
-        streakLabel.text = String(self.streak)
         loginContentView.addSubview(updateBtn)
         view.addSubview(loginContentView)
 
@@ -104,7 +93,6 @@ class VariableViewController: UIViewController {
         // label
         let labelInst = UILabel()
         self.view.addSubview(labelInst)
-        labelInst.text = "Habit \(self.pageNum)"
         labelInst.textColor = .black
         labelInst.translatesAutoresizingMaskIntoConstraints = false
         labelInst.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50).isActive = true
@@ -115,8 +103,6 @@ class VariableViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     //self.tabBarItem.image = UIImage(named: "item")
     //self.tabBarItem.selectedImage = UIImage(named: "item_selected")
     // Do any additional setup after loading the view.
