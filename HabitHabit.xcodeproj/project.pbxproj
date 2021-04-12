@@ -14,6 +14,8 @@
 		3002F23A2620CE0D00FF495E /* PeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3002F2392620CE0D00FF495E /* PeerTableViewCell.swift */; };
 		3B36E99C3902D4F63AE69E87 /* Pods_HabitHabit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */; };
 		9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9110926926198110007900BE /* ProfileSettingsViewController.swift */; };
+		912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */; };
+		912992C72624F1940097DB7D /* HabitImageMagnifierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */; };
 		91330414260E6C780062DD7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330413260E6C780062DD7E /* AppDelegate.swift */; };
 		91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330415260E6C780062DD7E /* SceneDelegate.swift */; };
 		91330418260E6C780062DD7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330417260E6C780062DD7E /* LoginViewController.swift */; };
@@ -42,6 +44,8 @@
 		3002F232261F7FD600FF495E /* ImageMagnificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMagnificationViewController.swift; sourceTree = "<group>"; };
 		3002F2392620CE0D00FF495E /* PeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewCell.swift; sourceTree = "<group>"; };
 		9110926926198110007900BE /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
+		912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageCircleCollectionViewCell.swift; sourceTree = "<group>"; };
+		912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageMagnifierViewController.swift; sourceTree = "<group>"; };
 		91330410260E6C780062DD7E /* HabitHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91330413260E6C780062DD7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91330415260E6C780062DD7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,10 +104,12 @@
 			isa = PBXGroup;
 			children = (
 				91330413260E6C780062DD7E /* AppDelegate.swift */,
+				912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */,
 				91330415260E6C780062DD7E /* SceneDelegate.swift */,
 				917E278E26122DEE00E6D920 /* Habit.swift */,
 				91E1240B2623993200048BB3 /* HabitBuddiesManagerViewController.swift */,
 				91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */,
+				912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */,
 				913305CD260E9E200062DD7E /* PeerTableViewController.swift */,
 				91330417260E6C780062DD7E /* LoginViewController.swift */,
 				913305C7260E9D840062DD7E /* VariableViewController.swift */,
@@ -290,11 +296,13 @@
 				CE185142261A5C5E00CB994A /* CreateHabitVariableViewController.swift in Sources */,
 				91E1240C2623993200048BB3 /* HabitBuddiesManagerViewController.swift in Sources */,
 				917E278F26122DEE00E6D920 /* Habit.swift in Sources */,
+				912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */,
 				91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */,
 				917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */,
 				3002F233261F7FD600FF495E /* ImageMagnificationViewController.swift in Sources */,
 				0C0EDD8B2622587800CE2806 /* DetailedHabitViewController.swift in Sources */,
 				91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */,
+				912992C72624F1940097DB7D /* HabitImageMagnifierViewController.swift in Sources */,
 				0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */,
 				3002F23A2620CE0D00FF495E /* PeerTableViewCell.swift in Sources */,
 				9133041E260E6C780062DD7E /* HabitHabit.xcdatamodeld in Sources */,

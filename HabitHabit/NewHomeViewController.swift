@@ -151,7 +151,12 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
     }
     
     private func setupAndStoreTakenImage(image: UIImage) -> Void {
-        guard let imageData = image.pngData() else { return }
+        let todayDate: Date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "LLLL dd, yyyy"
+        let imageText: String = df.string(from: todayDate)
+        let imageToAdd: UIImage = self.textToImage(drawText: imageText, inImage: image, atPoint: CGPoint(x: 100, y: 100))
+        guard let imageData = imageToAdd.pngData() else { return }
         let randomNumber: Int = Int.random(in: 0..<1_000_000)
         self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).putData(imageData, metadata: nil, completion: {
             _, error in
@@ -172,7 +177,7 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                             currentURLS.append(urlString)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("imageUrls").setValue(currentURLS.joined(separator: ","))
                             var currentDates = habitFromDatabase!.dates
-                            currentDates.append(Date())
+                            currentDates.append(todayDate)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
                             if currentDates.count == 1 {
                                 self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(1))
@@ -189,6 +194,29 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                 }
             })
         })
+    }
+    
+    // from https://stackoverflow.com/questions/28906914/how-do-i-add-text-to-an-image-in-ios-swift
+    private func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+        let textColor = UIColor.white
+        let textFont = UIFont(name: "Helvetica Bold", size: 24)!
+
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+
+        let textFontAttributes = [
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            ] as [NSAttributedString.Key : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
     }
     
     private func stringifyDateArray(dates: [Date]) -> [String] {
