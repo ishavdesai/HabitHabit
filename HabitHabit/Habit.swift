@@ -13,6 +13,18 @@ class Habit {
     var streak: Int
     var dates: [Date]
     var imageUrls: [String]
+    var uncheckedImageUrls: [String]
+    var uncheckedDates: [Date]
+    
+    init() {
+        self.habit = ""
+        self.timeToRemind = ""
+        self.streak = 0
+        self.dates = []
+        self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
+    }
     
     init(habit: String) {
         self.habit = habit
@@ -20,6 +32,8 @@ class Habit {
         self.streak = 0
         self.dates = []
         self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
     }
     
     init(habit: String, timeToRemind: String) {
@@ -28,6 +42,8 @@ class Habit {
         self.streak = 0
         self.dates = []
         self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
     }
     
     init(habit: String, streak: Int) {
@@ -36,6 +52,8 @@ class Habit {
         self.streak = streak
         self.dates = []
         self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date]) {
@@ -44,6 +62,8 @@ class Habit {
         self.streak = streak
         self.dates = dates
         self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String) {
@@ -52,6 +72,8 @@ class Habit {
         self.dates = dates
         self.timeToRemind = timeToRemind
         self.imageUrls = []
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String]) {
@@ -60,15 +82,37 @@ class Habit {
         self.dates = dates
         self.timeToRemind = timeToRemind
         self.imageUrls = imageUrls
+        self.uncheckedImageUrls = []
+        self.uncheckedDates = []
+    }
+    
+    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String]) {
+        self.habit = habit
+        self.streak = streak
+        self.timeToRemind = timeToRemind
+        self.dates = dates
+        self.imageUrls = imageUrls
+        self.uncheckedImageUrls = uncheckedImageUrls
+        self.uncheckedDates = []
+    }
+    
+    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date]) {
+        self.habit = habit
+        self.streak = streak
+        self.timeToRemind = timeToRemind
+        self.dates = dates
+        self.imageUrls = imageUrls
+        self.uncheckedImageUrls = uncheckedImageUrls
+        self.uncheckedDates = uncheckedDates
     }
     
     func toString() -> String {
         return self.habit
     }
     
-    func stringifyDateArray() -> [String] {
+    func stringifyDateArray(datesParam: [Date]) -> [String] {
         var result: [String] = []
-        for date in self.dates {
+        for date in datesParam {
             result.append(date.description)
         }
         return result
@@ -79,8 +123,10 @@ class Habit {
             "habit": self.habit,
             "streak": String(self.streak),
             "timeToRemind": self.timeToRemind,
-            "dates": self.stringifyDateArray().joined(separator: ","),
-            "imageUrls": self.imageUrls.joined(separator: ",")
+            "dates": self.stringifyDateArray(datesParam: self.dates).joined(separator: ","),
+            "imageUrls": self.imageUrls.joined(separator: ","),
+            "uncheckedImageUrls": self.uncheckedImageUrls.joined(separator: ","),
+            "uncheckedDates": self.stringifyDateArray(datesParam: self.uncheckedDates).joined(separator: ",")
         ]
     }
     
@@ -93,7 +139,11 @@ class Habit {
             return false
         } else if self.timeToRemind != habit.timeToRemind {
             return false
-        } else if self.imageUrls.count != self.imageUrls.count {
+        } else if self.imageUrls.count != habit.imageUrls.count {
+            return false
+        } else if self.uncheckedImageUrls.count != habit.uncheckedImageUrls.count {
+            return false
+        } else if self.uncheckedDates.count != habit.uncheckedDates.count{
             return false
         } else {
             for (index, _) in self.dates.enumerated() {

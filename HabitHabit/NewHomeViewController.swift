@@ -75,10 +75,14 @@ class NewHomeViewController: UIViewController {
         let streak: Int = Int(value["streak"] ?? "") ?? -1
         let dateString: String = value["dates"] ?? ""
         let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
+        let uncheckedDateString: String = value["uncheckedDates"] ?? ""
+        let uncheckedDates: [Date] = (uncheckedDateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: uncheckedDateString.components(separatedBy: ","))
         let imageUrlsString: String = value["imageUrls"] ?? ""
         let imageUrls: [String] = (imageUrlsString == "") ? [] : imageUrlsString.components(separatedBy: ",")
+        let uncheckedImageUrlsString: String = value["uncheckedImageUrls"] ?? ""
+        let uncheckedImageUrls: [String] = (uncheckedImageUrlsString == "") ? [] : uncheckedImageUrlsString.components(separatedBy: ",")
         let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
-        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls) : nil
+        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates) : nil
         return (habitExists, habitResult)
     }
     
@@ -176,9 +180,15 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                             var currentURLS = habitFromDatabase!.imageUrls
                             currentURLS.append(urlString)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("imageUrls").setValue(currentURLS.joined(separator: ","))
+                            var currentUncheckedURLS = habitFromDatabase!.uncheckedImageUrls
+                            currentUncheckedURLS.append(urlString)
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedImageUrls").setValue(currentUncheckedURLS.joined(separator: ","))
                             var currentDates = habitFromDatabase!.dates
                             currentDates.append(todayDate)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
+                            var uncheckedDates = habitFromDatabase!.uncheckedDates
+                            uncheckedDates.append(todayDate)
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedDates").setValue(self.stringifyDateArray(dates: uncheckedDates).joined(separator: ","))
                             if currentDates.count == 1 {
                                 self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(1))
                             } else if currentDates.count >= 2 {
