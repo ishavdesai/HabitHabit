@@ -18,7 +18,7 @@ class LandingPageViewController: UIPageViewController,
     let pageControl = UIPageControl()
     var currentIndex: Int?
     private var pendingIndex: Int?
-    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
     private var habitsList: [Habit] = []
     

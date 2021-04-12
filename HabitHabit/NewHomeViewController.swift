@@ -13,15 +13,21 @@ class NewHomeViewController: UIViewController {
     
     @IBOutlet weak var habitTableView: UITableView!
     
-    public var habitsList: [Habit] = []
+    private var habitsList: [Habit] = []
     
     private let database: DatabaseReference = Database.database().reference()
-    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let username: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_KEY_ERROR"
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        self.database.child(self.databaseUsernameKey).observeSingleEvent(of: .value) {
+            snapshot in
+            if !snapshot.exists() {
+                self.database.child(self.databaseUsernameKey).setValue("")
+            }
+        }
         habitTableView.delegate = self
         habitTableView.dataSource = self
                 
@@ -37,29 +43,25 @@ class NewHomeViewController: UIViewController {
 //        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
 //        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))
         
-        
-        self.database.child(self.databaseUsernameKey).child("Habit").observe(DataEventType.value) {
+        self.populateHabits()
+    }
+    
+    private func populateHabits() -> Void {
+        self.database.child(self.databaseUsernameKey).child("Habit").observe(.value) {
             snapshot in
-            
-            var list = [Habit]()
-
+            var tempHabitList: [Habit] = []
             for case let child as DataSnapshot in snapshot.children {
-
                 guard let value = child.value as? [String: String] else {
                     return
                 }
-
                 let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: value)
-
                 if habitExists {
-                    list.append(habit!)
+                    tempHabitList.append(habit!)
                 }
             }
-            
-            self.habitsList = list
+            self.habitsList = tempHabitList
             self.habitTableView.reloadData()
         }
-
     }
     
     private func makeHabit(value: [String: String]) -> (Bool, Habit?) {
@@ -112,11 +114,8 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let habit = habitsList[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "HabitCell") as! HabitTableViewCell
-        
         cell.setProperties(name: habit.habit, streak: habit.streak)
-        
         return cell
     }
     
@@ -125,13 +124,5 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         performSegue(withIdentifier: "habitPressSegue", sender: indexPath.row)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            habitsList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
+
 }

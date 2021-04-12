@@ -11,10 +11,10 @@ import UserNotifications
 
 class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
     @IBOutlet weak var habitsTableView: UITableView!
-    var habitsList: [Habit] = []
+    private var habitsList: [Habit] = []
     private let habitCellIdentifier: String = "HabitTableCell"
     @IBOutlet weak var habitTextField: UITextField!
     @IBOutlet weak var timePicker: UITextField!
@@ -46,21 +46,24 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         self.readHabitsFromDatabase()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupPicture()
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
         let landingPageView = storyboard.instantiateViewController(withIdentifier: "LandingPageVCID") as? LandingPageViewController
         landingPageView?.refreshView()
     }
-
+    
+    private func modifyImageSettings() -> Void {
+        self.profilePicture.contentMode = .scaleAspectFill
+        self.profilePicture.clipsToBounds = true
+        self.profilePicture.layer.masksToBounds = true
+        self.profilePicture.layer.cornerRadius = 150.0/2.0
+    }
     
     private func setupPicture() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
@@ -68,8 +71,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             guard let urlString = snapshot.value as? String else {
                 let image: UIImage = UIImage(named: "DefaultProfile")!
                 self.profilePicture.image = image
-                self.profilePicture.layer.masksToBounds = true
-                self.profilePicture.layer.cornerRadius = self.profilePicture.bounds.width / 2
+                self.modifyImageSettings()
                 return
             }
             guard let url = URL(string: urlString) else { return }
@@ -79,8 +81,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
                 DispatchQueue.main.async {
                     let image = UIImage(data: data)
                     self.profilePicture.image = image
-                    self.profilePicture.layer.masksToBounds = true
-                    self.profilePicture.layer.cornerRadius = self.profilePicture.bounds.width / 2
+                    self.modifyImageSettings()
                 }
             })
             task.resume()

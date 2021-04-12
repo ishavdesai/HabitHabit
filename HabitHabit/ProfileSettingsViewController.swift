@@ -14,11 +14,18 @@ class ProfileSettingsViewController: UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
-    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsernameDatabaseKey") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupPicture()
+    }
+    
+    private func modifyImageSettings() -> Void {
+        self.profilePicture.contentMode = .scaleAspectFill
+        self.profilePicture.clipsToBounds = true
+        self.profilePicture.layer.masksToBounds = true
+        self.profilePicture.layer.cornerRadius = 150.0/2.0
     }
     
     private func setupPicture() -> Void {
@@ -27,8 +34,7 @@ class ProfileSettingsViewController: UIViewController {
             guard let urlString = snapshot.value as? String else {
                 let image: UIImage = UIImage(named: "DefaultProfile")!
                 self.profilePicture.image = image
-                self.profilePicture.layer.masksToBounds = true
-                self.profilePicture.layer.cornerRadius = self.profilePicture.bounds.width / 2
+                self.modifyImageSettings()
                 return
             }
             guard let url = URL(string: urlString) else { return }
@@ -38,8 +44,7 @@ class ProfileSettingsViewController: UIViewController {
                 DispatchQueue.main.async {
                     let image = UIImage(data: data)
                     self.profilePicture.image = image
-                    self.profilePicture.layer.masksToBounds = true
-                    self.profilePicture.layer.cornerRadius = self.profilePicture.bounds.width / 2
+                    self.modifyImageSettings()
                 }
             })
             task.resume()
@@ -79,8 +84,7 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     
     private func setupAndStoreSelectedImage(image: UIImage) {
         self.profilePicture.image = image
-        self.profilePicture.layer.masksToBounds = true
-        self.profilePicture.layer.cornerRadius = self.profilePicture.bounds.width / 2
+        self.modifyImageSettings()
         guard let imageData = image.pngData() else { return }
         self.storage.child(self.databaseUsernameKey).child("ProfilePhoto.png").putData(imageData, metadata: nil, completion: { _, error in
             guard error ==  nil else { print("Failed to upload"); return }

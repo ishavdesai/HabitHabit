@@ -8,11 +8,13 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FirebaseDatabase
 
 class LoginViewController: UIViewController, GIDSignInDelegate {
 
     private var onLoginSegment: Bool = true
     private let loginSuccessSegue: String = "LoginSuccessSegue"
+    private let database: DatabaseReference = Database.database().reference()
     
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     @IBOutlet weak var usernameField: UITextField!
@@ -38,9 +40,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.", usernameKey: nil)
+                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.", usernameKey: nil, username: nil)
             } else {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
             }
             return
           }
@@ -48,10 +50,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error, authResult == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
             } else {
                 let userID: String = user.userID
-                self.loginAttempt(success: true, errorMessage: nil, usernameKey: userID)
+                let username: String = user.profile.givenName + user.profile.familyName
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: userID, username: username)
             }
         }
     }
@@ -104,13 +107,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         return true
     }
     
-    private func loginAttempt(success: Bool, errorMessage: String?, usernameKey: String?) -> Void {
+    private func loginAttempt(success: Bool, errorMessage: String?, usernameKey: String?, username: String?) -> Void {
         if !success {
             self.loginStatus?.text = "Sign In Failed: \(errorMessage!)"
         } else {
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
             defaults.setValue(usernameKey!, forKey: "kUsernameDatabaseKey")
+            defaults.setValue(username!, forKey: "kUsername")
+            
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
     }
@@ -123,9 +128,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
             user, error in
             if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
             } else {
-                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
             }
         }
     }
@@ -137,20 +142,21 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
               username.count > 0,
               password.count > 0,
               confirmPassword.count > 0,
-              password == confirmPassword else { return }
+              password == confirmPassword,
+              !(username.contains(".") || username.contains("#") || username.contains("$") || username.contains("[") || username.contains("]")) else { self.loginStatus.text = "Error in sign up information. Note: Username can't contain a ., #, $, [, or ] characters."; return }
         Auth.auth().createUser(withEmail: username + "@habithabit.com", password: password) {
             user, error in
             if error == nil {
                 Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
                     user, error in
                     if let error = error, user == nil {
-                        self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
+                        self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
                     } else {
-                        self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
+                        self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
                     }
                 }
             } else if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
             }
         }
     }
