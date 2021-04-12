@@ -118,11 +118,26 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
     
     func takePictureAndUpdateHabit(habit: Habit) {
         let imagePicker: UIImagePickerController = UIImagePickerController()
-        self.habitForImage = habit
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
-        self.present(imagePicker, animated: true)
+        let dates: [Date] = habit.dates
+        let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
+        if canAddPicture {
+            self.habitForImage = habit
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            self.present(imagePicker, animated: true)
+        } else {
+            let controller = UIAlertController(
+                title: "Unable to add picture",
+                message: "You have already made an update for the day for the habit \(habit.habit). You can check back in tomorrow",
+                preferredStyle: .alert)
+            let action = UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil)
+            controller.addAction(action)
+            present(controller, animated: true, completion: nil)
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -159,6 +174,16 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                             var currentDates = habitFromDatabase!.dates
                             currentDates.append(Date())
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
+                            if currentDates.count == 1 {
+                                self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(1))
+                            } else if currentDates.count >= 2 {
+                                let secondRecentDate = currentDates[currentDates.count - 2]
+                                if Calendar.current.isDateInYesterday(secondRecentDate) {
+                                    self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(habitFromDatabase!.streak + 1))
+                                } else {
+                                    self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(0))
+                                }
+                            }
                         }
                     }
                 }
