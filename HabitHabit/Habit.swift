@@ -12,12 +12,14 @@ class Habit {
     var timeToRemind: String
     var streak: Int
     var dates: [Date]
+    var imageUrls: [String]
     
     init(habit: String) {
         self.habit = habit
         self.timeToRemind = ""
         self.streak = 0
         self.dates = []
+        self.imageUrls = []
     }
     
     init(habit: String, timeToRemind: String) {
@@ -25,6 +27,7 @@ class Habit {
         self.timeToRemind = timeToRemind
         self.streak = 0
         self.dates = []
+        self.imageUrls = []
     }
     
     init(habit: String, streak: Int) {
@@ -32,6 +35,7 @@ class Habit {
         self.timeToRemind = ""
         self.streak = streak
         self.dates = []
+        self.imageUrls = []
     }
     
     init(habit: String, streak: Int, dates: [Date]) {
@@ -39,6 +43,7 @@ class Habit {
         self.timeToRemind = ""
         self.streak = streak
         self.dates = dates
+        self.imageUrls = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String) {
@@ -46,6 +51,15 @@ class Habit {
         self.streak = streak
         self.dates = dates
         self.timeToRemind = timeToRemind
+        self.imageUrls = []
+    }
+    
+    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String]) {
+        self.habit = habit
+        self.streak = streak
+        self.dates = dates
+        self.timeToRemind = timeToRemind
+        self.imageUrls = imageUrls
     }
     
     func toString() -> String {
@@ -65,7 +79,8 @@ class Habit {
             "habit": self.habit,
             "streak": String(self.streak),
             "timeToRemind": self.timeToRemind,
-            "dates": self.stringifyDateArray().joined(separator: ",")
+            "dates": self.stringifyDateArray().joined(separator: ","),
+            "imageUrls": self.imageUrls.joined(separator: ",")
         ]
     }
     
@@ -77,6 +92,8 @@ class Habit {
         } else if self.dates.count != habit.dates.count {
             return false
         } else if self.timeToRemind != habit.timeToRemind {
+            return false
+        } else if self.imageUrls.count != self.imageUrls.count {
             return false
         } else {
             for (index, _) in self.dates.enumerated() {
@@ -94,9 +111,10 @@ class Habit {
             print("Date: \(date)")
         }
         var result: [Date] = []
-        let dateFormatter = ISO8601DateFormatter()
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         for date in strList {
-            result.append(dateFormatter.date(from: date)!)
+            result.append(dateFormatterGet.date(from: String(date.prefix(19)))!)
         }
         return result
     }

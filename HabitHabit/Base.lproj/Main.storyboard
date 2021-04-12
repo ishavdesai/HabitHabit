@@ -166,48 +166,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U17-51-Pvx">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U17-51-Pvx">
+                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitCell" rowHeight="100" id="jqn-UD-jiP" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="374" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jqn-UD-jiP" id="4ZB-Mx-cDt" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khT-BF-eBN" userLabel="HabitName">
-                                                    <rect key="frame" x="20" y="25" width="238" height="51"/>
+                                                    <rect key="frame" x="20" y="25" width="192" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="30"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7KB-uN-xiN">
-                                                    <rect key="frame" x="347" y="35" width="49" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="onToggle:" destination="jqn-UD-jiP" eventType="valueChanged" id="3nW-y9-rzC"/>
-                                                    </connections>
-                                                </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="🔥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUT-0W-5ch">
-                                                    <rect key="frame" x="266" y="20" width="34" height="61"/>
+                                                    <rect key="frame" x="245" y="25" width="34" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW0-xM-pPo">
-                                                    <rect key="frame" x="298" y="25" width="33" height="51"/>
+                                                    <rect key="frame" x="276" y="25" width="33" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjk-mV-C3X" userLabel="Camera">
+                                                    <rect key="frame" x="317" y="28" width="46" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="cameraButtonClicked:" destination="jqn-UD-jiP" eventType="touchUpInside" id="Cwb-pU-7bE"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cameraButton" destination="fjk-mV-C3X" id="Wh2-5p-XIB"/>
                                             <outlet property="nameLabel" destination="khT-BF-eBN" id="7Ds-86-P8L"/>
                                             <outlet property="streakLabel" destination="DW0-xM-pPo" id="qey-wC-MTb"/>
                                         </connections>
@@ -217,12 +220,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hMv-00-4AE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="hMv-00-4AE" firstAttribute="trailing" secondItem="U17-51-Pvx" secondAttribute="trailing" id="1Qa-eM-7xR"/>
-                            <constraint firstItem="U17-51-Pvx" firstAttribute="leading" secondItem="hMv-00-4AE" secondAttribute="leading" id="4lX-Du-qBK"/>
-                            <constraint firstItem="hMv-00-4AE" firstAttribute="bottom" secondItem="U17-51-Pvx" secondAttribute="bottom" id="S97-J8-V3b"/>
-                            <constraint firstItem="U17-51-Pvx" firstAttribute="top" secondItem="hMv-00-4AE" secondAttribute="top" id="eVC-qR-k9t"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dhq-Sb-Iog">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="hun-BR-rRh">
@@ -239,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mib-f5-NJ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-897" y="1451"/>
+            <point key="canvasLocation" x="-897.10144927536237" y="1450.4464285714284"/>
         </scene>
         <!--Detailed Habit View Controller-->
         <scene sceneID="ytg-5J-GRk">

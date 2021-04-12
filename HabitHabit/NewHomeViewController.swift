@@ -7,14 +7,19 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
+protocol HabitImageTrackerDelegate {
+    func takePictureAndUpdateHabit(habit: Habit) -> Void
+}
 
 class NewHomeViewController: UIViewController {
     
     @IBOutlet weak var habitTableView: UITableView!
     
     private var habitsList: [Habit] = []
-    
+    private var habitForImage: Habit? = nil
+    private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let username: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_KEY_ERROR"
@@ -70,21 +75,13 @@ class NewHomeViewController: UIViewController {
         let streak: Int = Int(value["streak"] ?? "") ?? -1
         let dateString: String = value["dates"] ?? ""
         let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
+        let imageUrlsString: String = value["imageUrls"] ?? ""
+        let imageUrls: [String] = (imageUrlsString == "") ? [] : imageUrlsString.components(separatedBy: ",")
         let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
-        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind) : nil
+        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls) : nil
         return (habitExists, habitResult)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     @IBAction func onPressPlus(_ sender: Any) {
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
         let habitManagerView = storyboard.instantiateViewController(withIdentifier: "HabitSettingsVCID")
@@ -106,7 +103,7 @@ class NewHomeViewController: UIViewController {
     }
 }
 
-extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, HabitImageTrackerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return habitsList.count
@@ -115,8 +112,66 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let habit = habitsList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "HabitCell") as! HabitTableViewCell
-        cell.setProperties(name: habit.habit, streak: habit.streak)
+        cell.setProperties(habit: habit, delegate: self)
         return cell
+    }
+    
+    func takePictureAndUpdateHabit(habit: Habit) {
+        let imagePicker: UIImagePickerController = UIImagePickerController()
+        self.habitForImage = habit
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .camera
+        self.present(imagePicker, animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage else { return }
+        self.setupAndStoreTakenImage(image: image)
+    }
+    
+    private func setupAndStoreTakenImage(image: UIImage) -> Void {
+        guard let imageData = image.pngData() else { return }
+        let randomNumber: Int = Int.random(in: 0..<1_000_000)
+        self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).putData(imageData, metadata: nil, completion: {
+            _, error in
+            guard error == nil else {
+                print("Failed to upload"); return
+            }
+            self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).downloadURL(completion: {
+                url, error in
+                guard let url = url, error == nil else { return }
+                let urlString = url.absoluteString
+                self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
+                    snapshot in
+                    for case let child as DataSnapshot in snapshot.children {
+                        guard let value = child.value as? [String: String] else { return }
+                        let (habitExists, habitFromDatabase): (Bool, Habit?) = self.makeHabit(value: value)
+                        if habitExists && self.habitForImage!.equals(habit: habitFromDatabase!) {
+                            var currentURLS = habitFromDatabase!.imageUrls
+                            currentURLS.append(urlString)
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("imageUrls").setValue(currentURLS.joined(separator: ","))
+                            var currentDates = habitFromDatabase!.dates
+                            currentDates.append(Date())
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
+                        }
+                    }
+                }
+            })
+        })
+    }
+    
+    private func stringifyDateArray(dates: [Date]) -> [String] {
+        var result: [String] = []
+        for date in dates {
+            result.append(date.description)
+        }
+        return result
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
