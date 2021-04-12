@@ -14,8 +14,6 @@ class HabitImageCircleCollectionViewCell: UICollectionViewCell {
        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 150.0 / 2.0
         imageView.backgroundColor = .systemBlue
         return imageView
     }()

@@ -47,9 +47,8 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     
     private func setupCollectionView() -> Void {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 150, height: 150)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: (view.frame.size.width / 3) - 3, height: (view.frame.size.width / 3) - 3)
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.collectionView?.register(HabitImageCircleCollectionViewCell.self, forCellWithReuseIdentifier: HabitImageCircleCollectionViewCell.identifier)
         self.collectionView?.showsHorizontalScrollIndicator = false
@@ -62,7 +61,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.collectionView?.frame = CGRect(x: 0, y: 200, width: view.frame.size.width, height: 150).integral
+        self.collectionView?.frame = CGRect(x: 0, y: 200, width: view.frame.size.width, height: view.frame.size.height - 200).integral
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -73,6 +72,14 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: HabitImageCircleCollectionViewCell.identifier, for: indexPath as IndexPath) as! HabitImageCircleCollectionViewCell
         cell.configure(image: self.habitImages[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
