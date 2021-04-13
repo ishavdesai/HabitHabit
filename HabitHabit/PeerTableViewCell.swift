@@ -18,6 +18,7 @@ class PeerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        contentView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

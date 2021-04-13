@@ -17,6 +17,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.title = habit?.habit
         habitCountLabel.text = String(habit?.streak ?? 0)
         self.habitImages = self.getHabitImagesFromDatabase()
@@ -55,7 +56,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.collectionView?.register(HabitImageCircleCollectionViewCell.self, forCellWithReuseIdentifier: HabitImageCircleCollectionViewCell.identifier)
         self.collectionView?.showsHorizontalScrollIndicator = false
-        self.collectionView?.backgroundColor = .white
+        self.collectionView?.backgroundColor = self.view.backgroundColor
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         guard let myCollection = self.collectionView else { return }

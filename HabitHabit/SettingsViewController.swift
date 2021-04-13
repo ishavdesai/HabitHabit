@@ -20,6 +20,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
         self.setupPicture()

@@ -23,11 +23,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var loginSegment: UISegmentedControl!
     @IBOutlet weak var signInUpButton: UIButton!
     @IBOutlet weak var loginStatus: UILabel!
+    @IBOutlet weak var stackView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupGoogleLogin()
         self.setupCustomUsernamePassword()
+        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.googleSignInButton.colorScheme = GIDSignInButtonColorScheme(rawValue: 0)!
+        self.stackView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
     }
     
     private func setupGoogleLogin() -> Void {

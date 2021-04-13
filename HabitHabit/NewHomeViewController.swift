@@ -27,6 +27,7 @@ class NewHomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.database.child(self.databaseUsernameKey).observeSingleEvent(of: .value) {
             snapshot in
             if !snapshot.exists() {
@@ -100,10 +101,15 @@ class NewHomeViewController: UIViewController {
         if segue.identifier == "habitPressSegue",
            let nextVC = segue.destination as? DetailedHabitViewController {
             let row = sender as! Int
-            
             nextVC.habit = habitsList[row]
         }
-
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
 }
 

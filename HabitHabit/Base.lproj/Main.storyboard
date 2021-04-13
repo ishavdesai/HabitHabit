@@ -125,6 +125,7 @@
                         <outlet property="loginStatus" destination="5tL-g4-gnE" id="r2e-Mj-wXt"/>
                         <outlet property="passwordField" destination="XKs-gS-CdE" id="9bR-fd-fso"/>
                         <outlet property="signInUpButton" destination="GL5-eD-ma6" id="atj-ac-e5t"/>
+                        <outlet property="stackView" destination="3jb-it-VXq" id="8Mn-1j-8G6"/>
                         <outlet property="usernameField" destination="sPG-nq-1VA" id="yFJ-gL-Dwd"/>
                         <segue destination="aEh-pA-G1X" kind="presentation" identifier="LoginSuccessSegue" modalPresentationStyle="fullScreen" id="IGt-Ep-C7N"/>
                     </connections>
