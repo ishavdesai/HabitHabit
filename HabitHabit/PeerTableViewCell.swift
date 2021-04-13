@@ -12,8 +12,7 @@ class PeerTableViewCell: UITableViewCell {
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var denyButton: UIButton!
-    
-    
+    @IBOutlet weak var habitImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

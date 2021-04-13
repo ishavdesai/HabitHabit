@@ -29,7 +29,7 @@ class PeerTableViewController: UITableViewController, peerHabitDeleter {
         peerTableView.delegate = self
         peerTableView.dataSource = self
         
-        peerHabitList.append(Habit(habit: "bob", streak: 4, dates: []))
+        peerHabitList.append(Habit(habit: "Biking", streak: 4, dates: []))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +55,8 @@ class PeerTableViewController: UITableViewController, peerHabitDeleter {
         cell.imageButton.tag = row
         cell.checkButton.tag = row
         cell.denyButton.tag = row
-//        cell.imageButton.setImage(peerHabitList[row].image, for: .normal)
+        cell.habitImageView.image = UIImage(named: "DefaultPeerHabit")
+        cell.imageButton.setTitle("", for: .normal)
         return cell
     }
     
@@ -69,14 +70,14 @@ class PeerTableViewController: UITableViewController, peerHabitDeleter {
     
     @IBAction func checkPressed(_ sender: Any) {
         // that habit's approved count is incremented and the table view cell disappear
-        peerHabitList.remove(at: (sender as AnyObject).tag)
-        self.peerTableView.reloadData()
+        //peerHabitList.remove(at: (sender as AnyObject).tag)
+        //self.peerTableView.reloadData()
     }
     
     @IBAction func denyPressed(_ sender: Any) {
         // that habit's deny count is incremented and the table view cell disappear
-        peerHabitList.remove(at: (sender as AnyObject).tag)
-        self.peerTableView.reloadData()
+        //peerHabitList.remove(at: (sender as AnyObject).tag)
+        //self.peerTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
