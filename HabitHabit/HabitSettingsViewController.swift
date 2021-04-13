@@ -52,13 +52,6 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         self.setupPicture()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let storyboard = UIStoryboard(name:"Main", bundle:nil)
-        let landingPageView = storyboard.instantiateViewController(withIdentifier: "LandingPageVCID") as? LandingPageViewController
-        landingPageView?.refreshView()
-    }
-    
     private func modifyImageSettings() -> Void {
         self.profilePicture.contentMode = .scaleAspectFill
         self.profilePicture.clipsToBounds = true

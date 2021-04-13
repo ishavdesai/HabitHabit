@@ -8,16 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
-        <scene sceneID="eae-ga-6LV">
-            <objects>
-                <pageViewController storyboardIdentifier="LandingPageVCID" autoresizesArchivedViewToFullSize="NO" title="Home" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yzm-hx-BX4" customClass="LandingPageViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="house.fill" catalog="system" id="0R4-dY-sJw"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0In-SN-C5f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4394.202898550725" y="-119.19642857142857"/>
-        </scene>
         <!--Animation View Controller-->
         <scene sceneID="ojx-Oc-dwh">
             <objects>
