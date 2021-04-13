@@ -27,6 +27,9 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         var result: [UIImage] = []
         let sem = DispatchSemaphore.init(value: 0)
         let imageUrls = self.habit!.imageUrls
+        if imageUrls.count == 0 {
+            sem.signal()
+        }
         for index in 0..<imageUrls.count {
             guard let url = URL(string: imageUrls[index]) else { return result }
             let task = URLSession.shared.dataTask(with: url, completionHandler: {
