@@ -180,14 +180,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="chM-4n-O2h">
-                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                                <rect key="frame" x="10" y="93" width="394" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitCell" rowHeight="100" id="x38-lS-tJe" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="394" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x38-lS-tJe" id="0sm-zd-uZ8" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAE-TK-Dft" userLabel="HabitName">
@@ -235,9 +235,9 @@
                         <viewLayoutGuide key="safeArea" id="JcC-GB-h6t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JcC-GB-h6t" firstAttribute="trailing" secondItem="chM-4n-O2h" secondAttribute="trailing" constant="20" id="VyF-DT-rDe"/>
-                            <constraint firstItem="chM-4n-O2h" firstAttribute="leading" secondItem="JcC-GB-h6t" secondAttribute="leading" constant="20" id="eUe-44-l92"/>
-                            <constraint firstItem="chM-4n-O2h" firstAttribute="top" secondItem="JcC-GB-h6t" secondAttribute="top" id="gkV-GU-5kQ"/>
+                            <constraint firstItem="JcC-GB-h6t" firstAttribute="trailing" secondItem="chM-4n-O2h" secondAttribute="trailing" constant="10" id="VyF-DT-rDe"/>
+                            <constraint firstItem="chM-4n-O2h" firstAttribute="leading" secondItem="JcC-GB-h6t" secondAttribute="leading" constant="10" id="eUe-44-l92"/>
+                            <constraint firstItem="chM-4n-O2h" firstAttribute="top" secondItem="JcC-GB-h6t" secondAttribute="top" constant="5" id="gkV-GU-5kQ"/>
                             <constraint firstItem="JcC-GB-h6t" firstAttribute="bottom" secondItem="chM-4n-O2h" secondAttribute="bottom" id="xjj-eo-Cia"/>
                         </constraints>
                     </view>

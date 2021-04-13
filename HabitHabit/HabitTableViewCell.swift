@@ -28,14 +28,14 @@ class HabitTableViewCell: UITableViewCell {
         // add shadow on cell
         backgroundColor = .clear // very important
         layer.masksToBounds = false
-        layer.shadowOpacity = 0.23
-        layer.shadowRadius = 4
-        layer.shadowOffset = CGSize(width: 0, height: 0)
+        // layer.shadowOpacity = 0.23
+        // layer.shadowRadius = 4
+        // layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 10
         // add corner radius on `contentView`
-        contentView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
-        contentView.layer.cornerRadius = 8
+        contentView.backgroundColor = UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1)
+        contentView.layer.cornerRadius = 10
     }
     
     @IBAction func cameraButtonClicked(_ sender: Any) {
@@ -44,6 +44,6 @@ class HabitTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
     }
 }
