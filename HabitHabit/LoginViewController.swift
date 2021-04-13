@@ -11,7 +11,7 @@ import GoogleSignIn
 import FirebaseDatabase
 
 class LoginViewController: UIViewController, GIDSignInDelegate {
-
+    
     private var onLoginSegment: Bool = true
     private let loginSuccessSegue: String = "LoginSuccessSegue"
     private let database: DatabaseReference = Database.database().reference()
@@ -49,7 +49,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                 self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
             }
             return
-          }
+        }
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (authResult, error) in

@@ -24,7 +24,7 @@ class NewHomeViewController: UIViewController {
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let username: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_KEY_ERROR"
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
@@ -36,18 +36,18 @@ class NewHomeViewController: UIViewController {
         }
         habitTableView.delegate = self
         habitTableView.dataSource = self
-                
+        
         self.tabBarItem.title = "New Home"
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.largeTitleDisplayMode = .never
+        //        navigationItem.largeTitleDisplayMode = .never
         
         let now = Date()
         let df = DateFormatter()
         df.dateFormat = "LLLL dd, yyyy"
         navigationItem.title = df.string(from: now)
-//
-//        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
-//        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))
+        //
+        //        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
+        //        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))
         
         self.populateHabits()
     }
@@ -216,22 +216,22 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
     private func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.white
         let textFont = UIFont(name: "Helvetica Bold", size: 24)!
-
+        
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
-
+        
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.foregroundColor: textColor,
-            ] as [NSAttributedString.Key : Any]
+        ] as [NSAttributedString.Key : Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
-
+        
         let rect = CGRect(origin: point, size: image.size)
         text.draw(in: rect, withAttributes: textFontAttributes)
-
+        
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return newImage!
     }
     
@@ -248,5 +248,5 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         performSegue(withIdentifier: "habitPressSegue", sender: indexPath.row)
     }
-
+    
 }

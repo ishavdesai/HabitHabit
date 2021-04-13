@@ -10,7 +10,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class ProfileSettingsViewController: UIViewController {
-
+    
     @IBOutlet weak var profilePicture: UIImageView!
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
@@ -51,7 +51,7 @@ class ProfileSettingsViewController: UIViewController {
             task.resume()
         }
     }
-
+    
     @IBAction func changeProfilePicture(_ sender: Any) {
         let imagePicker: UIImagePickerController = UIImagePickerController()
         imagePicker.delegate = self

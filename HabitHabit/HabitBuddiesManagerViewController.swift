@@ -30,7 +30,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         self.statusLabel.text = ""
         self.usernameLabel.text = "Your username is: \(self.databaseUsernameKey)"
     }
-
+    
     private func modifyImageSettings() -> Void {
         self.profilePicture.contentMode = .scaleAspectFill
         self.profilePicture.clipsToBounds = true

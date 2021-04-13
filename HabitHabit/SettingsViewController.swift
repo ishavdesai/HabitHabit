@@ -74,5 +74,5 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.segueIdentifiers[indexPath.row], sender: nil)
     }
-
+    
 }

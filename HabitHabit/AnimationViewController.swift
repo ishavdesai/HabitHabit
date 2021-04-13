@@ -41,5 +41,5 @@ class AnimationViewController: UIViewController {
         // insert animation here
         self.performSegue(withIdentifier: self.loginViewSegue, sender: nil)
     }
-
+    
 }

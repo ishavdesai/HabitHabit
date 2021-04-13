@@ -19,5 +19,5 @@ class HabitImageMagnifierViewController: UIViewController {
         self.title = self.viewTitle!
         self.imageView.image = self.image!
     }
-
+    
 }

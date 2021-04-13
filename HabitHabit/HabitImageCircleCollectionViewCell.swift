@@ -11,7 +11,7 @@ class HabitImageCircleCollectionViewCell: UICollectionViewCell {
     static let identifier = "HabitImageCircleCollectionViewCell"
     
     private let habitImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .systemBlue

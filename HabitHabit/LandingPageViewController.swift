@@ -25,7 +25,7 @@ class LandingPageViewController: UIPageViewController,
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return pages.count
     }
-
+    
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return 0
     }
@@ -33,7 +33,7 @@ class LandingPageViewController: UIPageViewController,
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         pendingIndex = navigationController?.viewControllers.firstIndex(of: self)
     }
-
+    
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
             currentIndex = pendingIndex
@@ -92,7 +92,7 @@ class LandingPageViewController: UIPageViewController,
     private func readFromDatabase() -> Void {
         let initialPage = 0
         var pagesToAdd: [VariableViewController] = []
-
+        
         self.database.child(self.databaseUsernameKey).child("Habit").observe(.value) {
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
@@ -112,8 +112,8 @@ class LandingPageViewController: UIPageViewController,
             
             // uundo to this
             /* NOTE FROM ZACH: Commenting might break, testing
-            pagesToAdd.append(VariableViewController(pageNum: self.habitsList.count + 1, habitName: "Add a habit", streak: -1))
-            */
+             pagesToAdd.append(VariableViewController(pageNum: self.habitsList.count + 1, habitName: "Add a habit", streak: -1))
+             */
             
             // add the individual viewControllers to the pageViewController
             for variableVC in pagesToAdd {

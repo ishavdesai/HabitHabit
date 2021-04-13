@@ -103,5 +103,5 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
             destination.image = image
         }
     }
-
+    
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class HabitTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var streakLabel: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
@@ -43,7 +43,7 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-            super.layoutSubviews()
-            contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        }
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+    }
 }

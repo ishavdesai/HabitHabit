@@ -14,7 +14,7 @@ protocol peerHabitDeleter {
 }
 
 class PeerTableViewController: UITableViewController, peerHabitDeleter {
-
+    
     @IBOutlet var peerTableView: UITableView!
     
     let peerCell = "PeerCell"
@@ -63,7 +63,7 @@ class PeerTableViewController: UITableViewController, peerHabitDeleter {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
     }
-
+    
     @IBAction func imagePressed(_ sender: Any) {
         self.performSegue(withIdentifier: "imageMagnificationSegueIdentifier", sender: (sender as AnyObject).tag)
     }
