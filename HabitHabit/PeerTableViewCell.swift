@@ -9,10 +9,9 @@ import UIKit
 
 class PeerTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var imageButton: UIButton!
-    @IBOutlet weak var checkButton: UIButton!
-    @IBOutlet weak var denyButton: UIButton!
-    @IBOutlet weak var habitImageView: UIImageView!
+    @IBOutlet weak var friendHabitImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var habitLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +22,6 @@ class PeerTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
     
 }

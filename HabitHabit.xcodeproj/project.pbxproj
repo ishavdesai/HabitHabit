@@ -28,6 +28,7 @@
 		913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913305CD260E9E200062DD7E /* PeerTableViewController.swift */; };
 		917E278F26122DEE00E6D920 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E278E26122DEE00E6D920 /* Habit.swift */; };
 		917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E27912612322F00E6D920 /* HabitSettingsViewController.swift */; };
+		9197B17B26294536007B5A35 /* NameHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197B17A26294536007B5A35 /* NameHabit.swift */; };
 		91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */; };
 		91E1240C2623993200048BB3 /* HabitBuddiesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1240B2623993200048BB3 /* HabitBuddiesManagerViewController.swift */; };
 		91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */; };
@@ -57,6 +58,7 @@
 		913305CD260E9E200062DD7E /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		917E278E26122DEE00E6D920 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		917E27912612322F00E6D920 /* HabitSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsViewController.swift; sourceTree = "<group>"; };
+		9197B17A26294536007B5A35 /* NameHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameHabit.swift; sourceTree = "<group>"; };
 		91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		91E1240B2623993200048BB3 /* HabitBuddiesManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitBuddiesManagerViewController.swift; sourceTree = "<group>"; };
 		91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFriendViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				913305CD260E9E200062DD7E /* PeerTableViewController.swift */,
 				91330417260E6C780062DD7E /* LoginViewController.swift */,
 				91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */,
+				9197B17A26294536007B5A35 /* NameHabit.swift */,
 				913305CA260E9DFE0062DD7E /* SettingsViewController.swift */,
 				9110926926198110007900BE /* ProfileSettingsViewController.swift */,
 				917E27912612322F00E6D920 /* HabitSettingsViewController.swift */,
@@ -278,6 +281,7 @@
 				913305CB260E9DFE0062DD7E /* SettingsViewController.swift in Sources */,
 				9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */,
 				91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */,
+				9197B17B26294536007B5A35 /* NameHabit.swift in Sources */,
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
 				91330414260E6C780062DD7E /* AppDelegate.swift in Sources */,
