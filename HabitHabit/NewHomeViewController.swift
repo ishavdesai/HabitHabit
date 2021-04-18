@@ -126,27 +126,35 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         return cell
     }
     
+    private func displayMessage(message: String) -> Void {
+        let controller = UIAlertController(
+            title: "Unable to add picture",
+            message: message,
+            preferredStyle: .alert)
+        let action = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil)
+        controller.addAction(action)
+        present(controller, animated: true, completion: nil)
+    }
+    
     func takePictureAndUpdateHabit(habit: Habit) {
-        let imagePicker: UIImagePickerController = UIImagePickerController()
-        let dates: [Date] = habit.dates
-        let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
-        if canAddPicture {
-            self.habitForImage = habit
-            imagePicker.delegate = self
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
-            self.present(imagePicker, animated: true)
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.displayMessage(message: "Unable to access the camera. This is either a permission or emulator issue")
         } else {
-            let controller = UIAlertController(
-                title: "Unable to add picture",
-                message: "You have already made an update for the day for the habit \(habit.habit). You can check back in tomorrow",
-                preferredStyle: .alert)
-            let action = UIAlertAction(
-                title: "OK",
-                style: .default,
-                handler: nil)
-            controller.addAction(action)
-            present(controller, animated: true, completion: nil)
+            let imagePicker: UIImagePickerController = UIImagePickerController()
+            let dates: [Date] = habit.dates
+            let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
+            if canAddPicture {
+                self.habitForImage = habit
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true)
+            } else {
+                self.displayMessage(message: "You have already made an update for the day for the habit \(habit.habit). You can check back in tomorrow")
+            }
         }
     }
     

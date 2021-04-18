@@ -43,6 +43,9 @@ class AboutFriendViewController: UIViewController {
     }
     
     private func convertArrToString() -> String {
+        if self.habitNamesList.count == 0 {
+            return ""
+        }
         var result = ""
         for index in 0..<self.habitNamesList.count - 1 {
             result += "\(self.habitNamesList[index]), "
