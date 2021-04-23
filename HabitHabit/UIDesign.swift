@@ -13,8 +13,13 @@ class UIDesign {
     static func cleanupButton(button: UIButton!, dontAdjustText: Bool = false) -> Void {
         
         button.layer.borderWidth = 2
+        /*
         button.layer.borderColor = UIColor(red: 132/255, green: 55/255, blue: 135/255, alpha: 1).cgColor
         button.layer.backgroundColor = UIColor(red: 132/255, green: 55/255, blue: 135/255, alpha: 0.75).cgColor
+        */
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        button.layer.backgroundColor = UIColor.darkGray.cgColor
+        
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
         button.layer.shadowRadius = 3

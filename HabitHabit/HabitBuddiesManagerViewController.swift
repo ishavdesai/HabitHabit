@@ -102,7 +102,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     @IBAction func attemptToAddBuddy(_ sender: Any) {
         if let username: String = self.userUsernameInput.text {
             if username == "" {
-                self.statusLabel.text = "no user '\(username)'"
+                self.statusLabel.text = "Nice try QA, please enter a username"
                 return
             }
         }
