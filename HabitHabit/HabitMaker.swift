@@ -7,10 +7,7 @@
 
 import UIKit
 
-class FirebaseCommunicator {
-    
-    
-    
+class HabitMaker {
     static func makeHabit(value: [String: String]) -> (Bool, Habit?) {
         let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
         let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"

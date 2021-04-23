@@ -37,7 +37,7 @@ class ImageMagnificationViewController: UIViewController {
             snapshot in
             for case let habitChild as DataSnapshot in snapshot.children {
                 guard let habitValue = habitChild.value as? [String: String] else { return }
-                let (habitExists, habit): (Bool, Habit?) = FirebaseCommunicator.makeHabit(value: habitValue)
+                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: habitValue)
                 if habitExists && self.friendHabit.habit.equals(habit: habit!) {
                     let indexOfImage: Int = habit!.uncheckedImageUrls.firstIndex(of: self.friendHabit.imageUrl)!
                     habit!.uncheckedDates.remove(at: indexOfImage)

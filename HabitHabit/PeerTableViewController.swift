@@ -75,7 +75,7 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
                     snapshotHabit in
                     for case let childHabit as DataSnapshot in snapshotHabit.children {
                         guard let habitValue = childHabit.value as? [String: String] else { return }
-                        let (habitExists, habit): (Bool, Habit?) = FirebaseCommunicator.makeHabit(value: habitValue)
+                        let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: habitValue)
                         if habitExists {
                             for index in 0..<habit!.uncheckedImageUrls.count {
                                 self.friendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: habit!.uncheckedImageUrls[index], date: habit!.uncheckedDates[index], habit: habit!))

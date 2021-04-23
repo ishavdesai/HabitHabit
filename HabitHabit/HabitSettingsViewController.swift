@@ -115,7 +115,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habit): (Bool, Habit?) = FirebaseCommunicator.makeHabit(value: value)
+                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
                 if habitExists {
                     self.habitsList.append(habit!)
                     self.habitsTableView.reloadData()
@@ -248,7 +248,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habitFromDatabase): (Bool, Habit?) = FirebaseCommunicator.makeHabit(value: value)
+                let (habitExists, habitFromDatabase): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
                 if habitExists && habit.equals(habit: habitFromDatabase!) {
                     self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).removeValue()
                     return
