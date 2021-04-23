@@ -18,6 +18,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var userUsernameInput: UITextField!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var addBuddyButton: UIButton!
     private let aboutFriendSegue: String = "AboutFriendSegue"
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         self.buddyTableView.dataSource = self
         self.buddyTableView.delegate = self
         self.loadBuddiesFromDatabase()
+        UIDesign.cleanupButton(button: self.addBuddyButton)
         self.statusLabel.text = ""
         self.usernameLabel.text = "Your username is: \(self.databaseUsernameKey)"
     }
@@ -89,6 +91,12 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     }
     
     @IBAction func attemptToAddBuddy(_ sender: Any) {
+        if let username: String = self.userUsernameInput.text {
+            if username == "" {
+                self.statusLabel.text = "no user '\(username)'"
+                return
+            }
+        }
         let username: String = self.userUsernameInput.text!
         if self.friendUsernames.contains(username) {
             self.statusLabel.textColor = .red

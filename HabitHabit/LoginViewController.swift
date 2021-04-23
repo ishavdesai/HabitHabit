@@ -29,9 +29,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         super.viewDidLoad()
         self.setupGoogleLogin()
         self.setupCustomUsernamePassword()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
-        self.googleSignInButton.colorScheme = GIDSignInButtonColorScheme(rawValue: 0)!
-        self.stackView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.setupViewUI()
     }
     
     private func setupGoogleLogin() -> Void {
@@ -69,7 +67,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         self.confirmPasswordField?.placeholder = "Confirm Password"
         if self.onLoginSegment {
             self.confirmPasswordField?.isHidden = true
-            self.signInUpButton?.setTitle("Sign In", for: .normal)
+            self.signInUpButton?.setTitle("  Sign In  ", for: .normal)
         }
         self.loginStatus?.text = ""
         self.loginStatus?.textColor = .red
@@ -81,11 +79,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         case 0:
             self.onLoginSegment = true
             self.confirmPasswordField.isHidden = true
-            self.signInUpButton?.setTitle("Sign In", for: .normal)
+            self.signInUpButton?.setTitle("  Sign In  ", for: .normal)
         case 1:
             self.onLoginSegment = false
             self.confirmPasswordField.isHidden = false
-            self.signInUpButton?.setTitle("Sign Up", for: .normal)
+            self.signInUpButton?.setTitle("  Sign Up  ", for: .normal)
         default: break
         }
     }
@@ -169,6 +167,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         if self.checkFieldAccuracy() {
             self.onLoginSegment ? self.handleSignIn() : self.handleSignUp()
         }
+    }
+    
+    private func setupViewUI() -> Void {
+        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.googleSignInButton.colorScheme = GIDSignInButtonColorScheme(rawValue: 0)!
+        self.stackView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        
+        UIDesign.cleanupButton(button: self.signInUpButton)
     }
     
 }

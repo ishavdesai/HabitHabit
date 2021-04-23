@@ -15,6 +15,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Navbar
         UINavigationBar.appearance().barTintColor = UIColor.habit.purple
         //UINavigationBar.appearance().tintColor = .orange
