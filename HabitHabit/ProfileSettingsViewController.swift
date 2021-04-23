@@ -54,6 +54,18 @@ class ProfileSettingsViewController: UIViewController {
         }
     }
     
+    private func displaySourceTypeErrorMessage(message: String) -> Void {
+        let controller: UIAlertController = UIAlertController(
+            title: "Source Type not Available",
+            message: message,
+            preferredStyle: .alert)
+        controller.addAction(UIAlertAction(
+                                title: "OK",
+                                style: .default,
+                                handler: nil))
+        present(controller, animated: true, completion: nil)
+    }
+    
     @IBAction func changeProfilePicture(_ sender: Any) {
         let imagePicker: UIImagePickerController = UIImagePickerController()
         imagePicker.delegate = self
@@ -66,15 +78,23 @@ class ProfileSettingsViewController: UIViewController {
             title: "Photo Library",
             style: .default,
             handler: {_ in
-                imagePicker.sourceType = .photoLibrary
-                self.present(imagePicker, animated: true)
+                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                    imagePicker.sourceType = .photoLibrary
+                    self.present(imagePicker, animated: true)
+                } else {
+                    self.displaySourceTypeErrorMessage(message: "Unable to open Photo Library. Please check permissions.")
+                }
             })
         let takePhotoAction: UIAlertAction = UIAlertAction(
             title: "Take Photo",
             style: .default,
             handler: {_ in
-                imagePicker.sourceType = .camera
-                self.present(imagePicker, animated: true)
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    imagePicker.sourceType = .camera
+                    self.present(imagePicker, animated: true)
+                } else {
+                    self.displaySourceTypeErrorMessage(message: "Unable to access camera. Please check permissions. If using a simulator, you can't access the camera.")
+                }
             })
         photoController.addAction(photoLibraryAction)
         photoController.addAction(takePhotoAction)

@@ -37,7 +37,7 @@ class ImageMagnificationViewController: UIViewController {
             snapshot in
             for case let habitChild as DataSnapshot in snapshot.children {
                 guard let habitValue = habitChild.value as? [String: String] else { return }
-                let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: habitValue)
+                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: habitValue)
                 if habitExists && self.friendHabit.habit.equals(habit: habit!) {
                     let indexOfImage: Int = habit!.uncheckedImageUrls.firstIndex(of: self.friendHabit.imageUrl)!
                     habit!.uncheckedDates.remove(at: indexOfImage)
@@ -55,23 +55,6 @@ class ImageMagnificationViewController: UIViewController {
             result.append(date.description)
         }
         return result
-    }
-    
-    private func makeHabit(value: [String: String]) -> (Bool, Habit?) {
-        let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
-        let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"
-        let streak: Int = Int(value["streak"] ?? "") ?? -1
-        let dateString: String = value["dates"] ?? ""
-        let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
-        let uncheckedDateString: String = value["uncheckedDates"] ?? ""
-        let uncheckedDates: [Date] = (uncheckedDateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: uncheckedDateString.components(separatedBy: ","))
-        let imageUrlsString: String = value["imageUrls"] ?? ""
-        let imageUrls: [String] = (imageUrlsString == "") ? [] : imageUrlsString.components(separatedBy: ",")
-        let uncheckedImageUrlsString: String = value["uncheckedImageUrls"] ?? ""
-        let uncheckedImageUrls: [String] = (uncheckedImageUrlsString == "") ? [] : uncheckedImageUrlsString.components(separatedBy: ",")
-        let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
-        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates) : nil
-        return (habitExists, habitResult)
     }
     
     @IBAction func checkPressed(_ sender: Any) {

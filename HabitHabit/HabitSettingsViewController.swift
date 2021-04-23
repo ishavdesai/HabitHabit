@@ -115,24 +115,13 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: value)
+                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
                 if habitExists {
                     self.habitsList.append(habit!)
                     self.habitsTableView.reloadData()
                 }
             }
         }
-    }
-    
-    private func makeHabit(value: [String: String]) -> (Bool, Habit?) {
-        let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
-        let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"
-        let streak: Int = Int(value["streak"] ?? "") ?? -1
-        let dateString: String = value["dates"] ?? ""
-        let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
-        let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
-        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind) : nil
-        return (habitExists, habitResult)
     }
     
     private func showAlert(title: String, message: String) {
@@ -259,7 +248,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habitFromDatabase): (Bool, Habit?) = self.makeHabit(value: value)
+                let (habitExists, habitFromDatabase): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
                 if habitExists && habit.equals(habit: habitFromDatabase!) {
                     self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).removeValue()
                     return
