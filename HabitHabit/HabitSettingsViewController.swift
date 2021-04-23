@@ -228,9 +228,17 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.habitsTableView.dequeueReusableCell(withIdentifier: self.habitCellIdentifier, for: indexPath as IndexPath)
+        let cell: UITableViewCell = self.habitsTableView.dequeueReusableCell(withIdentifier: self.habitCellIdentifier, for: indexPath as IndexPath) as! GenericTableViewCell
         cell.textLabel?.text = self.habitsList[indexPath.row].toString()
+        UIDesign.setCellProperties(cell: cell)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

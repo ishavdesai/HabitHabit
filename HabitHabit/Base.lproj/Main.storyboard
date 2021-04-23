@@ -488,7 +488,7 @@
                                 <rect key="frame" x="20" y="319" width="374" height="494"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableViewCell" textLabel="Zcy-2p-toO" style="IBUITableViewCellStyleDefault" id="pQz-Un-qy0" userLabel="Settings Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableViewCell" textLabel="Zcy-2p-toO" style="IBUITableViewCellStyleDefault" id="pQz-Un-qy0" userLabel="Settings Cell" customClass="GenericTableViewCell" customModule="HabitHabit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pQz-Un-qy0" id="EiL-DS-2yZ">
@@ -580,7 +580,7 @@
                                     <constraint firstAttribute="height" constant="342" id="5sb-5W-nVt"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HabitTableCell" textLabel="dKk-On-CWE" style="IBUITableViewCellStyleDefault" id="NAu-Bx-2bW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HabitTableCell" textLabel="dKk-On-CWE" style="IBUITableViewCellStyleDefault" id="NAu-Bx-2bW" customClass="GenericTableViewCell" customModule="HabitHabit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NAu-Bx-2bW" id="1Ux-BR-cnx">
@@ -794,7 +794,7 @@
                                 <rect key="frame" x="20" y="474" width="374" height="339"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BuddyTableViewCell" textLabel="qyF-pv-abz" style="IBUITableViewCellStyleDefault" id="1VS-EN-Gd3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BuddyTableViewCell" textLabel="qyF-pv-abz" style="IBUITableViewCellStyleDefault" id="1VS-EN-Gd3" customClass="GenericTableViewCell" customModule="HabitHabit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1VS-EN-Gd3" id="Kcr-r3-2mv">

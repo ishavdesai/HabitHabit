@@ -9,6 +9,7 @@ import UIKit
 import FirebaseDatabase
 
 class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
     @IBOutlet weak var profilePicture: UIImageView!
@@ -81,9 +82,17 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.buddyTableView.dequeueReusableCell(withIdentifier: self.buddyTableViewCellIdentifier, for: indexPath as IndexPath)
+        let cell: UITableViewCell = self.buddyTableView.dequeueReusableCell(withIdentifier: self.buddyTableViewCellIdentifier, for: indexPath as IndexPath) as! GenericTableViewCell
         cell.textLabel?.text = self.friendUsernames[indexPath.row]
+        UIDesign.setCellProperties(cell: cell)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

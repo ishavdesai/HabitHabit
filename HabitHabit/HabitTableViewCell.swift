@@ -25,7 +25,11 @@ class HabitTableViewCell: UITableViewCell {
         self.cameraButton.setBackgroundImage(image, for: .normal)
         self.cameraButton.setTitle("", for: .normal)
         self.delegate = delegate
-        // add shadow on cell
+        
+        UIDesign.setCellProperties(cell: self)
+        
+        // UI Cell changes
+        /*
         backgroundColor = .clear // very important
         layer.masksToBounds = false
         // layer.shadowOpacity = 0.23
@@ -36,6 +40,7 @@ class HabitTableViewCell: UITableViewCell {
         // add corner radius on `contentView`
         contentView.backgroundColor = UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1)
         contentView.layer.cornerRadius = 10
+        */
     }
     
     @IBAction func cameraButtonClicked(_ sender: Any) {
