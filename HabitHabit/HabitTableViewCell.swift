@@ -16,14 +16,16 @@ class HabitTableViewCell: UITableViewCell {
     private var habit: Habit? = nil
     var delegate: HabitImageTrackerDelegate?
     
-    func setProperties(habit: Habit, delegate: HabitImageTrackerDelegate) {
+    func setProperties(habit: Habit, delegate: HabitImageTrackerDelegate, noCamera:Bool = false) {
         self.habit = habit
         self.nameLabel.text = self.habit!.habit
         self.streakLabel.text = String(self.habit!.streak)
         self.streak = self.habit!.streak
-        let image: UIImage? = UIImage(systemName: "camera")
-        self.cameraButton.setBackgroundImage(image, for: .normal)
-        self.cameraButton.setTitle("", for: .normal)
+        if(!noCamera) {
+            let image: UIImage? = UIImage(systemName: "camera")
+            self.cameraButton.setBackgroundImage(image, for: .normal)
+            self.cameraButton.setTitle("", for: .normal)
+        }
         self.delegate = delegate
         
         UIDesign.setCellProperties(cell: self)
