@@ -20,6 +20,7 @@ class AboutFriendViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.usernameLabel.text = "user: \(self.username)"
+        self.title = self.username
         self.setupPicture()
         self.readHabitsFromDatabase()
     }

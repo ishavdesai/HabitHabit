@@ -722,7 +722,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-EE-Qnh">
                                 <rect key="frame" x="91" y="394" width="232" height="183"/>
-                                <state key="normal" title="Change Profile Photo">
+                                <state key="normal" title="  Change Profile Photo  ">
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
                                 </state>
                                 <connections>
@@ -743,6 +743,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="a2Q-G0-P9z"/>
                     <connections>
+                        <outlet property="changePFPButton" destination="rMt-EE-Qnh" id="JTe-s8-K8n"/>
                         <outlet property="profilePicture" destination="QT2-yc-H0B" id="H0T-0a-btL"/>
                     </connections>
                 </viewController>
@@ -771,8 +772,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzh-kI-ffU">
-                                <rect key="frame" x="170" y="367" width="74" height="30"/>
-                                <state key="normal" title="add buddy"/>
+                                <rect key="frame" x="162" y="367" width="90" height="30"/>
+                                <state key="normal" title="  add buddy  "/>
                                 <connections>
                                     <action selector="attemptToAddBuddy:" destination="d2T-2q-885" eventType="touchUpInside" id="aTZ-25-J8A"/>
                                 </connections>
@@ -838,6 +839,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Friends" id="qng-Sk-C88"/>
                     <connections>
+                        <outlet property="addBuddyButton" destination="Vzh-kI-ffU" id="ZeA-VU-5Bw"/>
                         <outlet property="buddyTableView" destination="6SC-lZ-qXs" id="p2X-xi-QLt"/>
                         <outlet property="profilePicture" destination="O6X-E9-IjK" id="iO5-Kb-G1C"/>
                         <outlet property="statusLabel" destination="lpk-KM-YdG" id="Ahu-Fn-K43"/>
@@ -901,6 +903,7 @@
             <point key="canvasLocation" x="2928.985507246377" y="1293.75"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.91372549020000005" green="0.3294117647" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>

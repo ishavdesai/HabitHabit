@@ -39,6 +39,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        UIDesign.cleanupButton(button: self.addHabitButton)
         self.habitsTableView.delegate = self
         self.habitsTableView.dataSource = self
         self.setupTextFields()

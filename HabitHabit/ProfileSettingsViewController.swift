@@ -12,6 +12,7 @@ import FirebaseDatabase
 class ProfileSettingsViewController: UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var changePFPButton: UIButton!
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
@@ -20,6 +21,7 @@ class ProfileSettingsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.setupPicture()
+        UIDesign.cleanupButton(button: self.changePFPButton)
     }
     
     private func modifyImageSettings() -> Void {
