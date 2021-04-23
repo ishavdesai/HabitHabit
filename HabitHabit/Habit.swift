@@ -156,10 +156,6 @@ class Habit {
     }
     
     static func convertStringListToDateList(strList: [String]) -> [Date] {
-        print("Length: \(strList.count)")
-        for date in strList {
-            print("Date: \(date)")
-        }
         var result: [Date] = []
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"

@@ -26,6 +26,19 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.peerTableView.delegate = self
         self.peerTableView.dataSource = self
+        self.setupRefreshControl()
+        self.setupFriendHabits()
+    }
+    
+    private func setupRefreshControl() -> Void {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(self.updateFriendHabits(_:)), for: .valueChanged)
+        self.refreshControl?.tintColor = .white
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching Friend Habits ...")
+        self.peerTableView.refreshControl = self.refreshControl
+    }
+    
+    @objc private func updateFriendHabits(_ sender: Any) {
         self.setupFriendHabits()
     }
     
@@ -79,11 +92,11 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
                         if habitExists {
                             for index in 0..<habit!.uncheckedImageUrls.count {
                                 self.friendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: habit!.uncheckedImageUrls[index], date: habit!.uncheckedDates[index], habit: habit!))
-                                print("New NameHabit is added")
                                 self.peerTableView.reloadData()
                             }
                         }
                     }
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
