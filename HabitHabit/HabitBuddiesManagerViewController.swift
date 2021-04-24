@@ -32,6 +32,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         UIDesign.cleanupButton(button: self.addBuddyButton)
         self.statusLabel.text = ""
         self.usernameLabel.text = "Your username is: \(self.databaseUsernameKey)"
+        self.userUsernameInput?.autocorrectionType = .no
     }
     
     private func modifyImageSettings() -> Void {
