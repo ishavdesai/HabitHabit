@@ -558,28 +558,28 @@
             <objects>
                 <viewController storyboardIdentifier="HabitSettingsVCID" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="pMd-xN-xKt" customClass="HabitSettingsViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mwI-oA-Fig">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="moa-mD-Qcu" userLabel="Habit Text Field">
-                                <rect key="frame" x="20" y="303" width="374" height="34"/>
+                                <rect key="frame" x="20" y="163" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KYQ-XO-AeP" userLabel="Time Picker">
-                                <rect key="frame" x="20" y="361" width="374" height="34"/>
+                                <rect key="frame" x="20" y="221" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tL-tj-6s4">
-                                <rect key="frame" x="20" y="433" width="374" height="30"/>
+                                <rect key="frame" x="20" y="293" width="374" height="30"/>
                                 <state key="normal" title="Add a new Habit"/>
                                 <connections>
                                     <action selector="addNewHabit:" destination="pMd-xN-xKt" eventType="touchUpInside" id="hNu-GL-pjb"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="neP-64-X3x">
-                                <rect key="frame" x="132" y="145" width="150" height="150"/>
+                                <rect key="frame" x="132" y="5" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="MFf-Qa-PZX"/>
                                     <constraint firstAttribute="width" constant="150" id="ojP-65-EBl"/>
@@ -587,7 +587,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XMr-nx-4nl" userLabel="Habit Table View">
-                                <rect key="frame" x="20" y="471" width="374" height="342"/>
+                                <rect key="frame" x="20" y="331" width="374" height="342"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="342" id="5sb-5W-nVt"/>
@@ -733,8 +733,8 @@
                                     <constraint firstAttribute="width" constant="150" id="yav-8N-8su"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-EE-Qnh">
-                                <rect key="frame" x="91" y="504" width="232" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-EE-Qnh">
+                                <rect key="frame" x="91" y="364" width="232" height="30"/>
                                 <state key="normal" title="  Change Profile Photo  ">
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
                                 </state>
@@ -742,14 +742,39 @@
                                     <action selector="changeProfilePicture:" destination="BnU-C3-AYv" eventType="touchUpInside" id="Mop-4A-LHr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incognito Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raC-5R-x8O">
+                                <rect key="frame" x="25" y="419" width="153" height="26"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8eg-gO-Rnx">
+                                <rect key="frame" x="340" y="416.66666666666669" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onToggle:" destination="BnU-C3-AYv" eventType="valueChanged" id="hI6-SQ-LFh"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your photos will not appear on the peers tab for verification while incognito mode is on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13T-5P-6Zp">
+                                <rect key="frame" x="25" y="453.33333333333331" width="364" height="40.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="suA-z6-rTr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="8eg-gO-Rnx" secondAttribute="trailing" constant="25" id="BFZ-T8-8WK"/>
+                            <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="13T-5P-6Zp" secondAttribute="trailing" constant="25" id="Fcj-dd-BU3"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="rMt-EE-Qnh" secondAttribute="trailing" constant="91" id="Gvz-1f-g9S"/>
+                            <constraint firstItem="13T-5P-6Zp" firstAttribute="firstBaseline" secondItem="raC-5R-x8O" secondAttribute="baseline" constant="30" id="J4I-5M-TJn"/>
                             <constraint firstItem="rMt-EE-Qnh" firstAttribute="top" secondItem="QT2-yc-H0B" secondAttribute="bottom" constant="187" id="ZCK-xs-eYz"/>
+                            <constraint firstItem="raC-5R-x8O" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="25" id="eMB-T9-yNe"/>
+                            <constraint firstItem="13T-5P-6Zp" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="25" id="flo-eQ-5VN"/>
+                            <constraint firstItem="raC-5R-x8O" firstAttribute="top" secondItem="rMt-EE-Qnh" secondAttribute="bottom" constant="25" id="hZP-nH-YKQ"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="QT2-yc-H0B" secondAttribute="trailing" constant="132" id="p4u-ey-bIa"/>
                             <constraint firstItem="QT2-yc-H0B" firstAttribute="top" secondItem="suA-z6-rTr" secondAttribute="top" constant="27" id="sbb-rL-bc1"/>
+                            <constraint firstItem="8eg-gO-Rnx" firstAttribute="centerY" secondItem="raC-5R-x8O" secondAttribute="centerY" id="tII-s3-7YW"/>
                             <constraint firstItem="QT2-yc-H0B" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="132" id="w7V-MT-lgf"/>
                             <constraint firstItem="rMt-EE-Qnh" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="91" id="x2u-mR-NVd"/>
                         </constraints>
@@ -758,6 +783,7 @@
                     <connections>
                         <outlet property="changePFPButton" destination="rMt-EE-Qnh" id="JTe-s8-K8n"/>
                         <outlet property="profilePicture" destination="QT2-yc-H0B" id="H0T-0a-btL"/>
+                        <outlet property="toggle" destination="8eg-gO-Rnx" id="h6z-oc-MC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVs-Jd-4nf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -863,7 +889,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5e-Sb-EI2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1982.608695652174" y="1293.75"/>
+            <point key="canvasLocation" x="2777" y="1294"/>
         </scene>
         <!--About Friend-->
         <scene sceneID="EZn-BJ-1el">
@@ -958,7 +984,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0WG-of-oIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928.985507246377" y="1293.75"/>
+            <point key="canvasLocation" x="3723" y="1294"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

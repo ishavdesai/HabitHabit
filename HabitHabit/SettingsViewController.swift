@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let settingsList: [String] = ["Profile", "Habits", "Habit-buddies"]
+    let settingsList: [String] = ["Profile", "Habits", "Friends"]
     let segueIdentifiers: [String] = ["ProfileScreenSegueIdentifier", "HabitScreenSegueIdentifier", "HabitBuddiesSegue"]
     let settingsTableViewCellIdentifier: String = "SettingsTableViewCell"
     @IBOutlet weak var profilePicture: UIImageView!

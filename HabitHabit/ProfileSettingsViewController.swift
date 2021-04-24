@@ -16,12 +16,14 @@ class ProfileSettingsViewController: UIViewController {
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
+    @IBOutlet weak var toggle: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
         self.setupPicture()
         UIDesign.cleanupButton(button: self.changePFPButton)
+        self.initializeToggle()
     }
     
     private func modifyImageSettings() -> Void {
@@ -101,6 +103,41 @@ class ProfileSettingsViewController: UIViewController {
         present(photoController, animated: true, completion: nil)
     }
     
+    
+    private func initializeToggle() {
+        self.database.child(self.databaseUsernameKey).child("Private").getData{ (error, snapshot) in
+                if let error = error {
+                    print("Error getting data \(error)")
+                }
+                else if snapshot.exists() {
+                    let isOn = snapshot.value as? Bool ?? false
+                    print(isOn)
+                    if (isOn) {
+                        DispatchQueue.main.async {
+                            self.toggle.isOn = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.toggle.isOn = false
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                        self.toggle.isOn = false
+                    }
+                }
+        }
+    }
+    
+    @IBAction func onToggle(_ sender: Any) {
+        if toggle.isOn {
+            self.database.child(self.databaseUsernameKey).child("Private").setValue(true)
+        } else {
+            self.database.child(self.databaseUsernameKey).child("Private").setValue(false)
+        }
+    }
+    
 }
 
 extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -130,4 +167,6 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    
 }
