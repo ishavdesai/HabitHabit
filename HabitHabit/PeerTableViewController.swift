@@ -90,6 +90,7 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
     
     private func setupFriendHabits() -> Void {
         self.friendHabits.removeAll()
+        self.peerTableView.reloadData()
         self.database.child(self.databaseUsernameKey).child("Friends").observeSingleEvent(of: .value) {
             snapshotFriend in
             for case let childFriend as DataSnapshot in snapshotFriend.children {
