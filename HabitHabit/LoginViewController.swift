@@ -36,7 +36,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.clientID = "789038255534-q4goruaca6g9813aroqqgugfeq6cd0ug.apps.googleusercontent.com"
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance()?.signIn()
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
