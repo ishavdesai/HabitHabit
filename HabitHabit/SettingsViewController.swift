@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseDatabase
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -17,6 +18,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var settingsTableView: UITableView!
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
+    private let logOutSegue: String = "logOutSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +83,23 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.segueIdentifiers[indexPath.row], sender: nil)
+    }
+    
+    @IBAction func logOutButtonPressed(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.performSegue(withIdentifier: self.logOutSegue, sender: nil)
+        } catch _ as NSError {
+            let alert = UIAlertController(
+                title: "Error signing out",
+                message: "Ensure you have an internet connection to sign out",
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                                title: "Dismiss",
+                                style: .cancel,
+                                handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
 }
