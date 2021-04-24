@@ -133,6 +133,26 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         self.performSegue(withIdentifier: self.aboutFriendSegue, sender: indexPath.row)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.removeFriendFromDatabase(friendName: self.friendUsernames[indexPath.row])
+            self.friendUsernames.remove(at: indexPath.row)
+            self.buddyTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    private func removeFriendFromDatabase(friendName: String) -> Void {
+        self.database.child(self.databaseUsernameKey).child("Friends").observeSingleEvent(of: .value) {
+            snapshot in
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? String else { return }
+                if value == friendName {
+                    self.database.child(self.databaseUsernameKey).child("Friends").child(child.key).removeValue()
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == self.aboutFriendSegue,
            let destination = segue.destination as? AboutFriendViewController {
