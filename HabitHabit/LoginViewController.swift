@@ -63,7 +63,10 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     private func setupCustomUsernamePassword() -> Void {
         self.usernameField?.placeholder = "Username"
+        self.usernameField?.autocorrectionType = .no
         self.passwordField?.placeholder = "Password"
+        self.passwordField?.isSecureTextEntry = true
+        self.passwordField?.autocorrectionType = .no
         self.confirmPasswordField?.placeholder = "Confirm Password"
         if self.onLoginSegment {
             self.confirmPasswordField?.isHidden = true
