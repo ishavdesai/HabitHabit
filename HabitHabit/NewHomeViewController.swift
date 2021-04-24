@@ -75,9 +75,6 @@ class NewHomeViewController: UIViewController {
         self.present(habitManagerView, animated:true, completion:nil)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "habitPressSegue",
@@ -85,6 +82,10 @@ class NewHomeViewController: UIViewController {
             let row = sender as! Int
             nextVC.habit = habitsList[row]
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

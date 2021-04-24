@@ -16,16 +16,22 @@ class HabitTableViewCell: UITableViewCell {
     private var habit: Habit? = nil
     var delegate: HabitImageTrackerDelegate?
     
-    func setProperties(habit: Habit, delegate: HabitImageTrackerDelegate) {
+    func setProperties(habit: Habit, delegate: HabitImageTrackerDelegate, noCamera:Bool = false) {
         self.habit = habit
         self.nameLabel.text = self.habit!.habit
         self.streakLabel.text = String(self.habit!.streak)
         self.streak = self.habit!.streak
-        let image: UIImage? = UIImage(systemName: "camera")
-        self.cameraButton.setBackgroundImage(image, for: .normal)
-        self.cameraButton.setTitle("", for: .normal)
+        if(!noCamera) {
+            let image: UIImage? = UIImage(systemName: "camera")
+            self.cameraButton.setBackgroundImage(image, for: .normal)
+            self.cameraButton.setTitle("", for: .normal)
+        }
         self.delegate = delegate
-        // add shadow on cell
+        
+        UIDesign.setCellProperties(cell: self)
+        
+        // UI Cell changes
+        /*
         backgroundColor = .clear // very important
         layer.masksToBounds = false
         // layer.shadowOpacity = 0.23
@@ -36,6 +42,7 @@ class HabitTableViewCell: UITableViewCell {
         // add corner radius on `contentView`
         contentView.backgroundColor = UIColor(red: 88/255, green: 86/255, blue: 214/255, alpha: 1)
         contentView.layer.cornerRadius = 10
+        */
     }
     
     @IBAction func cameraButtonClicked(_ sender: Any) {

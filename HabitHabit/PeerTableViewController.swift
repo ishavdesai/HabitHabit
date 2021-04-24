@@ -56,7 +56,17 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
         cell.usernameLabel?.text = "\(self.friendHabits[indexPath.row].username)"
         cell.habitLabel?.text = "\(self.friendHabits[indexPath.row].habitName)"
         // cell.accessoryType = .disclosureIndicator
+        UIDesign.setCellProperties(cell: cell)
         return cell
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

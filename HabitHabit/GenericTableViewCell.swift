@@ -1,29 +1,26 @@
 //
-//  PeerTableViewCell.swift
+//  GenericTableViewCell.swift
 //  HabitHabit
 //
-//  Created by Dime Iwata on 4/10/21.
+//  Created by Ally on 4/23/21.
 //
 
 import UIKit
 
-class PeerTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var friendHabitImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var habitLabel: UILabel!
-    
+class GenericTableViewCell: UITableViewCell {
+
+    /*
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        contentView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
+        // Configure the view for the selected state
     }
-    
+    */
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
