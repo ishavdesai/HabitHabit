@@ -90,26 +90,38 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
     
     private func setupFriendHabits() -> Void {
         self.friendHabits.removeAll()
+        self.peerTableView.reloadData()
         self.database.child(self.databaseUsernameKey).child("Friends").observeSingleEvent(of: .value) {
             snapshotFriend in
             for case let childFriend as DataSnapshot in snapshotFriend.children {
                 guard let friend = childFriend.value as? String else { return }
-                self.database.child(friend).child("Habit").observeSingleEvent(of: .value) {
-                    snapshotHabit in
-                    for case let childHabit as DataSnapshot in snapshotHabit.children {
-                        guard let habitValue = childHabit.value as? [String: String] else { return }
-                        let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: habitValue)
-                        if habitExists {
-                            for index in 0..<habit!.uncheckedImageUrls.count {
-                                self.friendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: habit!.uncheckedImageUrls[index], date: habit!.uncheckedDates[index], habit: habit!))
-                                self.peerTableView.reloadData()
+                
+                self.database.child(friend).child("Private").getData{ (error, snapshot) in
+                        var isPrivate = false
+                        if let error = error {
+                            print("Error getting data \(error)")
+                        }
+                        else if snapshot.exists() {
+                            isPrivate = snapshot.value as? Bool ?? false
+                        }
+                        if !isPrivate {
+                            self.database.child(friend).child("Habit").observeSingleEvent(of: .value) {
+                                snapshotHabit in
+                                for case let childHabit as DataSnapshot in snapshotHabit.children {
+                                    guard let habitValue = childHabit.value as? [String: String] else { return }
+                                    let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: habitValue)
+                                    if habitExists {
+                                        for index in 0..<habit!.uncheckedImageUrls.count {
+                                            self.friendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: habit!.uncheckedImageUrls[index], date: habit!.uncheckedDates[index], habit: habit!))
+                                            self.peerTableView.reloadData()
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
                 }
             }
             self.refreshControl?.endRefreshing()
         }
     }
-    
 }

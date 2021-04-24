@@ -30,6 +30,19 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         self.setupGoogleLogin()
         self.setupCustomUsernamePassword()
         self.setupViewUI()
+        
+        // Delete me
+//        let username = "shrey2"
+//        let password = "okokok"
+//        Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
+//            user, error in
+//            if let error = error, user == nil {
+//                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+//            } else {
+//                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
+//            }
+//        }
+        
     }
     
     private func setupGoogleLogin() -> Void {
