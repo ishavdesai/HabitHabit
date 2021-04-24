@@ -103,30 +103,29 @@ class ProfileSettingsViewController: UIViewController {
         present(photoController, animated: true, completion: nil)
     }
     
-    
     private func initializeToggle() {
         self.database.child(self.databaseUsernameKey).child("Private").getData{ (error, snapshot) in
-                if let error = error {
-                    print("Error getting data \(error)")
-                }
-                else if snapshot.exists() {
-                    let isOn = snapshot.value as? Bool ?? false
-                    print(isOn)
-                    if (isOn) {
-                        DispatchQueue.main.async {
-                            self.toggle.isOn = true
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.toggle.isOn = false
-                        }
+            if let error = error {
+                print("Error getting data \(error)")
+            }
+            else if snapshot.exists() {
+                let isOn = snapshot.value as? Bool ?? false
+                print(isOn)
+                if (isOn) {
+                    DispatchQueue.main.async {
+                        self.toggle.isOn = true
                     }
-                }
-                else {
+                } else {
                     DispatchQueue.main.async {
                         self.toggle.isOn = false
                     }
                 }
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.toggle.isOn = false
+                }
+            }
         }
     }
     
@@ -167,6 +166,5 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
     
 }
