@@ -106,9 +106,9 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
                             }
                         }
                     }
-                    self.refreshControl?.endRefreshing()
                 }
             }
+            self.refreshControl?.endRefreshing()
         }
     }
     
