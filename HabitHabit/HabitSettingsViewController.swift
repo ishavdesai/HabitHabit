@@ -94,11 +94,14 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             barButtonSystemItem: .done,
             target: nil,
             action: #selector(donePressed))
-        toolbar.setItems([doneButton], animated: true)
+        let cancelButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: #selector(cancelPressed))
+        toolbar.setItems([cancelButton, doneButton], animated: true)
         self.timePicker.inputAccessoryView = toolbar
         self.timePicker.inputView = self.timePickerView
         self.timePickerView.datePickerMode = .time
         self.timePickerView.frame.size = CGSize(width: 0, height: 250)
+        self.timePickerView.preferredDatePickerStyle = .wheels
+        self.timePickerView.sizeToFit()
     }
     
     @objc func donePressed() {
@@ -108,6 +111,10 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         self.timePicker.text = formatter.string(from: self.timePickerView.date)
         self.view.endEditing(true)
         print(self.timePicker.text!)
+    }
+    
+    @objc func cancelPressed() {
+        self.view.endEditing(true)
     }
     
     private func readHabitsFromDatabase() -> Void {
