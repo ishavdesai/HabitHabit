@@ -18,10 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Navbar
         UINavigationBar.appearance().barTintColor = UIColor.habit.purple
-        //UINavigationBar.appearance().tintColor = .orange
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.habit.orange]
-        //UINavigationBar.appearance().isTranslucent = false
         
+        // UITabBar
         UITabBar.appearance().backgroundColor = UIColor.habit.purple
         UITabBar.appearance().tintColor = UIColor.habit.orange
         UITabBar.appearance().isTranslucent = false
@@ -29,14 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.habit.orange], for: .selected)
         UITabBar.appearance().unselectedItemTintColor = .white
         
+        //UISegmentedControl
         UISegmentedControl.appearance().backgroundColor = UIColor.habit.darkPurple
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.habit.midPurple
         UISegmentedControl.appearance().setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         
+        //UISwitch
         UISwitch.appearance().backgroundColor = UIColor.habit.darkPurple
         UISwitch.appearance().onTintColor = UIColor.habit.orange
         
+        //UITableView
         UITableView.appearance().backgroundColor = UIColor.habit.purple
         
         FirebaseApp.configure()
@@ -118,11 +120,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-extension UIColor {
-    struct habit {
-        static var purple: UIColor { return UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1) }
-        static var darkPurple: UIColor { return UIColor(red: 44/255, green: 0/255, blue: 30/255, alpha: 1) }
-        static var midPurple: UIColor { return UIColor(red: 132/255, green: 55/255, blue: 135/255, alpha: 1) }
-        static var orange: UIColor { return UIColor(red: 233/255, green: 84/255, blue: 32/255, alpha: 1) }
-    }
-}

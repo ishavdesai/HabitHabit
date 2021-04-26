@@ -23,14 +23,18 @@ class ImageMagnificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Habit Approval"
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
-        let df = DateFormatter()
-        df.dateFormat = "LLLL dd, yyyy"
+        self.view.backgroundColor = UIColor.habit.purple
+        self.setUpLabels()
+    }
+    
+    private func setUpLabels() {
         self.userNameLabel.text = self.friendHabit.username
         self.userNameLabel.textColor = .white
         self.habitNameLabel.text = "Does this depict '\(self.friendHabit.habitName)'?"
         self.habitNameLabel.textColor = .white
         self.habitImageView.image = self.friendHabit.getImage()
+        let df = DateFormatter()
+        df.dateFormat = "LLLL dd, yyyy"
         self.dateLabel.text = df.string(from: self.friendHabit.date)
         self.dateLabel.textColor = .white
     }

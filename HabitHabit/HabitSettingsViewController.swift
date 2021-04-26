@@ -24,26 +24,17 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var currentHabitsLabel: UILabel!
     
     
-    func configureConstraints() {
-        currentHabitsLabel.topAnchor.constraint(equalTo: habitsTableView.bottomAnchor, constant:10).isActive = true
-        habitsTableView.topAnchor.constraint(equalTo: currentHabitsLabel.bottomAnchor, constant:10).isActive = true
-        habitTextField.bottomAnchor.constraint(equalTo: timePicker.topAnchor, constant:15).isActive = true
-        timePicker.topAnchor.constraint(equalTo: habitTextField.bottomAnchor, constant:10).isActive = true
-        addHabitButton.topAnchor.constraint(equalTo:timePicker.bottomAnchor, constant:55).isActive = true
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         UIDesign.cleanupButton(button: self.addHabitButton)
         self.habitsTableView.delegate = self
         self.habitsTableView.dataSource = self
         self.setupTextFields()
-        //self.configureConstraints()
         self.setupPicture()
         self.readHabitsFromDatabase()
     }

@@ -31,18 +31,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         self.setupCustomUsernamePassword()
         self.setupViewUI()
         
-        // Delete me
-//        let username = "shrey2"
-//        let password = "okokok"
-//        Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
-//            user, error in
-//            if let error = error, user == nil {
-//                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
-//            } else {
-//                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
-//            }
-//        }
-        
     }
     
     private func setupGoogleLogin() -> Void {
@@ -187,9 +175,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     private func setupViewUI() -> Void {
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.googleSignInButton.colorScheme = GIDSignInButtonColorScheme(rawValue: 0)!
-        self.stackView.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.stackView.backgroundColor = UIColor.habit.purple
         
         UIDesign.cleanupButton(button: self.signInUpButton, dontAdjustText: true)
     }
