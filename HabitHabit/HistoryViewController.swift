@@ -86,10 +86,10 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
                 let imageWidth = Int(self.view.frame.size.width / 4)
                 let imageHeight = Int(self.view.frame.size.height / 11)
 //---------For test(delete later)----------------------------------------------------------------
-                let imageName = habit.imageUrls[imageIndex]
-                let image = UIImage(named: imageName)
+//                let imageName = habit.imageUrls[imageIndex]
+//                let image = UIImage(named: imageName)
 //-----------------------------------------------------------------------------------------------
-//                let image = self.getImage(imageUrl: habit.imageUrls[imageIndex]) // replace with above
+                let image = self.getImage(imageUrl: habit.imageUrls[imageIndex]) // replace with above
                 let imageView = UIImageView(image: image)
                 imageView.tag = 130 // identifier to be cleared each time
                 imageView.frame = CGRect(x: imagePosition.0, y: imagePosition.1, width: imageWidth, height: imageHeight)
@@ -156,8 +156,10 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
                 }
                 let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
                 if habitExists {
-                    habit!.imageUrls.append("DefaultPeerHabit")
-                    habit!.dates.append(Date())
+//-------------For test (delete later)---------------------------------------------------------
+//                    habit!.imageUrls.append("DefaultPeerHabit")
+//                    habit!.dates.append(Date())
+//---------------------------------------------------------------------------------------------
                     self.habits.append(habit!)
                 }
             }
