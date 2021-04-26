@@ -40,10 +40,10 @@ class NewHomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         //        navigationItem.largeTitleDisplayMode = .never
         
-        let now = Date()
-        let df = DateFormatter()
-        df.dateFormat = "LLLL dd, yyyy"
-        navigationItem.title = df.string(from: now)
+        // let now = Date()
+        // let df = DateFormatter()
+        // df.dateFormat = "LLLL dd, yyyy"
+        navigationItem.title = "Habits"
         //
         //        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
         //        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))

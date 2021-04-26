@@ -21,6 +21,8 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var addBuddyButton: UIButton!
     private let aboutFriendSegue: String = "AboutFriendSegue"
+    private let refreshControl = UIRefreshControl()
+    private var friendRequestsSent: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +31,22 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         self.buddyTableView.dataSource = self
         self.buddyTableView.delegate = self
         self.loadBuddiesFromDatabase()
+        self.setupRefreshControl()
         UIDesign.cleanupButton(button: self.addBuddyButton)
         self.statusLabel.text = ""
         self.usernameLabel.text = "Your username is: \(self.databaseUsernameKey)"
         self.userUsernameInput?.autocorrectionType = .no
+    }
+    
+    private func setupRefreshControl() -> Void {
+        self.refreshControl.addTarget(self, action: #selector(self.updateFriendsList(_:)), for: .valueChanged)
+        self.refreshControl.tintColor = .white
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Fetching Friends ...")
+        self.buddyTableView.refreshControl = self.refreshControl
+    }
+    
+    @objc private func updateFriendsList(_ sender: Any) -> Void {
+        self.loadBuddiesFromDatabase()
     }
     
     private func modifyImageSettings() -> Void {
@@ -52,6 +66,16 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
             }
             self.friendUsernames = tempFriendList
             self.buddyTableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        self.database.child(self.databaseUsernameKey).child("FriendRequestsSent").observe(.value) {
+            snapshot in
+            var tempFriendRequestSentList: [String] = []
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? String else { return }
+                tempFriendRequestSentList.append(value)
+            }
+            self.friendRequestsSent = tempFriendRequestSentList
         }
     }
     
@@ -109,21 +133,27 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         }
         let username: String = self.userUsernameInput.text!
         if self.friendUsernames.contains(username) {
-            self.statusLabel.textColor = .red
+            self.statusLabel.textColor = .systemRed
             self.statusLabel.text = "The user \(username) is already in your friends list"
+            return
+        } else if self.friendRequestsSent.contains(username) {
+            self.statusLabel.textColor = .systemRed
+            self.statusLabel.text = "You have already sent a friend request to \(username)"
             return
         }
         self.database.child(username).observeSingleEvent(of: .value) {
             snapshot in
             if snapshot.exists() {
-                self.friendUsernames.append(username)
-                self.buddyTableView.reloadData()
+                // self.friendUsernames.append(username)
+                // self.buddyTableView.reloadData()
                 self.statusLabel.textColor = .green
-                self.statusLabel.text = "Added connection with \(username)."
-                self.database.child(self.databaseUsernameKey).child("Friends").child(String(Int.random(in: 0..<1_000_000))).setValue(username)
+                self.statusLabel.text = "Sent friend request to \(username)."
+                self.friendRequestsSent.append(username)
+                self.database.child(username).child("Friend-Requests").child(String(Int.random(in: 0..<1_000_000))).setValue(self.databaseUsernameKey)
+                self.database.child(self.databaseUsernameKey).child("FriendRequestsSent").child(String(Int.random(in: 0..<1_000_000))).setValue(username)
             } else {
                 self.statusLabel.textColor = .red
-                self.statusLabel.text = "Failed to add connection with \(username). Make sure you entered the correct username."
+                self.statusLabel.text = "Failed to find account: \(username). Make sure you entered the correct username."
             }
         }
     }
