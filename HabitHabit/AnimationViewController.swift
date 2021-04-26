@@ -24,22 +24,42 @@ class AnimationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.habit.purple
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         self.launchImageView.center = view.center
         self.mirrorLaunchImageView.center = view.center
-        // view.addSubview(self.launchImageView)
+        view.addSubview(self.launchImageView)
         view.addSubview(self.mirrorLaunchImageView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-            self.animate()
-        })
+        self.mirrorLaunchImageView.alpha = 0
+        self.animate()
     }
     
     private func animate() -> Void {
         // insert animation here
-        self.performSegue(withIdentifier: self.loginViewSegue, sender: nil)
+        UIView.animate(
+            withDuration: 1.0,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                self.launchImageView.alpha = 0
+            },
+            completion: {
+                finished in
+                if finished {
+                    UIView.animate(
+                        withDuration: 1.0,
+                        delay: 0.0,
+                        options: .curveEaseIn,
+                        animations: {
+                            self.mirrorLaunchImageView.alpha = 1
+                        },
+                        completion: {
+                            finished in
+                            if finished {
+                                usleep(1694200)
+                                self.performSegue(withIdentifier: self.loginViewSegue, sender: nil)
+                            }
+                        })
+                }
+            })
     }
     
 }
