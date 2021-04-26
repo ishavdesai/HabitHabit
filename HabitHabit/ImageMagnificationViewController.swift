@@ -27,9 +27,12 @@ class ImageMagnificationViewController: UIViewController {
         let df = DateFormatter()
         df.dateFormat = "LLLL dd, yyyy"
         self.userNameLabel.text = self.friendHabit.username
-        self.habitNameLabel.text = self.friendHabit.habitName
+        self.userNameLabel.textColor = .white
+        self.habitNameLabel.text = "Does this depict '\(self.friendHabit.habitName)'?"
+        self.habitNameLabel.textColor = .white
         self.habitImageView.image = self.friendHabit.getImage()
         self.dateLabel.text = df.string(from: self.friendHabit.date)
+        self.dateLabel.textColor = .white
     }
     
     private func removeHabitFromDatabase() {

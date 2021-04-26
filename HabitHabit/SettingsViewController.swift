@@ -16,6 +16,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let settingsTableViewCellIdentifier: String = "SettingsTableViewCell"
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
     private let logOutSegue: String = "logOutSegue"

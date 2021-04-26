@@ -34,7 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISegmentedControl.appearance().setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         
+        UISwitch.appearance().backgroundColor = UIColor.habit.darkPurple
+        UISwitch.appearance().onTintColor = UIColor.habit.orange
+        
         UITableView.appearance().backgroundColor = UIColor.habit.purple
+        
         FirebaseApp.configure()
         UNUserNotificationCenter.current().requestAuthorization(
             options: [.alert],
