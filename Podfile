@@ -12,5 +12,7 @@ target 'HabitHabit' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
+  pod 'FSCalendar'
+  pod 'CalculateCalendarLogic'
 
 end
