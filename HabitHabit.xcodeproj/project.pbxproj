@@ -12,6 +12,7 @@
 		0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */; };
 		3002F233261F7FD600FF495E /* ImageMagnificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3002F232261F7FD600FF495E /* ImageMagnificationViewController.swift */; };
 		3002F23A2620CE0D00FF495E /* PeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3002F2392620CE0D00FF495E /* PeerTableViewCell.swift */; };
+		309F290B2635DA22000B3860 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309F290A2635DA22000B3860 /* HistoryViewController.swift */; };
 		3B36E99C3902D4F63AE69E87 /* Pods_HabitHabit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */; };
 		9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9110926926198110007900BE /* ProfileSettingsViewController.swift */; };
 		912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */; };
@@ -44,6 +45,7 @@
 		15ACD9FCAC4F278421B58DD3 /* Pods_HabitHabit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HabitHabit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3002F232261F7FD600FF495E /* ImageMagnificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMagnificationViewController.swift; sourceTree = "<group>"; };
 		3002F2392620CE0D00FF495E /* PeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewCell.swift; sourceTree = "<group>"; };
+		309F290A2635DA22000B3860 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9110926926198110007900BE /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageCircleCollectionViewCell.swift; sourceTree = "<group>"; };
 		912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageMagnifierViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				0CB054892613DA9000912B0E /* HabitTableViewCell.swift */,
 				3002F232261F7FD600FF495E /* ImageMagnificationViewController.swift */,
 				3002F2392620CE0D00FF495E /* PeerTableViewCell.swift */,
+				309F290A2635DA22000B3860 /* HistoryViewController.swift */,
 			);
 			path = HabitHabit;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */,
 				91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */,
 				CE1852862632AA9000CB994A /* GenericTableViewCell.swift in Sources */,
+				309F290B2635DA22000B3860 /* HistoryViewController.swift in Sources */,
 				917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */,
 				3002F233261F7FD600FF495E /* ImageMagnificationViewController.swift in Sources */,
 				0C0EDD8B2622587800CE2806 /* DetailedHabitViewController.swift in Sources */,
