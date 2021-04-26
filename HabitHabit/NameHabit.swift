@@ -31,7 +31,7 @@ class NameHabit {
         let task = URLSession.shared.dataTask(with: URL(string: imageUrl)!, completionHandler: {
             data, _, error in
             guard let data = data, error == nil else { return }
-            result = UIImage(data: data)!
+            result = UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")
             sem.signal()
         })
         task.resume()
