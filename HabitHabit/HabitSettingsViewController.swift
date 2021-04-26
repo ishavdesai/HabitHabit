@@ -25,6 +25,10 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        self.timePicker.text = formatter.string(from: self.timePickerView.date)
         self.view.endEditing(true)
     }
     
