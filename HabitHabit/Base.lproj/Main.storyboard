@@ -171,7 +171,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LHh-bh-Dcc">
-                                <rect key="frame" x="10" y="145" width="394" height="668"/>
+                                <rect key="frame" x="10" y="93" width="394" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitCell" rowHeight="100" id="Lre-6I-Ycs" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
@@ -407,20 +407,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j8A-rw-ZGa">
-                                <rect key="frame" x="20" y="149" width="374" height="273"/>
+                                <rect key="frame" x="20" y="202" width="374" height="273"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="j8A-rw-ZGa" secondAttribute="height" multiplier="374:273" id="la6-6K-fXS"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" fixedFrame="YES" text="habitLabel" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-63-EWa">
-                                <rect key="frame" x="20" y="461" width="374" height="20"/>
+                                <rect key="frame" x="20" y="502" width="374" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57Q-9I-uu5">
-                                <rect key="frame" x="136" y="528" width="36" height="51"/>
+                                <rect key="frame" x="136" y="562" width="36" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="✅"/>
@@ -429,7 +429,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbU-hl-hk9">
-                                <rect key="frame" x="242" y="528" width="36" height="51"/>
+                                <rect key="frame" x="242" y="562" width="36" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="❌"/>
@@ -437,9 +437,8 @@
                                     <action selector="denyPressed:" destination="zpP-iH-Ce9" eventType="touchUpInside" id="x52-kg-103"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" fixedFrame="YES" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOK-Kh-G4W">
-                                <rect key="frame" x="20" y="54" width="374" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOK-Kh-G4W">
+                                <rect key="frame" x="20" y="140" width="374" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -460,9 +459,11 @@
                         <viewLayoutGuide key="safeArea" id="Ef2-vp-YWh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="j8A-rw-ZGa" firstAttribute="top" secondItem="Ef2-vp-YWh" secondAttribute="top" constant="62" id="8PO-q0-Gvd"/>
                             <constraint firstItem="Ef2-vp-YWh" firstAttribute="trailing" secondItem="j8A-rw-ZGa" secondAttribute="trailing" constant="20" id="MoX-3X-dQg"/>
+                            <constraint firstItem="nOK-Kh-G4W" firstAttribute="top" secondItem="Ef2-vp-YWh" secondAttribute="top" id="f3D-Om-AQG"/>
+                            <constraint firstItem="Ef2-vp-YWh" firstAttribute="bottom" secondItem="j8A-rw-ZGa" secondAttribute="bottom" constant="338" id="hbT-cm-y8M"/>
                             <constraint firstItem="j8A-rw-ZGa" firstAttribute="leading" secondItem="Ef2-vp-YWh" secondAttribute="leading" constant="20" id="q2k-Sk-mD8"/>
-                            <constraint firstItem="j8A-rw-ZGa" firstAttribute="top" secondItem="Ef2-vp-YWh" secondAttribute="top" constant="149" id="wfe-Zt-CGS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Habit Information" id="ElT-O7-Eni"/>
@@ -561,27 +562,27 @@
             <objects>
                 <viewController id="DHe-ej-3om" customClass="HistoryViewController" customModule="HabitHabit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hiN-Q8-bLZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYe-r9-Mau" customClass="FSCalendar">
-                                <rect key="frame" x="20" y="39" width="374" height="428"/>
+                                <rect key="frame" x="20" y="179" width="374" height="293"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-cP-JlX">
-                                <rect key="frame" x="80" y="497" width="314" height="21"/>
+                                <rect key="frame" x="80" y="502" width="314" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habit: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-aM-sU4">
-                                <rect key="frame" x="75" y="538" width="319" height="21"/>
+                                <rect key="frame" x="75" y="543" width="319" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTu-eh-i7k">
-                                <rect key="frame" x="20" y="1" width="79" height="30"/>
+                                <rect key="frame" x="20" y="141" width="79" height="30"/>
                                 <state key="normal" title="Prev month">
                                     <color key="titleColor" systemColor="systemTealColor"/>
                                 </state>
@@ -590,7 +591,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyp-GD-8hY">
-                                <rect key="frame" x="314" y="1" width="80" height="30"/>
+                                <rect key="frame" x="314" y="141" width="80" height="30"/>
                                 <state key="normal" title="Next month">
                                     <color key="titleColor" systemColor="systemTealColor"/>
                                 </state>
