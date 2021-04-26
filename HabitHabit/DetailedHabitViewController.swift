@@ -17,7 +17,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.title = habit?.habit
         habitCountLabel.text = String(habit?.streak ?? 0)
         self.habitImages = self.getHabitImagesFromDatabase()
