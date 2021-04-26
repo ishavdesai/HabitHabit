@@ -60,8 +60,6 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
         return cell
     }
     
-    
-    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // this will turn on `masksToBounds` just before showing the cell
         cell.contentView.layer.masksToBounds = true

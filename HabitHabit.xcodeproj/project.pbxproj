@@ -17,6 +17,8 @@
 		9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9110926926198110007900BE /* ProfileSettingsViewController.swift */; };
 		912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */; };
 		912992C72624F1940097DB7D /* HabitImageMagnifierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */; };
+		91303B6726374958009B275D /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303B6626374958009B275D /* FriendRequestsViewController.swift */; };
+		91303B6A263752FC009B275D /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303B69263752FC009B275D /* FriendRequestTableViewCell.swift */; };
 		91330414260E6C780062DD7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330413260E6C780062DD7E /* AppDelegate.swift */; };
 		91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330415260E6C780062DD7E /* SceneDelegate.swift */; };
 		91330418260E6C780062DD7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91330417260E6C780062DD7E /* LoginViewController.swift */; };
@@ -49,6 +51,8 @@
 		9110926926198110007900BE /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		912992C32624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageCircleCollectionViewCell.swift; sourceTree = "<group>"; };
 		912992C62624F1940097DB7D /* HabitImageMagnifierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitImageMagnifierViewController.swift; sourceTree = "<group>"; };
+		91303B6626374958009B275D /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
+		91303B69263752FC009B275D /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		91330410260E6C780062DD7E /* HabitHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91330413260E6C780062DD7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91330415260E6C780062DD7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,10 +122,12 @@
 				91330417260E6C780062DD7E /* LoginViewController.swift */,
 				CE185281263278D700CB994A /* UIDesign.swift */,
 				91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */,
+				91303B69263752FC009B275D /* FriendRequestTableViewCell.swift */,
 				9197B17A26294536007B5A35 /* NameHabit.swift */,
 				91614E0726327BAD00EF55D5 /* HabitMaker.swift */,
 				9110926926198110007900BE /* ProfileSettingsViewController.swift */,
 				917E27912612322F00E6D920 /* HabitSettingsViewController.swift */,
+				91303B6626374958009B275D /* FriendRequestsViewController.swift */,
 				91330424260E6C7A0062DD7E /* Info.plist */,
 				91330419260E6C780062DD7E /* Main.storyboard */,
 				0C0EDD8A2622587800CE2806 /* DetailedHabitViewController.swift */,
@@ -296,6 +302,7 @@
 				91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */,
 				9197B17B26294536007B5A35 /* NameHabit.swift in Sources */,
 				91614E0826327BAD00EF55D5 /* HabitMaker.swift in Sources */,
+				91303B6A263752FC009B275D /* FriendRequestTableViewCell.swift in Sources */,
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
 				91330414260E6C780062DD7E /* AppDelegate.swift in Sources */,
@@ -306,6 +313,7 @@
 				91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */,
 				CE1852862632AA9000CB994A /* GenericTableViewCell.swift in Sources */,
 				309F290B2635DA22000B3860 /* HistoryViewController.swift in Sources */,
+				91303B6726374958009B275D /* FriendRequestsViewController.swift in Sources */,
 				917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */,
 				3002F233261F7FD600FF495E /* ImageMagnificationViewController.swift in Sources */,
 				0C0EDD8B2622587800CE2806 /* DetailedHabitViewController.swift in Sources */,
