@@ -20,7 +20,7 @@ class ProfileSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.setupPicture()
         UIDesign.cleanupButton(button: self.changePFPButton)
         self.initializeToggle()
@@ -104,6 +104,9 @@ class ProfileSettingsViewController: UIViewController {
     }
     
     private func initializeToggle() {
+        self.toggle.layer.cornerRadius = 16
+
+        
         self.database.child(self.databaseUsernameKey).child("Private").getData{ (error, snapshot) in
             if let error = error {
                 print("Error getting data \(error)")

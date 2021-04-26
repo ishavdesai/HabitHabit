@@ -24,7 +24,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.setupPicture()
         self.buddyTableView.dataSource = self
         self.buddyTableView.delegate = self

@@ -16,13 +16,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let settingsTableViewCellIdentifier: String = "SettingsTableViewCell"
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     private let database: DatabaseReference = Database.database().reference()
     private let logOutSegue: String = "logOutSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
         self.setupPicture()

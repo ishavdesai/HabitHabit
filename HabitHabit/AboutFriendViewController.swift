@@ -49,7 +49,7 @@ class AboutFriendViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.usernameLabel.text = "user: \(self.username)"
         self.title = self.username
         self.setupPicture()
