@@ -139,6 +139,40 @@ class Habit {
         return result
     }
     
+    func computeStreakLength() -> Int {
+        let habit = self
+        let rejectedDatesAsStrings = habit.rejectedDates
+        var datesAsStrings = [String]()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        for date in habit.dates {
+            datesAsStrings.append(format.string(from: date))
+        }
+        
+        var result = 0
+        var date = Date()
+        
+        // Today is a special day. Dont cancel streak if today is not yet done
+        if taskCompletedOnDate(date: format.string(from: date), dates: datesAsStrings, rejectedDates: rejectedDatesAsStrings) {
+            result = 1
+        }
+        
+        // Set date to yesterday
+        date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+        
+        while taskCompletedOnDate(date: format.string(from: date), dates: datesAsStrings, rejectedDates: rejectedDatesAsStrings) {
+            result += 1
+            date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+        }
+
+        return result
+    }
+    
+    func taskCompletedOnDate(date: String, dates:[String], rejectedDates:[String]) -> Bool {
+        return dates.contains(date) && !rejectedDates.contains(date)
+    }
+
+    
     func convertToJSON() -> [String: String] {
         return [
             "habit": self.habit,
