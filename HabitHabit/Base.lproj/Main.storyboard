@@ -350,7 +350,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-SK-1JW">
-                                            <rect key="frame" x="220" y="73" width="183" height="5"/>
+                                            <rect key="frame" x="220" y="73" width="214" height="5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
@@ -437,7 +437,7 @@
                                     <action selector="denyPressed:" destination="zpP-iH-Ce9" eventType="touchUpInside" id="x52-kg-103"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOK-Kh-G4W">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOK-Kh-G4W">
                                 <rect key="frame" x="20" y="140" width="374" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
@@ -460,10 +460,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="j8A-rw-ZGa" firstAttribute="top" secondItem="Ef2-vp-YWh" secondAttribute="top" constant="62" id="8PO-q0-Gvd"/>
+                            <constraint firstItem="nOK-Kh-G4W" firstAttribute="leading" secondItem="Ef2-vp-YWh" secondAttribute="leading" constant="20" id="JUS-rh-l5d"/>
                             <constraint firstItem="Ef2-vp-YWh" firstAttribute="trailing" secondItem="j8A-rw-ZGa" secondAttribute="trailing" constant="20" id="MoX-3X-dQg"/>
+                            <constraint firstItem="Ef2-vp-YWh" firstAttribute="trailing" secondItem="nOK-Kh-G4W" secondAttribute="trailing" constant="20" id="eGg-Ja-kI3"/>
                             <constraint firstItem="nOK-Kh-G4W" firstAttribute="top" secondItem="Ef2-vp-YWh" secondAttribute="top" id="f3D-Om-AQG"/>
                             <constraint firstItem="Ef2-vp-YWh" firstAttribute="bottom" secondItem="j8A-rw-ZGa" secondAttribute="bottom" constant="338" id="hbT-cm-y8M"/>
                             <constraint firstItem="j8A-rw-ZGa" firstAttribute="leading" secondItem="Ef2-vp-YWh" secondAttribute="leading" constant="20" id="q2k-Sk-mD8"/>
+                            <constraint firstItem="Ef2-vp-YWh" firstAttribute="bottom" secondItem="nOK-Kh-G4W" secondAttribute="bottom" constant="624" id="xYQ-JW-jDI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Habit Information" id="ElT-O7-Eni"/>
