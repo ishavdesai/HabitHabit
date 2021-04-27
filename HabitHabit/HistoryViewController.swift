@@ -122,6 +122,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
     
     // Indicates how many habits the user has updated on a date with dots below the day
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        self.habitsOnDate[date]?.removeAll()
         var countHabit = 0
         for habit in self.habits {
             var imageIndex = 0
