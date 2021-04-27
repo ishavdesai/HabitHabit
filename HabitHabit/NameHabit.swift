@@ -12,6 +12,7 @@ class NameHabit {
     let username: String
     let habitName: String
     var imageUrl: String
+    var image: UIImage?
     let date: Date
     let habit: Habit
     
@@ -26,12 +27,16 @@ class NameHabit {
     }
     
     func getImage() -> UIImage {
+        if self.image != nil {
+            return self.image!
+        }
         var result: UIImage!
         let sem = DispatchSemaphore.init(value: 0)
         let task = URLSession.shared.dataTask(with: URL(string: imageUrl)!, completionHandler: {
             data, _, error in
             guard let data = data, error == nil else { return }
             result = UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")
+            self.image = result
             sem.signal()
         })
         task.resume()
