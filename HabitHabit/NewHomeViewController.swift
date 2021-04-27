@@ -22,7 +22,6 @@ class NewHomeViewController: UIViewController {
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
-    private let username: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_KEY_ERROR"
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -42,9 +42,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.", usernameKey: nil, username: nil)
+                self.loginAttempt(success: false, errorMessage: "The user has not signed in before or they have since signed out.", usernameKey: nil)
             } else {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             }
             return
         }
@@ -52,11 +52,10 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error, authResult == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             } else {
-                let userID: String = user.userID
                 let username: String = user.profile.givenName + user.profile.familyName
-                self.loginAttempt(success: true, errorMessage: nil, usernameKey: userID, username: username)
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
             }
         }
     }
@@ -116,15 +115,13 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         return true
     }
     
-    private func loginAttempt(success: Bool, errorMessage: String?, usernameKey: String?, username: String?) -> Void {
+    private func loginAttempt(success: Bool, errorMessage: String?, usernameKey: String?) -> Void {
         if !success {
             self.loginStatus?.text = "Sign In Failed: \(errorMessage!)"
         } else {
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
             defaults.setValue(usernameKey!, forKey: "kUsernameDatabaseKey")
-            defaults.setValue(username!, forKey: "kUsername")
-            
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
     }
@@ -137,9 +134,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
             user, error in
             if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             } else {
-                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
+                self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
             }
         }
     }
@@ -159,13 +156,13 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                 Auth.auth().signIn(withEmail: username + "@habithabit.com", password: password) {
                     user, error in
                     if let error = error, user == nil {
-                        self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+                        self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
                     } else {
-                        self.loginAttempt(success: true, errorMessage: nil, usernameKey: username, username: username)
+                        self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
                     }
                 }
             } else if let error = error, user == nil {
-                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil, username: nil)
+                self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             }
         }
     }
