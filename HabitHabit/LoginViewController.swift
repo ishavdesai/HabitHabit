@@ -121,7 +121,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         } else {
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
-            defaults.setValue(usernameKey!, forKey: "kUsernameDatabaseKey")
+            defaults.setValue(usernameKey!, forKey: "kUsername")
             UtilityClass.saveProfileImage()
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
