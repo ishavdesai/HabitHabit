@@ -43,7 +43,7 @@ class AboutFriendViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func takePictureAndUpdateHabit(habit: Habit) {
-        print("Oh fuck this wasnt supposed to happen")
+        print("NOT SUPPOSED TO HAPPEN")
     }
     //----------------------------
     
