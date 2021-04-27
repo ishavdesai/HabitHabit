@@ -817,19 +817,10 @@
                                     <constraint firstAttribute="width" constant="150" id="yav-8N-8su"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-EE-Qnh">
-                                <rect key="frame" x="91" y="504" width="232" height="30"/>
-                                <state key="normal" title="  Change Profile Photo  ">
-                                    <color key="titleColor" systemColor="systemOrangeColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeProfilePicture:" destination="BnU-C3-AYv" eventType="touchUpInside" id="Mop-4A-LHr"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incognito Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raC-5R-x8O">
-                                <rect key="frame" x="25" y="559" width="153" height="26"/>
+                                <rect key="frame" x="25" y="559" width="153" height="26.333333333333371"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8eg-gO-Rnx">
@@ -839,23 +830,43 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your photos will not appear on the peers tab for verification while incognito mode is on." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13T-5P-6Zp">
-                                <rect key="frame" x="25" y="593.33333333333337" width="364" height="40.666666666666629"/>
+                                <rect key="frame" x="25" y="593.66666666666663" width="364" height="40.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWR-eQ-ltb" userLabel="Username">
+                                <rect key="frame" x="25" y="448" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-EE-Qnh">
+                                <rect key="frame" x="91" y="325" width="232" height="30"/>
+                                <state key="normal" title="  Change Profile Photo  ">
+                                    <color key="titleColor" systemColor="systemOrangeColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeProfilePicture:" destination="BnU-C3-AYv" eventType="touchUpInside" id="Mop-4A-LHr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="suA-z6-rTr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="TWR-eQ-ltb" firstAttribute="trailing" secondItem="8eg-gO-Rnx" secondAttribute="trailing" id="21D-bX-iHJ"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="8eg-gO-Rnx" secondAttribute="trailing" constant="25" id="BFZ-T8-8WK"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="13T-5P-6Zp" secondAttribute="trailing" constant="25" id="Fcj-dd-BU3"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="rMt-EE-Qnh" secondAttribute="trailing" constant="91" id="Gvz-1f-g9S"/>
                             <constraint firstItem="13T-5P-6Zp" firstAttribute="firstBaseline" secondItem="raC-5R-x8O" secondAttribute="baseline" constant="30" id="J4I-5M-TJn"/>
-                            <constraint firstItem="rMt-EE-Qnh" firstAttribute="top" secondItem="QT2-yc-H0B" secondAttribute="bottom" constant="187" id="ZCK-xs-eYz"/>
+                            <constraint firstItem="TWR-eQ-ltb" firstAttribute="top" secondItem="rMt-EE-Qnh" secondAttribute="bottom" constant="93" id="KbV-gx-rPA"/>
+                            <constraint firstItem="8eg-gO-Rnx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="raC-5R-x8O" secondAttribute="trailing" constant="8" symbolic="YES" id="L0W-W3-K9d"/>
+                            <constraint firstItem="rMt-EE-Qnh" firstAttribute="top" secondItem="QT2-yc-H0B" secondAttribute="bottom" constant="8" id="ZCK-xs-eYz"/>
+                            <constraint firstItem="TWR-eQ-ltb" firstAttribute="leading" secondItem="raC-5R-x8O" secondAttribute="leading" id="c8C-W4-wYQ"/>
+                            <constraint firstItem="8eg-gO-Rnx" firstAttribute="top" secondItem="TWR-eQ-ltb" secondAttribute="bottom" constant="87.666666666666686" id="cS4-zl-Nl8"/>
                             <constraint firstItem="raC-5R-x8O" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="25" id="eMB-T9-yNe"/>
                             <constraint firstItem="13T-5P-6Zp" firstAttribute="leading" secondItem="suA-z6-rTr" secondAttribute="leading" constant="25" id="flo-eQ-5VN"/>
-                            <constraint firstItem="raC-5R-x8O" firstAttribute="top" secondItem="rMt-EE-Qnh" secondAttribute="bottom" constant="25" id="hZP-nH-YKQ"/>
+                            <constraint firstItem="raC-5R-x8O" firstAttribute="top" secondItem="rMt-EE-Qnh" secondAttribute="bottom" constant="204" id="hZP-nH-YKQ"/>
                             <constraint firstItem="suA-z6-rTr" firstAttribute="trailing" secondItem="QT2-yc-H0B" secondAttribute="trailing" constant="132" id="p4u-ey-bIa"/>
                             <constraint firstItem="QT2-yc-H0B" firstAttribute="top" secondItem="suA-z6-rTr" secondAttribute="top" constant="27" id="sbb-rL-bc1"/>
                             <constraint firstItem="8eg-gO-Rnx" firstAttribute="centerY" secondItem="raC-5R-x8O" secondAttribute="centerY" id="tII-s3-7YW"/>
@@ -868,6 +879,7 @@
                         <outlet property="changePFPButton" destination="rMt-EE-Qnh" id="JTe-s8-K8n"/>
                         <outlet property="profilePicture" destination="QT2-yc-H0B" id="H0T-0a-btL"/>
                         <outlet property="toggle" destination="8eg-gO-Rnx" id="h6z-oc-MC3"/>
+                        <outlet property="usernameLabel" destination="TWR-eQ-ltb" id="SNh-H8-fP5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVs-Jd-4nf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

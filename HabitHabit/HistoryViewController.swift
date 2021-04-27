@@ -25,13 +25,13 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 119/255, green: 33/255, blue: 111/255, alpha: 1)
+        self.view.backgroundColor = UIColor.habit.purple
         self.dateLabel.textColor = .white
         self.habitLabel.textColor = .white
         
         self.calendarView.dataSource = self
         self.calendarView.delegate = self
-        
+        self.calendarView.backgroundColor = .systemPink
         self.loadUserData()
     }
     

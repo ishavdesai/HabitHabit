@@ -17,12 +17,14 @@ class ProfileSettingsViewController: UIViewController {
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     @IBOutlet weak var toggle: UISwitch!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.habit.purple
         self.setupPicture()
         UIDesign.cleanupButton(button: self.changePFPButton)
+        self.usernameLabel.text = "username: \(self.databaseUsernameKey)"
         self.initializeToggle()
     }
     
