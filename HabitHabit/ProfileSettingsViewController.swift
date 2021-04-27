@@ -18,6 +18,7 @@ class ProfileSettingsViewController: UIViewController {
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var usernameLabel: UILabel!
+    var delegate: UpdateProfilePictureImmediately!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +166,7 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage else { return }
+        self.delegate.updateProfilePicture(image: image)
         self.setupAndStoreSelectedImage(image: image)
     }
     

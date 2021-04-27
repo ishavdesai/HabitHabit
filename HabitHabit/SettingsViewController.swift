@@ -9,7 +9,11 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+protocol UpdateProfilePictureImmediately {
+    func updateProfilePicture(image: UIImage) -> Void
+}
+
+class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateProfilePictureImmediately {
     
     let settingsList: [String] = ["Profile", "Habits", "History", "Friends", "Friend Requests"]
     let segueIdentifiers: [String] = ["ProfileScreenSegueIdentifier", "HabitScreenSegueIdentifier", "HistorySegueIdentifier", "HabitBuddiesSegue", "FriendRequestsSegue"]
@@ -39,6 +43,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.profilePicture.clipsToBounds = true
         self.profilePicture.layer.masksToBounds = true
         self.profilePicture.layer.cornerRadius = 150.0/2.0
+    }
+    
+    func updateProfilePicture(image: UIImage) -> Void {
+        self.profilePicture.image = image
+        self.modifyImageSettings()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileScreenSegueIdentifier",
+           let destination = segue.destination as? ProfileSettingsViewController {
+            destination.delegate = self
+        }
     }
     
     private func setupPicture() -> Void {
