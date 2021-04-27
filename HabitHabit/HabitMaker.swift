@@ -14,6 +14,7 @@ class HabitMaker {
         let streak: Int = Int(value["streak"] ?? "") ?? -1
         let dateString: String = value["dates"] ?? ""
         let dates: [Date] = (dateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: dateString.components(separatedBy: ","))
+        let rejectedDates: [String] = (value["rejectedDates"] ?? "").components(separatedBy: ",")
         let uncheckedDateString: String = value["uncheckedDates"] ?? ""
         let uncheckedDates: [Date] = (uncheckedDateString.count == 0) ? [] : Habit.convertStringListToDateList(strList: uncheckedDateString.components(separatedBy: ","))
         let imageUrlsString: String = value["imageUrls"] ?? ""
@@ -21,7 +22,7 @@ class HabitMaker {
         let uncheckedImageUrlsString: String = value["uncheckedImageUrls"] ?? ""
         let uncheckedImageUrls: [String] = (uncheckedImageUrlsString == "") ? [] : uncheckedImageUrlsString.components(separatedBy: ",")
         let habitExists: Bool = habit != "NO_HABIT_EXISTS" && streak != -1 && timeToRemind != "NO_TIME_TO_REMIND"
-        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates) : nil
+        let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates, rejectedDates: rejectedDates) : nil
         return (habitExists, habitResult)
     }
 }
