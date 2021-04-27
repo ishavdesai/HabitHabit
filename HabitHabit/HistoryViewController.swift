@@ -155,7 +155,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
                 guard let value = child.value as? [String: String] else {
                     return
                 }
-                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
+                let (habitExists, habit): (Bool, Habit?) = UtilityClass.makeHabit(value: value)
                 if habitExists {
 //-------------For test (delete later)---------------------------------------------------------
 //                    habit!.imageUrls.append("DefaultPeerHabit")

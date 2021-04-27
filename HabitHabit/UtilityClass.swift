@@ -6,8 +6,29 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
-class HabitMaker {
+class UtilityClass {
+    
+    static let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
+    static let database: DatabaseReference = Database.database().reference()
+    static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
+    
+    static func saveProfileImage() -> Void {
+        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
+            snapshot in
+            guard let urlString = snapshot.value as? String else { return }
+            guard let url = URL(string: urlString) else { return }
+            let task = URLSession.shared.dataTask(with: url, completionHandler: {
+                data, _, error in
+                guard let data = data, error == nil else { return }
+                let image: UIImage? = UIImage(data: data)
+                self.profilePicture = image ?? self.profilePicture
+            })
+            task.resume()
+        }
+    }
+    
     static func makeHabit(value: [String: String]) -> (Bool, Habit?) {
         let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
         let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"

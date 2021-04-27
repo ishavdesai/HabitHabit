@@ -42,7 +42,7 @@ class NewHomeViewController: UIViewController {
         // let now = Date()
         // let df = DateFormatter()
         // df.dateFormat = "LLLL dd, yyyy"
-        navigationItem.title = "Habits"
+        self.navigationItem.title = "Habits"
         //
         //        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
         //        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))
@@ -58,7 +58,7 @@ class NewHomeViewController: UIViewController {
                 guard let value = child.value as? [String: String] else {
                     return
                 }
-                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
+                let (habitExists, habit): (Bool, Habit?) = UtilityClass.makeHabit(value: value)
                 if habitExists {
                     tempHabitList.append(habit!)
                 }
@@ -171,7 +171,7 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                     snapshot in
                     for case let child as DataSnapshot in snapshot.children {
                         guard let value = child.value as? [String: String] else { return }
-                        let (habitExists, habitFromDatabase): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
+                        let (habitExists, habitFromDatabase): (Bool, Habit?) = UtilityClass.makeHabit(value: value)
                         if habitExists && self.habitForImage!.equals(habit: habitFromDatabase!) {
                             var currentURLS = habitFromDatabase!.imageUrls
                             currentURLS.append(urlString)

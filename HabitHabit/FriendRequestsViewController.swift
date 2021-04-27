@@ -107,26 +107,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     private func setupPicture() -> Void {
-        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
-            snapshot in
-            guard let urlString = snapshot.value as? String else {
-                let image: UIImage = UIImage(named: "DefaultProfile")!
-                self.profilePicture.image = image
-                self.modifyImageSettings(imageView: self.profilePicture, imageSize: 150.0)
-                return
-            }
-            guard let url = URL(string: urlString) else { return }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                guard let data = data, error == nil else { return }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    self.profilePicture.image = image
-                    self.modifyImageSettings(imageView: self.profilePicture, imageSize: 150.0)
-                }
-            })
-            task.resume()
-        }
+        self.profilePicture.image = UtilityClass.profilePicture
+        self.modifyImageSettings(imageView: self.profilePicture, imageSize: 150.0)
     }
     
     private func loadFriendRequests() -> Void {

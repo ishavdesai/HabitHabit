@@ -9,11 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-protocol UpdateProfilePictureImmediately {
-    func updateProfilePicture(image: UIImage) -> Void
-}
-
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateProfilePictureImmediately {
+class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let settingsList: [String] = ["Profile", "Habits", "History", "Friends", "Friend Requests"]
     let segueIdentifiers: [String] = ["ProfileScreenSegueIdentifier", "HabitScreenSegueIdentifier", "HistorySegueIdentifier", "HabitBuddiesSegue", "FriendRequestsSegue"]
@@ -45,39 +41,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.profilePicture.layer.cornerRadius = 150.0/2.0
     }
     
-    func updateProfilePicture(image: UIImage) -> Void {
-        self.profilePicture.image = image
-        self.modifyImageSettings()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProfileScreenSegueIdentifier",
-           let destination = segue.destination as? ProfileSettingsViewController {
-            destination.delegate = self
-        }
-    }
-    
     private func setupPicture() -> Void {
-        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
-            snapshot in
-            guard let urlString = snapshot.value as? String else {
-                let image: UIImage = UIImage(named: "DefaultProfile")!
-                self.profilePicture.image = image
-                self.modifyImageSettings()
-                return
-            }
-            guard let url = URL(string: urlString) else { return }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                guard let data = data, error == nil else { return }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    self.profilePicture.image = image
-                    self.modifyImageSettings()
-                }
-            })
-            task.resume()
-        }
+        self.profilePicture.image = UtilityClass.profilePicture
+        self.modifyImageSettings()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

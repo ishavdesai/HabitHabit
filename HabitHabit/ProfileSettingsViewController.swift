@@ -18,7 +18,6 @@ class ProfileSettingsViewController: UIViewController {
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var usernameLabel: UILabel!
-    var delegate: UpdateProfilePictureImmediately!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,26 +36,9 @@ class ProfileSettingsViewController: UIViewController {
     }
     
     private func setupPicture() -> Void {
-        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
-            snapshot in
-            guard let urlString = snapshot.value as? String else {
-                let image: UIImage = UIImage(named: "DefaultProfile")!
-                self.profilePicture.image = image
-                self.modifyImageSettings()
-                return
-            }
-            guard let url = URL(string: urlString) else { return }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                guard let data = data, error == nil else { return }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    self.profilePicture.image = image
-                    self.modifyImageSettings()
-                }
-            })
-            task.resume()
-        }
+        let image: UIImage = UtilityClass.profilePicture
+        self.profilePicture.image = image
+        self.modifyImageSettings()
     }
     
     private func displaySourceTypeErrorMessage(message: String) -> Void {
@@ -158,7 +140,6 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
                 guard let url = url, error == nil else { return }
                 let urlString = url.absoluteString
                 self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").setValue(urlString)
-                print(urlString)
             })
         })
     }
@@ -166,7 +147,7 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage else { return }
-        self.delegate.updateProfilePicture(image: image)
+        UtilityClass.profilePicture = image
         self.setupAndStoreSelectedImage(image: image)
     }
     

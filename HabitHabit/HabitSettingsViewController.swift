@@ -23,7 +23,6 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var addHabitButton: UIButton!
     @IBOutlet weak var currentHabitsLabel: UILabel!
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .none
@@ -56,26 +55,8 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     private func setupPicture() -> Void {
-        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
-            snapshot in
-            guard let urlString = snapshot.value as? String else {
-                let image: UIImage = UIImage(named: "DefaultProfile")!
-                self.profilePicture.image = image
-                self.modifyImageSettings()
-                return
-            }
-            guard let url = URL(string: urlString) else { return }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                guard let data = data, error == nil else { return }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    self.profilePicture.image = image
-                    self.modifyImageSettings()
-                }
-            })
-            task.resume()
-        }
+        self.profilePicture.image = UtilityClass.profilePicture
+        self.modifyImageSettings()
     }
     
     private func setupTextFields() -> Void {
@@ -117,7 +98,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habit): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
+                let (habitExists, habit): (Bool, Habit?) = UtilityClass.makeHabit(value: value)
                 if habitExists {
                     self.habitsList.append(habit!)
                     self.habitsTableView.reloadData()
@@ -262,7 +243,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
             snapshot in
             for case let child as DataSnapshot in snapshot.children {
                 guard let value = child.value as? [String: String] else { return }
-                let (habitExists, habitFromDatabase): (Bool, Habit?) = HabitMaker.makeHabit(value: value)
+                let (habitExists, habitFromDatabase): (Bool, Habit?) = UtilityClass.makeHabit(value: value)
                 if habitExists && habit.equals(habit: habitFromDatabase!) {
                     self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).removeValue()
                     return

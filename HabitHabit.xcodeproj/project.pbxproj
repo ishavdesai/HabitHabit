@@ -29,7 +29,7 @@
 		91330452260E6F220062DD7E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91330451260E6F220062DD7E /* GoogleService-Info.plist */; };
 		913305CB260E9DFE0062DD7E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913305CA260E9DFE0062DD7E /* SettingsViewController.swift */; };
 		913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913305CD260E9E200062DD7E /* PeerTableViewController.swift */; };
-		91614E0826327BAD00EF55D5 /* HabitMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91614E0726327BAD00EF55D5 /* HabitMaker.swift */; };
+		91614E0826327BAD00EF55D5 /* UtilityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91614E0726327BAD00EF55D5 /* UtilityClass.swift */; };
 		917E278F26122DEE00E6D920 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E278E26122DEE00E6D920 /* Habit.swift */; };
 		917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E27912612322F00E6D920 /* HabitSettingsViewController.swift */; };
 		9197B17B26294536007B5A35 /* NameHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197B17A26294536007B5A35 /* NameHabit.swift */; };
@@ -65,7 +65,7 @@
 		91330451260E6F220062DD7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		913305CA260E9DFE0062DD7E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		913305CD260E9E200062DD7E /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
-		91614E0726327BAD00EF55D5 /* HabitMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMaker.swift; sourceTree = "<group>"; };
+		91614E0726327BAD00EF55D5 /* UtilityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityClass.swift; sourceTree = "<group>"; };
 		917E278E26122DEE00E6D920 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		917E27912612322F00E6D920 /* HabitSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsViewController.swift; sourceTree = "<group>"; };
 		9197B17A26294536007B5A35 /* NameHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameHabit.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */,
 				91303B69263752FC009B275D /* FriendRequestTableViewCell.swift */,
 				9197B17A26294536007B5A35 /* NameHabit.swift */,
-				91614E0726327BAD00EF55D5 /* HabitMaker.swift */,
+				91614E0726327BAD00EF55D5 /* UtilityClass.swift */,
 				9110926926198110007900BE /* ProfileSettingsViewController.swift */,
 				917E27912612322F00E6D920 /* HabitSettingsViewController.swift */,
 				91303B6626374958009B275D /* FriendRequestsViewController.swift */,
@@ -301,7 +301,7 @@
 				CE185282263278D700CB994A /* UIDesign.swift in Sources */,
 				91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */,
 				9197B17B26294536007B5A35 /* NameHabit.swift in Sources */,
-				91614E0826327BAD00EF55D5 /* HabitMaker.swift in Sources */,
+				91614E0826327BAD00EF55D5 /* UtilityClass.swift in Sources */,
 				91303B6A263752FC009B275D /* FriendRequestTableViewCell.swift in Sources */,
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
