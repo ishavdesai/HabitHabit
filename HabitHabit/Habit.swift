@@ -157,6 +157,10 @@ class Habit {
             result = 1
         }
         
+        if rejectedDatesAsStrings.contains(format.string(from: date)) {
+            return result
+        }
+        
         // Set date to yesterday
         date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
         
