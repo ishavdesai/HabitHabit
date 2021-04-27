@@ -69,6 +69,7 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.imageMagnificationSegue, sender: (self.friendHabits[indexPath.row], indexPath.row))
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func deleteFriendHabitFromTable(index: Int) {

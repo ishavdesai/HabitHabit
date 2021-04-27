@@ -159,8 +159,8 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.buddyTableView.deselectRow(at: indexPath as IndexPath, animated: true)
         self.performSegue(withIdentifier: self.aboutFriendSegue, sender: indexPath.row)
+        self.buddyTableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

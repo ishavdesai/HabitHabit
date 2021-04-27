@@ -68,6 +68,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         self.passwordField?.isSecureTextEntry = true
         self.passwordField?.autocorrectionType = .no
         self.confirmPasswordField?.placeholder = "Confirm Password"
+        self.confirmPasswordField?.isSecureTextEntry = true
+        self.confirmPasswordField?.autocorrectionType = .no
         if self.onLoginSegment {
             self.confirmPasswordField?.isHidden = true
             self.signInUpButton?.setTitle(UIDesign.adjustText(text: "Sign In"), for: .normal)

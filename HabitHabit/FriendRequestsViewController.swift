@@ -146,6 +146,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.friendRequestsTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func deleteFriendRequestFromTable(index: Int) {
         self.friendRequestUsernames.remove(at: index)
         self.friendRequestsTableView.reloadData()

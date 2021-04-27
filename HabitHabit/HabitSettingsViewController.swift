@@ -236,6 +236,10 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.habitsTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // this will turn on `masksToBounds` just before showing the cell
         cell.contentView.layer.masksToBounds = true

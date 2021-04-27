@@ -93,6 +93,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         df.dateFormat = "LLLL dd, yyyy"
         let titleToPass: String = df.string(from: date)
         self.performSegue(withIdentifier: self.habitImageMagnifierSegue, sender: (image, titleToPass))
+        self.collectionView?.deselectItem(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
