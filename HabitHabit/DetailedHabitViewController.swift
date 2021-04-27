@@ -19,7 +19,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.habit.purple
         self.title = habit?.habit
-        habitCountLabel.text = String(habit?.streak ?? 0)
+        habitCountLabel.text = String(habit?.computeStreakLength() ?? 0)
         self.habitImages = self.getHabitImagesFromDatabase()
         self.setupCollectionView()
     }

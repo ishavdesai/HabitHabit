@@ -21,6 +21,8 @@ class HabitTableViewCell: UITableViewCell {
         self.nameLabel.text = self.habit!.habit
         self.streakLabel.text = String(self.habit!.streak)
         self.streak = self.habit!.streak
+        self.streak = self.habit!.computeStreakLength()
+        self.streakLabel.text = String(self.streak)
         if(!noCamera) {
             let image: UIImage? = UIImage(systemName: "camera")
             self.cameraButton.setBackgroundImage(image, for: .normal)
@@ -30,7 +32,7 @@ class HabitTableViewCell: UITableViewCell {
         
         UIDesign.setCellProperties(cell: self)
     }
-    
+        
     @IBAction func cameraButtonClicked(_ sender: Any) {
         self.delegate?.takePictureAndUpdateHabit(habit: self.habit!)
     }

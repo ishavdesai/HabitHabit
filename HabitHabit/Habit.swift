@@ -15,6 +15,7 @@ class Habit {
     var imageUrls: [String]
     var uncheckedImageUrls: [String]
     var uncheckedDates: [Date]
+    var rejectedDates: [String]
     
     init() {
         self.habit = ""
@@ -24,6 +25,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String) {
@@ -34,6 +36,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, timeToRemind: String) {
@@ -44,6 +47,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int) {
@@ -54,6 +58,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date]) {
@@ -64,6 +69,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String) {
@@ -74,6 +80,7 @@ class Habit {
         self.imageUrls = []
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String]) {
@@ -84,6 +91,7 @@ class Habit {
         self.imageUrls = imageUrls
         self.uncheckedImageUrls = []
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String]) {
@@ -94,6 +102,7 @@ class Habit {
         self.imageUrls = imageUrls
         self.uncheckedImageUrls = uncheckedImageUrls
         self.uncheckedDates = []
+        self.rejectedDates = []
     }
     
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date]) {
@@ -104,8 +113,20 @@ class Habit {
         self.imageUrls = imageUrls
         self.uncheckedImageUrls = uncheckedImageUrls
         self.uncheckedDates = uncheckedDates
+        self.rejectedDates = []
     }
-    
+
+    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date], rejectedDates: [String]) {
+        self.habit = habit
+        self.streak = streak
+        self.timeToRemind = timeToRemind
+        self.dates = dates
+        self.imageUrls = imageUrls
+        self.uncheckedImageUrls = uncheckedImageUrls
+        self.uncheckedDates = uncheckedDates
+        self.rejectedDates = rejectedDates
+    }
+
     func toString() -> String {
         return self.habit
     }
@@ -118,6 +139,40 @@ class Habit {
         return result
     }
     
+    func computeStreakLength() -> Int {
+        let habit = self
+        let rejectedDatesAsStrings = habit.rejectedDates
+        var datesAsStrings = [String]()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        for date in habit.dates {
+            datesAsStrings.append(format.string(from: date))
+        }
+        
+        var result = 0
+        var date = Date()
+        
+        // Today is a special day. Dont cancel streak if today is not yet done
+        if taskCompletedOnDate(date: format.string(from: date), dates: datesAsStrings, rejectedDates: rejectedDatesAsStrings) {
+            result = 1
+        }
+        
+        // Set date to yesterday
+        date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+        
+        while taskCompletedOnDate(date: format.string(from: date), dates: datesAsStrings, rejectedDates: rejectedDatesAsStrings) {
+            result += 1
+            date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+        }
+
+        return result
+    }
+    
+    func taskCompletedOnDate(date: String, dates:[String], rejectedDates:[String]) -> Bool {
+        return dates.contains(date) && !rejectedDates.contains(date)
+    }
+
+    
     func convertToJSON() -> [String: String] {
         return [
             "habit": self.habit,
@@ -126,7 +181,8 @@ class Habit {
             "dates": self.stringifyDateArray(datesParam: self.dates).joined(separator: ","),
             "imageUrls": self.imageUrls.joined(separator: ","),
             "uncheckedImageUrls": self.uncheckedImageUrls.joined(separator: ","),
-            "uncheckedDates": self.stringifyDateArray(datesParam: self.uncheckedDates).joined(separator: ",")
+            "uncheckedDates": self.stringifyDateArray(datesParam: self.uncheckedDates).joined(separator: ","),
+            "rejectedDates": self.rejectedDates.joined(separator: ",")
         ]
     }
     
@@ -164,5 +220,4 @@ class Habit {
         }
         return result
     }
-    
 }
