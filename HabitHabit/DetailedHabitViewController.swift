@@ -64,19 +64,29 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let date = self.habit!.dates[indexPath.row]
         let image = self.habitImages[indexPath.row]
+        let uncheckedDate = self.habit!.uncheckedDates
+        let rejectedDate: [Date] = Habit.convertStringListToDateList(strList: self.habit!.rejectedDates, rejectedDateFormat: true)
+        var updateStatus: Bool?
+        if uncheckedDate.contains(date) {
+            updateStatus = nil
+        } else {
+            updateStatus = UtilityClass.dateListSameAsDate(dateList: rejectedDate, date: date)
+        }
         let df = DateFormatter()
         df.dateFormat = "LLLL dd, yyyy"
         let titleToPass: String = df.string(from: date)
-        self.performSegue(withIdentifier: self.habitImageMagnifierSegue, sender: (image, titleToPass))
+        self.performSegue(withIdentifier: self.habitImageMagnifierSegue, sender: (image, titleToPass, updateStatus, self.habit!.habit))
         self.collectionView?.deselectItem(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == self.habitImageMagnifierSegue,
-           let destination = segue.destination as? HabitImageMagnifierViewController {
-            let (image, titleToPass): (UIImage, String) = sender as! (UIImage, String)
+           let destination = segue.destination as? HabitImageMagnifierViewController,
+           let (image, titleToPass, updateStatus, habitName): (UIImage, String, Bool?, String) = sender as? (UIImage, String, Bool?, String) {
             destination.viewTitle = titleToPass
             destination.image = image
+            destination.updateStatus = updateStatus
+            destination.habitName = habitName
         }
     }
     

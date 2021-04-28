@@ -73,6 +73,15 @@ class UtilityClass {
         }
     }
     
+    static func dateListSameAsDate(dateList: [Date], date: Date) -> Bool {
+        for dateInList in dateList {
+            if Calendar.current.isDate(dateInList, inSameDayAs: date) {
+                return true
+            }
+        }
+        return false
+    }
+    
     static func makeHabit(value: [String: String]) -> (Bool, Habit?) {
         let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
         let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"
