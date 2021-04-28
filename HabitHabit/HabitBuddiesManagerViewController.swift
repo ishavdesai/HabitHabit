@@ -23,6 +23,7 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
     private let aboutFriendSegue: String = "AboutFriendSegue"
     private let refreshControl = UIRefreshControl()
     private var friendRequestsSent: [String] = []
+    private var friendRequests: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,15 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
             }
             self.friendRequestsSent = tempFriendRequestSentList
         }
+        self.database.child(self.databaseUsernameKey).child("Friend-Requests").observeSingleEvent(of: .value) {
+            snapshot in
+            var tempFriendRequestList: [String] = []
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? String else { return }
+                tempFriendRequestList.append(value)
+            }
+            self.friendRequests = tempFriendRequestList
+        }
     }
     
     private func setupPicture() -> Void {
@@ -121,6 +131,10 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
         } else if self.friendRequestsSent.contains(username) {
             self.statusLabel.textColor = .systemRed
             self.statusLabel.text = "You have already sent a friend request to \(username)"
+            return
+        } else if self.friendRequests.contains(username) {
+            self.statusLabel.textColor = .systemRed
+            self.statusLabel.text = "\(username) has already sent you a friend request. Respond to the friend request on the friend request page"
             return
         }
         self.database.child(username).observeSingleEvent(of: .value) {
