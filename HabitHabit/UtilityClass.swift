@@ -14,6 +14,7 @@ class UtilityClass {
     static let database: DatabaseReference = Database.database().reference()
     static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
     static var habitNameUpdateDict: [String: [ImageDatePair]] = [:]
+    static var accountIsPrivate: Bool = false
     
     static func saveProfileImage() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
@@ -27,6 +28,15 @@ class UtilityClass {
                 self.profilePicture = image ?? self.profilePicture
             })
             task.resume()
+        }
+    }
+    
+    static func getPrivacyStatus() -> Void {
+        self.database.child(self.databaseUsernameKey).child("Private").observeSingleEvent(of: .value) {
+            snapshot in
+            if snapshot.exists() {
+                self.accountIsPrivate = snapshot.value as? Bool ?? false
+            }
         }
     }
     

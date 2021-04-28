@@ -23,13 +23,17 @@ class HabitImageMagnifierViewController: UIViewController {
         self.title = self.viewTitle!
         self.imageView.image = self.image!
         self.habitNameLabel?.text = "Habit Name: \(self.habitName!)"
-        if self.updateStatus == nil {
-            self.habitUpdateStatusLabel?.text = "This habit update has not been verified by a peer yet"
-        } else {
-            self.habitUpdateStatusLabel?.text = "This habit update was \(self.updateStatus! ? "rejected" : "accepted")."
-        }
         self.habitNameLabel?.textColor = .white
         self.habitUpdateStatusLabel?.textColor = .white
+        if UtilityClass.accountIsPrivate {
+            self.habitUpdateStatusLabel?.text = ""
+        } else {
+            if self.updateStatus == nil {
+                self.habitUpdateStatusLabel?.text = "This habit update has not been verified by a peer yet"
+            } else {
+                self.habitUpdateStatusLabel?.text = "This habit update was \(self.updateStatus! ? "rejected" : "accepted")."
+            }
+        }
     }
     
 }

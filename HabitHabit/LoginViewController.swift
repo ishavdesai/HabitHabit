@@ -124,6 +124,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             defaults.setValue(usernameKey!, forKey: "kUsername")
             UtilityClass.saveHabitUpdateImages()
             UtilityClass.saveProfileImage()
+            UtilityClass.getPrivacyStatus()
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
     }

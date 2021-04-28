@@ -125,8 +125,10 @@ class ProfileSettingsViewController: UIViewController {
     
     @IBAction func onToggle(_ sender: Any) {
         if toggle.isOn {
+            UtilityClass.accountIsPrivate = true
             self.database.child(self.databaseUsernameKey).child("Private").setValue(true)
         } else {
+            UtilityClass.accountIsPrivate = false
             self.database.child(self.databaseUsernameKey).child("Private").setValue(false)
         }
     }
