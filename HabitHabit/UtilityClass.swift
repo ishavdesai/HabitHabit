@@ -13,6 +13,7 @@ class UtilityClass {
     static let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     static let database: DatabaseReference = Database.database().reference()
     static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
+    static var habitNameUpdateDict: [String: [UIImage]] = [:]
     
     static func saveProfileImage() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
@@ -26,6 +27,33 @@ class UtilityClass {
                 self.profilePicture = image ?? self.profilePicture
             })
             task.resume()
+        }
+    }
+    
+    static func saveHabitUpdateImages() -> Void {
+        self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
+            snapshot in
+            var habitList: [Habit] = []
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? [String: String] else { return }
+                let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: value)
+                if habitExists {
+                    habitList.append(habit!)
+                }
+            }
+            for habit in habitList {
+                let imageUrls = habit.imageUrls
+                self.habitNameUpdateDict[habit.habit] = []
+                for index in 0..<imageUrls.count {
+                    guard let url = URL(string: imageUrls[index]) else { return }
+                    let task = URLSession.shared.dataTask(with: url, completionHandler: {
+                        data, _, error in
+                        guard let data = data, error == nil else { return }
+                        self.habitNameUpdateDict[habit.habit]!.append(UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!)
+                    })
+                    task.resume()
+                }
+            }
         }
     }
     

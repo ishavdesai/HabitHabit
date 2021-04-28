@@ -18,35 +18,10 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.habit.purple
-        self.title = habit?.habit
-        habitCountLabel.text = String(habit?.computeStreakLength() ?? 0)
-        self.habitImages = self.getHabitImagesFromDatabase()
+        self.title = self.habit?.habit
+        habitCountLabel.text = String(self.habit?.computeStreakLength() ?? 0)
+        self.habitImages = UtilityClass.habitNameUpdateDict[self.habit!.habit]!
         self.setupCollectionView()
-    }
-    
-    private func getHabitImagesFromDatabase() -> [UIImage] {
-        var result: [UIImage] = []
-        let sem = DispatchSemaphore.init(value: 0)
-        let imageUrls = self.habit!.imageUrls
-        if imageUrls.count == 0 {
-            sem.signal()
-        }
-        for index in 0..<imageUrls.count {
-            guard let url = URL(string: imageUrls[index]) else { return result }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                defer {
-                    if index == imageUrls.count - 1 {
-                        sem.signal()
-                    }
-                }
-                guard let data = data, error == nil else { return }
-                result.append(UIImage(data: data)!)
-            })
-            task.resume()
-        }
-        sem.wait()
-        return result
     }
     
     private func setupCollectionView() -> Void {

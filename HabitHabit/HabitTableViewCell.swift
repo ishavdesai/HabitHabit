@@ -19,8 +19,6 @@ class HabitTableViewCell: UITableViewCell {
     func setProperties(habit: Habit, delegate: HabitImageTrackerDelegate, noCamera:Bool = false) {
         self.habit = habit
         self.nameLabel.text = self.habit!.habit
-        self.streakLabel.text = String(self.habit!.streak)
-        self.streak = self.habit!.streak
         self.streak = self.habit!.computeStreakLength()
         self.streakLabel.text = String(self.streak)
         if(!noCamera) {

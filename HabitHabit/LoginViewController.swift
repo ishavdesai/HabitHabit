@@ -122,6 +122,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
             defaults.setValue(usernameKey!, forKey: "kUsername")
+            UtilityClass.saveHabitUpdateImages()
             UtilityClass.saveProfileImage()
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }

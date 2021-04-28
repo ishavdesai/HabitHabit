@@ -188,6 +188,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         let timeToRemind: String? = self.timePicker.text
         if self.checkFieldAccuracy(habitString: habitString, timeToRemind: timeToRemind) {
             let newHabit: Habit = Habit(habit: habitString!, timeToRemind: timeToRemind!)
+            UtilityClass.habitNameUpdateDict[newHabit.habit] = []
             self.habitsList.append(newHabit)
             self.habitsTableView.reloadData()
             self.addToNotificationQueue(habit: newHabit)
