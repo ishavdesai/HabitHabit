@@ -151,16 +151,12 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
     }
     
     private func setupAndStoreTakenImage(image: UIImage) -> Void {
-        let todayDate: Date = Date()
-        let timezoneOffset = TimeZone.current.secondsFromGMT()
-        let epochDate = todayDate.timeIntervalSince1970
-        let timezoneEpochOffset = (epochDate + Double(timezoneOffset))
-        let todayDateTimeZone = Date(timeIntervalSince1970: timezoneEpochOffset)
+        let todayDate: Date = UtilityClass.getTimeWithCorrectTimeZone()
         let df = DateFormatter()
         df.dateFormat = "LLLL dd, yyyy"
         let imageText: String = df.string(from: todayDate)
         let imageToAdd: UIImage = self.textToImage(drawText: imageText, inImage: image, atPoint: CGPoint(x: 100, y: 100))
-        UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.append(imageToAdd)
+        UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.append(ImageDatePair(image: imageToAdd, date: todayDate))
         guard let imageData = imageToAdd.pngData() else { return }
         let randomNumber: Int = Int.random(in: 0..<1_000_000)
         self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).putData(imageData, metadata: nil, completion: {
@@ -185,10 +181,10 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                             currentUncheckedURLS.append(urlString)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedImageUrls").setValue(currentUncheckedURLS.joined(separator: ","))
                             var currentDates = habitFromDatabase!.dates
-                            currentDates.append(todayDateTimeZone)
+                            currentDates.append(todayDate)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
                             var uncheckedDates = habitFromDatabase!.uncheckedDates
-                            uncheckedDates.append(todayDateTimeZone)
+                            uncheckedDates.append(todayDate)
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedDates").setValue(self.stringifyDateArray(dates: uncheckedDates).joined(separator: ","))
                             if currentDates.count == 1 {
                                 self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(1))

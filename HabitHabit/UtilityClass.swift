@@ -13,7 +13,7 @@ class UtilityClass {
     static let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     static let database: DatabaseReference = Database.database().reference()
     static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
-    static var habitNameUpdateDict: [String: [UIImage]] = [:]
+    static var habitNameUpdateDict: [String: [ImageDatePair]] = [:]
     
     static func saveProfileImage() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
@@ -28,6 +28,22 @@ class UtilityClass {
             })
             task.resume()
         }
+    }
+    
+    static func getAllImagesOnly(imageDateList: [ImageDatePair]) -> [UIImage] {
+        var result: [UIImage] = []
+        for imageDate in imageDateList {
+            result.append(imageDate.image)
+        }
+        return result
+    }
+    
+    static func getTimeWithCorrectTimeZone() -> Date {
+        let todayDate = Date()
+        let timezoneOffset = TimeZone.current.secondsFromGMT()
+        let epochDate = todayDate.timeIntervalSince1970
+        let timezoneEpochOffset = (epochDate + Double(timezoneOffset))
+        return Date(timeIntervalSince1970: timezoneEpochOffset)
     }
     
     static func saveHabitUpdateImages() -> Void {
@@ -49,7 +65,7 @@ class UtilityClass {
                     let task = URLSession.shared.dataTask(with: url, completionHandler: {
                         data, _, error in
                         guard let data = data, error == nil else { return }
-                        self.habitNameUpdateDict[habit.habit]!.append(UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!)
+                        self.habitNameUpdateDict[habit.habit]!.append(ImageDatePair(image: UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!, date: habit.dates[index]))
                     })
                     task.resume()
                 }

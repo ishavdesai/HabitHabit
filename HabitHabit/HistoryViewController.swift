@@ -89,7 +89,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
 //                let imageName = habit.imageUrls[imageIndex]
 //                let image = UIImage(named: imageName)
 //-----------------------------------------------------------------------------------------------
-                let image = self.getImage(imageUrl: habit.imageUrls[imageIndex]) // replace with above
+                let image = self.findImageForSpecifiedDate(habit: habit, imageIndex: imageIndex, date: date) // replace with above
                 let imageView = UIImageView(image: image)
                 imageView.tag = 130 // identifier to be cleared each time
                 imageView.frame = CGRect(x: imagePosition.0, y: imagePosition.1, width: imageWidth, height: imageHeight)
@@ -106,18 +106,15 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
         self.habitLabel.text = habitsText
     }
     
-    func getImage(imageUrl: String) -> UIImage {
-        var result: UIImage!
-        let sem = DispatchSemaphore.init(value: 0)
-        let task = URLSession.shared.dataTask(with: URL(string: imageUrl)!, completionHandler: {
-            data, _, error in
-            guard let data = data, error == nil else { return }
-            result = UIImage(data: data)!
-            sem.signal()
-        })
-        task.resume()
-        sem.wait()
-        return result
+    private func findImageForSpecifiedDate(habit: Habit, imageIndex: Int, date: Date) -> UIImage {
+        let imageDates: [ImageDatePair] = UtilityClass.habitNameUpdateDict[habit.habit] ?? []
+        var dateSpecificImages: [UIImage] = []
+        for imageDate in imageDates {
+            if Calendar.current.isDate(imageDate.date, inSameDayAs: date) {
+                dateSpecificImages.append(imageDate.image)
+            }
+        }
+        return dateSpecificImages[imageIndex]
     }
     
     // Indicates how many habits the user has updated on a date with dots below the day

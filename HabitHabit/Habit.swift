@@ -218,10 +218,9 @@ class Habit {
     static func convertStringListToDateList(strList: [String]) -> [Date] {
         var result: [Date] = []
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.timeZone = .autoupdatingCurrent
-        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         for date in strList {
-            result.append(dateFormatterGet.date(from: String(date.prefix(19)))!)
+            result.append(dateFormatterGet.date(from: date)!)
         }
         return result
     }

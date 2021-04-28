@@ -20,7 +20,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         self.view.backgroundColor = UIColor.habit.purple
         self.title = self.habit?.habit
         habitCountLabel.text = String(self.habit?.computeStreakLength() ?? 0)
-        self.habitImages = UtilityClass.habitNameUpdateDict[self.habit!.habit]!
+        self.habitImages = UtilityClass.getAllImagesOnly(imageDateList: UtilityClass.habitNameUpdateDict[self.habit!.habit]!)
         self.setupCollectionView()
     }
     
