@@ -15,7 +15,7 @@ class UtilityClass {
     static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
     static var habitNameUpdateDict: [String: [ImageDatePair]] = [:]
     static var accountIsPrivate: Bool = false
-    static let compressionRate: CGFloat = 0.5
+    static let compressionRate: CGFloat = 0.0
     
     static func saveProfileImage() -> Void {
         self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
