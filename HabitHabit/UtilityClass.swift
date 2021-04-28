@@ -76,6 +76,7 @@ class UtilityClass {
                         data, _, error in
                         guard let data = data, error == nil else { return }
                         self.habitNameUpdateDict[habit.habit]!.append(ImageDatePair(image: UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!, date: habit.dates[index]))
+                        print("IMAGE ADDED FOR HABIT: \(habit.habit)")
                     })
                     task.resume()
                 }

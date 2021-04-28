@@ -115,7 +115,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
                 dateSpecificImages.append(imageDate.image)
             }
         }
-        return dateSpecificImages[imageIndex]
+        return dateSpecificImages[0]
     }
     
     // Indicates how many habits the user has updated on a date with dots below the day
