@@ -90,15 +90,17 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
 //                let imageName = habit.imageUrls[imageIndex]
 //                let image = UIImage(named: imageName)
 //-----------------------------------------------------------------------------------------------
-                let image = self.findImageForSpecifiedDate(habit: habit, imageIndex: imageIndex, date: date) // replace with above
-                let imageView = UIImageView(image: image)
-                imageView.tag = 130 // identifier to be cleared each time
-                imageView.frame = CGRect(x: imagePosition.0, y: imagePosition.1, width: imageWidth, height: imageHeight)
-                view.addSubview(imageView)
-                imagePosition.0 += imageWidth + 20
-                if imagePosition.0 == (30 + 3 * (imageWidth + 20)) {
-                    imagePosition.0 = 30
-                    imagePosition.1 += imageHeight + 20
+                let image: UIImage? = self.findImageForSpecifiedDate(habit: habit, imageIndex: imageIndex, date: date) // replace with above
+                if image != nil {
+                    let imageView = UIImageView(image: image)
+                    imageView.tag = 130 // identifier to be cleared each time
+                    imageView.frame = CGRect(x: imagePosition.0, y: imagePosition.1, width: imageWidth, height: imageHeight)
+                    view.addSubview(imageView)
+                    imagePosition.0 += imageWidth + 20
+                    if imagePosition.0 == (30 + 3 * (imageWidth + 20)) {
+                        imagePosition.0 = 30
+                        imagePosition.1 += imageHeight + 20
+                    }
                 }
             }
             // cut off the last ", "
@@ -107,7 +109,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
         self.habitLabel.text = habitsText
     }
     
-    private func findImageForSpecifiedDate(habit: Habit, imageIndex: Int, date: Date) -> UIImage {
+    private func findImageForSpecifiedDate(habit: Habit, imageIndex: Int, date: Date) -> UIImage? {
         let imageDates: [ImageDatePair] = UtilityClass.habitNameUpdateDict[habit.habit] ?? []
         var dateSpecificImages: [UIImage] = []
         for imageDate in imageDates {
@@ -115,7 +117,11 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
                 dateSpecificImages.append(imageDate.image)
             }
         }
-        return dateSpecificImages[0]
+        if dateSpecificImages.count == 0 {
+            return nil
+        } else {
+            return dateSpecificImages[0]
+        }
     }
     
     // Indicates how many habits the user has updated on a date with dots below the day
