@@ -31,7 +31,8 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
         
         self.calendarView.dataSource = self
         self.calendarView.delegate = self
-        self.calendarView.backgroundColor = .systemPink
+        self.calendarView.backgroundColor = .white
+        self.calendarView.layer.cornerRadius = 5
         self.loadUserData()
     }
     

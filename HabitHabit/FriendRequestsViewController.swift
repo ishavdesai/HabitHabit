@@ -35,6 +35,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
         self.loadFriendRequests()
     }
     
+    
     private func setupRefreshControl() -> Void {
         self.refreshControl.addTarget(self, action: #selector(self.refreshFriendRequests(_:)), for: .valueChanged)
         self.refreshControl.tintColor = .white
