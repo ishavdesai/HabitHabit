@@ -28,11 +28,17 @@ class ProfileSettingsViewController: UIViewController {
         self.initializeToggle()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupPicture()
+    }
+    
     private func modifyImageSettings() -> Void {
         self.profilePicture.contentMode = .scaleAspectFill
         self.profilePicture.clipsToBounds = true
         self.profilePicture.layer.masksToBounds = true
-        self.profilePicture.layer.cornerRadius = 150.0/2.0
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.height/2
+        //self.profilePicture.layer.cornerRadius = 150.0/2.0
     }
     
     private func setupPicture() -> Void {
