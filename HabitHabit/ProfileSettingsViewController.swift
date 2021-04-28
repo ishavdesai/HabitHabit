@@ -140,7 +140,7 @@ extension ProfileSettingsViewController: UIImagePickerControllerDelegate, UINavi
     private func setupAndStoreSelectedImage(image: UIImage) {
         self.profilePicture.image = image
         self.modifyImageSettings()
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = image.jpegData(compressionQuality: UtilityClass.compressionRate) else { return }
         self.storage.child(self.databaseUsernameKey).child("ProfilePhoto.png").putData(imageData, metadata: nil, completion: { _, error in
             guard error ==  nil else { print("Failed to upload"); return }
             self.storage.child(self.databaseUsernameKey).child("ProfilePhoto.png").downloadURL(completion: {

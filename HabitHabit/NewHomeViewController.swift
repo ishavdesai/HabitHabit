@@ -157,7 +157,7 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         let imageText: String = df.string(from: todayDate)
         let imageToAdd: UIImage = self.textToImage(drawText: imageText, inImage: image, atPoint: CGPoint(x: 100, y: 100))
         UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.append(ImageDatePair(image: imageToAdd, date: todayDate))
-        guard let imageData = imageToAdd.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = imageToAdd.jpegData(compressionQuality: UtilityClass.compressionRate) else { return }
         let randomNumber: Int = Int.random(in: 0..<1_000_000)
         self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).putData(imageData, metadata: nil, completion: {
             _, error in
