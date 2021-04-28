@@ -29,7 +29,7 @@ class NewHomeViewController: UIViewController {
         self.database.child(self.databaseUsernameKey).observeSingleEvent(of: .value) {
             snapshot in
             if !snapshot.exists() {
-                self.database.child(self.databaseUsernameKey).setValue("")
+                self.database.child(self.databaseUsernameKey).setValue(["AccountStatus":"AccountCreated"])
             }
         }
         habitTableView.delegate = self
