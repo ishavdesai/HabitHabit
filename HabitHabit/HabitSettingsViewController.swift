@@ -215,6 +215,7 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         let cell: UITableViewCell = self.habitsTableView.dequeueReusableCell(withIdentifier: self.habitCellIdentifier, for: indexPath as IndexPath) as! GenericTableViewCell
         cell.textLabel?.text = self.habitsList[indexPath.row].toString()
         //UIDesign.setCellProperties(cell: cell)
+        cell.backgroundColor = .clear
         return cell
     }
     
