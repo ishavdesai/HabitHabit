@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 (success, error) in
                 if success {
                     print("Notifications Approved")
-                } else {
+                } else if error != nil {
                     print("Error: \(error!.localizedDescription)")
                 }
             })

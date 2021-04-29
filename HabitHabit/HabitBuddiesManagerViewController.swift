@@ -178,6 +178,15 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
                 }
             }
         }
+        self.database.child(friendName).child("Friends").observeSingleEvent(of: .value) {
+            snapshot in
+            for case let child as DataSnapshot in snapshot.children {
+                guard let value = child.value as? String else { return }
+                if value == self.databaseUsernameKey {
+                    self.database.child(friendName).child("Friends").child(child.key).removeValue()
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
