@@ -34,6 +34,8 @@
 		917E278F26122DEE00E6D920 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E278E26122DEE00E6D920 /* Habit.swift */; };
 		917E27922612322F00E6D920 /* HabitSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E27912612322F00E6D920 /* HabitSettingsViewController.swift */; };
 		9197B17B26294536007B5A35 /* NameHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197B17A26294536007B5A35 /* NameHabit.swift */; };
+		91DA359A263A624800D4AEA9 /* HistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DA3599263A624800D4AEA9 /* HistoryCollectionViewCell.swift */; };
+		91DA359D263A636000D4AEA9 /* GeneralCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DA359C263A636000D4AEA9 /* GeneralCollectionViewCell.swift */; };
 		91DE87C9260EBB1000F7D9FB /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */; };
 		91E1240C2623993200048BB3 /* HabitBuddiesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1240B2623993200048BB3 /* HabitBuddiesManagerViewController.swift */; };
 		91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */; };
@@ -71,6 +73,8 @@
 		917E278E26122DEE00E6D920 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		917E27912612322F00E6D920 /* HabitSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSettingsViewController.swift; sourceTree = "<group>"; };
 		9197B17A26294536007B5A35 /* NameHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameHabit.swift; sourceTree = "<group>"; };
+		91DA3599263A624800D4AEA9 /* HistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		91DA359C263A636000D4AEA9 /* GeneralCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewCell.swift; sourceTree = "<group>"; };
 		91DE87C8260EBB1000F7D9FB /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		91E1240B2623993200048BB3 /* HabitBuddiesManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitBuddiesManagerViewController.swift; sourceTree = "<group>"; };
 		91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFriendViewController.swift; sourceTree = "<group>"; };
@@ -136,8 +140,10 @@
 				0C0EDD8A2622587800CE2806 /* DetailedHabitViewController.swift */,
 				91330451260E6F220062DD7E /* GoogleService-Info.plist */,
 				9133041F260E6C7A0062DD7E /* Assets.xcassets */,
+				91DA359C263A636000D4AEA9 /* GeneralCollectionViewCell.swift */,
 				91330421260E6C7A0062DD7E /* LaunchScreen.storyboard */,
 				9133041C260E6C780062DD7E /* HabitHabit.xcdatamodeld */,
+				91DA3599263A624800D4AEA9 /* HistoryCollectionViewCell.swift */,
 				0CEA33E32613AF2E00D17FD0 /* NewHomeViewController.swift */,
 				913305CA260E9DFE0062DD7E /* SettingsViewController.swift */,
 				CE1852852632AA8F00CB994A /* GenericTableViewCell.swift */,
@@ -301,6 +307,7 @@
 			files = (
 				913305CB260E9DFE0062DD7E /* SettingsViewController.swift in Sources */,
 				9110926A26198110007900BE /* ProfileSettingsViewController.swift in Sources */,
+				91DA359D263A636000D4AEA9 /* GeneralCollectionViewCell.swift in Sources */,
 				CE185282263278D700CB994A /* UIDesign.swift in Sources */,
 				91E1240F2623B6EF00048BB3 /* AboutFriendViewController.swift in Sources */,
 				9197B17B26294536007B5A35 /* NameHabit.swift in Sources */,
@@ -322,6 +329,7 @@
 				0C0EDD8B2622587800CE2806 /* DetailedHabitViewController.swift in Sources */,
 				91330416260E6C780062DD7E /* SceneDelegate.swift in Sources */,
 				912992C72624F1940097DB7D /* HabitImageMagnifierViewController.swift in Sources */,
+				91DA359A263A624800D4AEA9 /* HistoryCollectionViewCell.swift in Sources */,
 				915EE687263922F200C78369 /* ImageDatePair.swift in Sources */,
 				0CEA33E42613AF2E00D17FD0 /* NewHomeViewController.swift in Sources */,
 				3002F23A2620CE0D00FF495E /* PeerTableViewCell.swift in Sources */,

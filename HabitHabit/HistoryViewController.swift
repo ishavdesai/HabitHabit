@@ -12,12 +12,14 @@ import FSCalendar
 import CalculateCalendarLogic
 
 
-class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var habitLabel: UILabel!
     @IBOutlet weak var calendarView: FSCalendar!
+    private var collectionView: UICollectionView?
     
+    var collectionViewImages: [UIImage] = []
     var habits: [Habit] = []
     var habitsOnDate: [Date: [(Habit, Int)]] = [:]
     private let database: DatabaseReference = Database.database().reference()
@@ -34,6 +36,45 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
         self.calendarView.backgroundColor = .white
         self.calendarView.layer.cornerRadius = 5
         self.loadUserData()
+        self.setupCollectionView()
+    }
+    
+    private func setupCollectionView() -> Void {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: (view.frame.size.width / 3) - 3, height: (view.frame.size.width / 3) - 3)
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        self.collectionView?.register(HistoryCollectionViewCell.self, forCellWithReuseIdentifier: HistoryCollectionViewCell.identifier)
+        self.collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.backgroundColor = self.view.backgroundColor
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        guard let myCollection = self.collectionView else { return }
+        view.addSubview(myCollection)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let y_offset: CGFloat = 550
+        self.collectionView?.frame = CGRect(x: 0, y: y_offset, width: view.frame.size.width, height: view.frame.size.height - y_offset).integral
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.collectionViewImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: HistoryCollectionViewCell.identifier, for: indexPath as IndexPath) as! HistoryCollectionViewCell
+        cell.configure(image: self.collectionViewImages[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,45 +109,30 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
     // When the user taps a date, the habits on that date will be displayed below
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         self.removeImages()
-        
+        self.collectionViewImages.removeAll()
+        self.collectionView?.reloadData()
         let tmpDate = Calendar(identifier: .gregorian)
         let year = tmpDate.component(.year, from: date)
         let month = tmpDate.component(.month, from: date)
         let day = tmpDate.component(.day, from: date)
         dateLabel.text = "Date: \(month)/\(day)/\(year)"
 
-        var habitsText = "Habit: "
+        var habitsText = "Habit(s): "
         if self.habitsOnDate[date] != nil {
-            var imagePosition = (30, Int(self.habitLabel.frame.origin.y) + 40)
             for habitAndIndex in self.habitsOnDate[date]! {
                 let habit = habitAndIndex.0
                 let imageIndex = habitAndIndex.1
                 habitsText += habit.toString() + ", "
-
-                // load a picture of habit activity
-                let imageWidth = Int(self.view.frame.size.width / 4)
-                let imageHeight = Int(self.view.frame.size.height / 11)
-//---------For test(delete later)----------------------------------------------------------------
-//                let imageName = habit.imageUrls[imageIndex]
-//                let image = UIImage(named: imageName)
-//-----------------------------------------------------------------------------------------------
                 let image: UIImage? = self.findImageForSpecifiedDate(habit: habit, imageIndex: imageIndex, date: date) // replace with above
                 if image != nil {
-                    let imageView = UIImageView(image: image)
-                    imageView.tag = 130 // identifier to be cleared each time
-                    imageView.frame = CGRect(x: imagePosition.0, y: imagePosition.1, width: imageWidth, height: imageHeight)
-                    view.addSubview(imageView)
-                    imagePosition.0 += imageWidth + 20
-                    if imagePosition.0 == (30 + 3 * (imageWidth + 20)) {
-                        imagePosition.0 = 30
-                        imagePosition.1 += imageHeight + 20
-                    }
+                    self.collectionViewImages.append(image!)
                 }
             }
             // cut off the last ", "
             habitsText = String(habitsText.dropLast(2))
         }
         self.habitLabel.text = habitsText
+        self.collectionView?.reloadData()
     }
     
     private func findImageForSpecifiedDate(habit: Habit, imageIndex: Int, date: Date) -> UIImage? {
