@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.settingsTableView.dequeueReusableCell(withIdentifier: self.settingsTableViewCellIdentifier, for: indexPath as IndexPath) as! GenericTableViewCell
         cell.textLabel?.text = self.settingsList[indexPath.row]
-        cell.backgroundColor = .clear
+        //cell.backgroundColor = .clear
         cell.textLabel?.textColor = .white
         //UIDesign.setCellProperties(cell: cell)
         return cell
