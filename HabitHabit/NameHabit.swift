@@ -18,12 +18,17 @@ class NameHabit {
     
     public var description: String { return "Name: \(self.username)\n\thabitName: \(self.habitName)\n\tdate: \(self.date)"}
     
-    init(username: String, habitName: String, imageUrl: String, date: Date, habit: Habit) {
+    convenience init(username: String, habitName: String, imageUrl: String, date: Date, habit: Habit) {
+        self.init(username: username, habitName: habitName, imageUrl: imageUrl, date: date, habit: habit, image: nil)
+    }
+    
+    init(username: String, habitName: String, imageUrl: String, date: Date, habit: Habit, image: UIImage?) {
         self.username = username
         self.habitName = habitName
-        self.date = date
         self.imageUrl = imageUrl
+        self.date = date
         self.habit = habit
+        self.image = image
     }
     
     func getImage() -> UIImage {

@@ -17,103 +17,40 @@ class Habit {
     var uncheckedDates: [Date]
     var rejectedDates: [String]
     
-    init() {
-        self.habit = ""
-        self.timeToRemind = ""
-        self.streak = 0
-        self.dates = []
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init() {
+        self.init(habit: "")
     }
     
-    init(habit: String) {
-        self.habit = habit
-        self.timeToRemind = ""
-        self.streak = 0
-        self.dates = []
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String) {
+        self.init(habit: habit, streak: 0)
     }
     
-    init(habit: String, timeToRemind: String) {
-        self.habit = habit
-        self.timeToRemind = timeToRemind
-        self.streak = 0
-        self.dates = []
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, timeToRemind: String) {
+        self.init(habit: habit, streak: 0, dates: [], timeToRemind: timeToRemind)
     }
     
-    init(habit: String, streak: Int) {
-        self.habit = habit
-        self.timeToRemind = ""
-        self.streak = streak
-        self.dates = []
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int) {
+        self.init(habit: habit, streak: streak, dates: [])
     }
     
-    init(habit: String, streak: Int, dates: [Date]) {
-        self.habit = habit
-        self.timeToRemind = ""
-        self.streak = streak
-        self.dates = dates
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int, dates: [Date]) {
+        self.init(habit: habit, streak: streak, dates: dates, timeToRemind: "")
     }
     
-    init(habit: String, streak: Int, dates: [Date], timeToRemind: String) {
-        self.habit = habit
-        self.streak = streak
-        self.dates = dates
-        self.timeToRemind = timeToRemind
-        self.imageUrls = []
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int, dates: [Date], timeToRemind: String) {
+        self.init(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: [])
     }
     
-    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String]) {
-        self.habit = habit
-        self.streak = streak
-        self.dates = dates
-        self.timeToRemind = timeToRemind
-        self.imageUrls = imageUrls
-        self.uncheckedImageUrls = []
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String]) {
+        self.init(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: [])
     }
     
-    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String]) {
-        self.habit = habit
-        self.streak = streak
-        self.timeToRemind = timeToRemind
-        self.dates = dates
-        self.imageUrls = imageUrls
-        self.uncheckedImageUrls = uncheckedImageUrls
-        self.uncheckedDates = []
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String]) {
+        self.init(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: [])
     }
     
-    init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date]) {
-        self.habit = habit
-        self.streak = streak
-        self.timeToRemind = timeToRemind
-        self.dates = dates
-        self.imageUrls = imageUrls
-        self.uncheckedImageUrls = uncheckedImageUrls
-        self.uncheckedDates = uncheckedDates
-        self.rejectedDates = []
+    convenience init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date]) {
+        self.init(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates, rejectedDates: [])
     }
 
     init(habit: String, streak: Int, dates: [Date], timeToRemind: String, imageUrls: [String], uncheckedImageUrls: [String], uncheckedDates: [Date], rejectedDates: [String]) {

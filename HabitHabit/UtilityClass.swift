@@ -10,30 +10,78 @@ import FirebaseDatabase
 
 class UtilityClass {
     
-    static let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
     static let database: DatabaseReference = Database.database().reference()
     static var profilePicture: UIImage = UIImage(named: "DefaultProfile")!
     static var habitNameUpdateDict: [String: [ImageDatePair]] = [:]
     static var accountIsPrivate: Bool = false
     static let compressionRate: CGFloat = 0.0
+    static var firstTimeSeeingPeerScreen: Bool = true
+    static var initialFriendHabits: [NameHabit] = []
     
-    static func saveProfileImage() -> Void {
-        self.database.child(self.databaseUsernameKey).child("ProfilePictureURL").observeSingleEvent(of: .value) {
-            snapshot in
-            guard let urlString = snapshot.value as? String else { return }
-            guard let url = URL(string: urlString) else { return }
-            let task = URLSession.shared.dataTask(with: url, completionHandler: {
-                data, _, error in
-                guard let data = data, error == nil else { return }
-                let image: UIImage? = UIImage(data: data)
-                self.profilePicture = image ?? self.profilePicture
-            })
-            task.resume()
+    static func loadDataForThePeerScreen(username: String) -> Void {
+        self.initialFriendHabits.removeAll()
+        self.database.child(username).child("Friends").observeSingleEvent(of: .value) {
+            snapshotFriend in
+            for case let childFriend as DataSnapshot in snapshotFriend.children {
+                guard let friend = childFriend.value as? String else { return }
+                self.database.child(friend).child("Private").getData {
+                    (error, snapshot) in
+                    var isPrivate = false
+                    if let error = error {
+                        print("Error Getting private status: \(error)")
+                    } else if snapshot.exists() {
+                        isPrivate = snapshot.value as? Bool ?? false
+                    }
+                    if !isPrivate {
+                        self.database.child(friend).child("Habit").observeSingleEvent(of: .value) {
+                            snapshotHabit in
+                            for case let childHabit as DataSnapshot in snapshotHabit.children {
+                                guard let habitValue = childHabit.value as? [String: String] else { return }
+                                let (habitExists, habit): (Bool, Habit?) = self.makeHabit(value: habitValue)
+                                if habitExists {
+                                    for index in 0..<habit!.uncheckedImageUrls.count {
+                                        let uncheckedImageUrl: String = habit!.uncheckedImageUrls[index]
+                                        let task = URLSession.shared.dataTask(with: URL(string: uncheckedImageUrl)!, completionHandler: {
+                                            data, _, error in
+                                            guard let data = data, error == nil else { return }
+                                            let result: UIImage = UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!
+                                            self.initialFriendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: uncheckedImageUrl, date: habit!.uncheckedDates[index], habit: habit!, image: result))
+                                            print("Peer habit added for \(friend) and habit: \(habit!.habit)")
+                                        })
+                                        task.resume()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
-    static func getPrivacyStatus() -> Void {
-        self.database.child(self.databaseUsernameKey).child("Private").observeSingleEvent(of: .value) {
+    static func saveProfileImage(username: String) -> Void {
+        self.database.child(username).child("ProfilePictureURL").observeSingleEvent(of: .value) {
+            snapshot in
+            if snapshot.exists() {
+                guard let urlString = snapshot.value as? String else { return }
+                guard let url = URL(string: urlString) else { return }
+                let task = URLSession.shared.dataTask(with: url, completionHandler: {
+                    data, _, error in
+                    guard let data = data, error == nil else { return }
+                    let image: UIImage? = UIImage(data: data)
+                    self.profilePicture = image ?? UIImage(named: "DefaultProfile")!
+                    print("Profile Picture loaded in: \(username)")
+                })
+                task.resume()
+            } else {
+                self.profilePicture = UIImage(named: "DefaultProfile")!
+                print("Profile picture not there, stick to default")
+            }
+        }
+    }
+    
+    static func getPrivacyStatus(username: String) -> Void {
+        self.database.child(username).child("Private").observeSingleEvent(of: .value) {
             snapshot in
             if snapshot.exists() {
                 self.accountIsPrivate = snapshot.value as? Bool ?? false
@@ -57,8 +105,8 @@ class UtilityClass {
         return Date(timeIntervalSince1970: timezoneEpochOffset)
     }
     
-    static func saveHabitUpdateImages() -> Void {
-        self.database.child(self.databaseUsernameKey).child("Habit").observeSingleEvent(of: .value) {
+    static func saveHabitUpdateImages(username: String) -> Void {
+        self.database.child(username).child("Habit").observeSingleEvent(of: .value) {
             snapshot in
             var habitList: [Habit] = []
             for case let child as DataSnapshot in snapshot.children {

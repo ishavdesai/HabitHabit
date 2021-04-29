@@ -119,12 +119,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         if !success {
             self.loginStatus?.text = "Sign In Failed: \(errorMessage!)"
         } else {
+            _ = UtilityClass()
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
             defaults.setValue(usernameKey!, forKey: "kUsername")
-            UtilityClass.saveHabitUpdateImages()
-            UtilityClass.saveProfileImage()
-            UtilityClass.getPrivacyStatus()
+            print("USERNAME LINE 125: \(usernameKey!)")
+            UtilityClass.loadDataForThePeerScreen(username: usernameKey!)
+            UtilityClass.saveHabitUpdateImages(username: usernameKey!)
+            UtilityClass.saveProfileImage(username: usernameKey!)
+            UtilityClass.getPrivacyStatus(username: usernameKey!)
             performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
         }
     }

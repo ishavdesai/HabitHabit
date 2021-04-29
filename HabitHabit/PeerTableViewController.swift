@@ -27,7 +27,13 @@ class PeerTableViewController: UITableViewController, DeleteFriendHabitFromTable
         self.peerTableView.delegate = self
         self.peerTableView.dataSource = self
         self.setupRefreshControl()
-        self.setupFriendHabits()
+        if UtilityClass.firstTimeSeeingPeerScreen {
+            UtilityClass.firstTimeSeeingPeerScreen = false
+            self.friendHabits = UtilityClass.initialFriendHabits
+            self.peerTableView.reloadData()
+        } else {
+            self.setupFriendHabits()
+        }
     }
     
     private func setupRefreshControl() -> Void {
