@@ -55,7 +55,7 @@ class HistoryViewController: UIViewController, FSCalendarDataSource, FSCalendarD
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let y_offset: CGFloat = 550
+        let y_offset: CGFloat = self.habitLabel.frame.maxY
         self.collectionView?.frame = CGRect(x: 0, y: y_offset, width: view.frame.size.width, height: view.frame.size.height - y_offset).integral
     }
     
