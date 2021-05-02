@@ -129,7 +129,7 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         let imagePicker: UIImagePickerController = UIImagePickerController()
         let dates: [Date] = habit.dates
         let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
-        if true || canAddPicture {
+        if canAddPicture {
             self.habitForImage = habit
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
