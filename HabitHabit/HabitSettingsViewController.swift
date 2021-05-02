@@ -126,6 +126,9 @@ class HabitSettingsViewController: UIViewController, UITableViewDataSource, UITa
         } else if timeToRemind == "" {
             self.showAlert(title: "Missing Time", message: "No Time to be reminded has been entered. Please enter a time to remind you to do a habit")
             return false
+        } else if UtilityClass.habitInHabitList(habitList: self.habitsList, habit: habitString ?? "") {
+            self.showAlert(title: "Duplicate Habit", message: "You already have a habit for \(habitString ?? ""). We do not allow duplicate habits.")
+            return false
         }
         return true
     }

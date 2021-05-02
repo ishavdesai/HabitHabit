@@ -142,6 +142,15 @@ class UtilityClass {
         return false
     }
     
+    static func habitInHabitList(habitList: [Habit], habit: String) -> Bool {
+        for element in habitList {
+            if element.habit.lowercased() == habit.lowercased() {
+                return true
+            }
+        }
+        return false
+    }
+    
     static func makeHabit(value: [String: String]) -> (Bool, Habit?) {
         let habit: String = value["habit"] ?? "NO_HABIT_EXISTS"
         let timeToRemind: String = value["timeToRemind"] ?? "NO_TIME_TO_REMIND"
