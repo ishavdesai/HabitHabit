@@ -122,21 +122,21 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
     }
     
     func takePictureAndUpdateHabit(habit: Habit) {
-        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
-            self.displayMessage(message: "Unable to access the camera. This is either a permission or emulator issue")
+        let source: UIImagePickerController.SourceType? = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : (UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? .photoLibrary : nil)
+        if source == nil {
+            self.displayMessage(message: "Unable to access the camera or the photo libaray.")
+        }
+        let imagePicker: UIImagePickerController = UIImagePickerController()
+        let dates: [Date] = habit.dates
+        let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
+        if canAddPicture {
+            self.habitForImage = habit
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source!
+            self.present(imagePicker, animated: true)
         } else {
-            let imagePicker: UIImagePickerController = UIImagePickerController()
-            let dates: [Date] = habit.dates
-            let canAddPicture: Bool = dates.count == 0 || !Calendar.current.isDateInToday(dates[dates.count - 1])
-            if canAddPicture {
-                self.habitForImage = habit
-                imagePicker.delegate = self
-                imagePicker.allowsEditing = true
-                imagePicker.sourceType = .camera
-                self.present(imagePicker, animated: true)
-            } else {
-                self.displayMessage(message: "You have already made an update for the day for the habit \(habit.habit). You can check back in tomorrow")
-            }
+            self.displayMessage(message: "You have already made an update for the day for the habit \(habit.habit). You can check back in tomorrow")
         }
     }
     
