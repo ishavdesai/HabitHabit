@@ -57,19 +57,11 @@ class ImageMagnificationViewController: UIViewController {
                     habit!.uncheckedDates.remove(at: indexOfImage)
                     habit!.uncheckedImageUrls.remove(at: indexOfImage)
                     self.database.child(self.friendHabit.username).child("Habit").child(habitChild.key).child("uncheckedImageUrls").setValue(habit!.uncheckedImageUrls.joined(separator: ","))
-                    self.database.child(self.friendHabit.username).child("Habit").child(habitChild.key).child("uncheckedDates").setValue(self.stringifyDateArray(datesParam: habit!.uncheckedDates).joined(separator: ","))
+                    self.database.child(self.friendHabit.username).child("Habit").child(habitChild.key).child("uncheckedDates").setValue(Habit.convertDateListToStringList(dates: habit!.uncheckedDates).joined(separator: ","))
                     self.database.child(self.friendHabit.username).child("Habit").child(habitChild.key).child("rejectedDates").setValue(habit!.rejectedDates.joined(separator: ","))
                 }
             }
         }
-    }
-    
-    private func stringifyDateArray(datesParam: [Date]) -> [String] {
-        var result: [String] = []
-        for date in datesParam {
-            result.append(date.description)
-        }
-        return result
     }
     
     @IBAction func checkPressed(_ sender: Any) {

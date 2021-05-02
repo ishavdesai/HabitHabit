@@ -152,14 +152,24 @@ class Habit {
         return true
     }
     
-    static func convertStringListToDateList(strList: [String], rejectedDateFormat: Bool = false) -> [Date] {
+    static func convertStringListToDateList(strList: [String]) -> [Date] {
         var result: [Date] = []
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = rejectedDateFormat ? "yyyy-MM-dd" : "yyyy-MM-dd HH:mm:ss Z"
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
         for date in strList {
             if date != "" {
                 result.append(dateFormatterGet.date(from: date)!)
             }
+        }
+        return result
+    }
+    
+    static func convertDateListToStringList(dates: [Date]) -> [String] {
+        var result: [String] = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        for date in dates {
+            result.append(dateFormatter.string(from: date))
         }
         return result
     }

@@ -31,6 +31,10 @@ class NameHabit {
         self.image = image
     }
     
+    func compare(_ other: NameHabit) -> Bool {
+        return self.date < other.date
+    }
+    
     func getImage() -> UIImage {
         if self.image != nil {
             return self.image!

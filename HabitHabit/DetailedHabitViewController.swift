@@ -11,7 +11,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     
     private var collectionView: UICollectionView?
     var habit: Habit?
-    var habitImages: [UIImage] = []
+    var imageDateList: [ImageDatePair] = []
     @IBOutlet weak var habitCountLabel: UILabel!
     let habitImageMagnifierSegue: String = "HabitImageMagnifierSegue"
     
@@ -20,7 +20,7 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
         self.view.backgroundColor = UIColor.habit.purple
         self.title = self.habit?.habit
         habitCountLabel.text = String(self.habit?.computeStreakLength() ?? 0)
-        self.habitImages = UtilityClass.getAllImagesOnly(imageDateList: UtilityClass.habitNameUpdateDict[self.habit!.habit]!)
+        self.imageDateList = UtilityClass.habitNameUpdateDict[self.habit!.habit]!
         self.setupCollectionView()
     }
     
@@ -44,12 +44,12 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.habitImages.count
+        return self.imageDateList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: HabitImageCircleCollectionViewCell.identifier, for: indexPath as IndexPath) as! HabitImageCircleCollectionViewCell
-        cell.configure(image: self.habitImages[indexPath.row])
+        cell.configure(image: self.imageDateList[indexPath.row].image)
         return cell
     }
     
@@ -62,10 +62,10 @@ class DetailedHabitViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let date = self.habit!.dates[indexPath.row]
-        let image = self.habitImages[indexPath.row]
+        let date = self.imageDateList[indexPath.row].date
+        let image = self.imageDateList[indexPath.row].image
         let uncheckedDate = self.habit!.uncheckedDates
-        let rejectedDate: [Date] = Habit.convertStringListToDateList(strList: self.habit!.rejectedDates, rejectedDateFormat: true)
+        let rejectedDate: [Date] = Habit.convertStringListToDateList(strList: self.habit!.rejectedDates)
         var updateStatus: Bool?
         if uncheckedDate.contains(date) {
             updateStatus = nil

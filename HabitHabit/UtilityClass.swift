@@ -45,7 +45,8 @@ class UtilityClass {
                                             data, _, error in
                                             guard let data = data, error == nil else { return }
                                             let result: UIImage = UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!
-                                            self.initialFriendHabits.append(NameHabit(username: friend, habitName: habit!.habit, imageUrl: uncheckedImageUrl, date: habit!.uncheckedDates[index], habit: habit!, image: result))
+                                            let insertionElement: NameHabit = NameHabit(username: friend, habitName: habit!.habit, imageUrl: uncheckedImageUrl, date: habit!.uncheckedDates[index], habit: habit!, image: result)
+                                            self.initialFriendHabits.insert(insertionElement, at: self.initialFriendHabits.insertionIndexOf(insertionElement, isOrderedBefore: { $0.compare($1) }))
                                             print("Peer habit added for \(friend) and habit: \(habit!.habit)")
                                         })
                                         task.resume()
@@ -98,11 +99,7 @@ class UtilityClass {
     }
     
     static func getTimeWithCorrectTimeZone() -> Date {
-        let todayDate = Date()
-        let timezoneOffset = TimeZone.current.secondsFromGMT()
-        let epochDate = todayDate.timeIntervalSince1970
-        let timezoneEpochOffset = (epochDate + Double(timezoneOffset))
-        return Date(timeIntervalSince1970: timezoneEpochOffset)
+        return Date()
     }
     
     static func saveHabitUpdateImages(username: String) -> Void {
@@ -120,11 +117,14 @@ class UtilityClass {
                 let imageUrls = habit.imageUrls
                 self.habitNameUpdateDict[habit.habit] = []
                 for index in 0..<imageUrls.count {
+                    print("Date: \(habit.dates[index])")
+                    print("Image URL: \(imageUrls[index])")
                     guard let url = URL(string: imageUrls[index]) else { return }
                     let task = URLSession.shared.dataTask(with: url, completionHandler: {
                         data, _, error in
                         guard let data = data, error == nil else { return }
-                        self.habitNameUpdateDict[habit.habit]!.append(ImageDatePair(image: UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!, date: habit.dates[index]))
+                        let insertionElement: ImageDatePair = ImageDatePair(image: UIImage(data: data) ?? UIImage(named: "DefaultPeerHabit")!, date: habit.dates[index])
+                        self.habitNameUpdateDict[habit.habit]!.insert(insertionElement, at: self.habitNameUpdateDict[habit.habit]!.insertionIndexOf(insertionElement, isOrderedBefore: { $0.compare($1) }))
                         print("IMAGE ADDED FOR HABIT: \(habit.habit)")
                     })
                     task.resume()
@@ -159,4 +159,22 @@ class UtilityClass {
         let habitResult: Habit? = habitExists ? Habit(habit: habit, streak: streak, dates: dates, timeToRemind: timeToRemind, imageUrls: imageUrls, uncheckedImageUrls: uncheckedImageUrls, uncheckedDates: uncheckedDates, rejectedDates: rejectedDates) : nil
         return (habitExists, habitResult)
     }
+}
+
+extension Array {
+    func insertionIndexOf(_ elem: Element, isOrderedBefore: (Element, Element) -> Bool) -> Int {
+            var lo = 0
+            var hi = self.count - 1
+            while lo <= hi {
+                let mid = (lo + hi)/2
+                if isOrderedBefore(self[mid], elem) {
+                    lo = mid + 1
+                } else if isOrderedBefore(elem, self[mid]) {
+                    hi = mid - 1
+                } else {
+                    return mid // found at position mid
+                }
+            }
+            return lo // not found, would be inserted at position lo
+        }
 }

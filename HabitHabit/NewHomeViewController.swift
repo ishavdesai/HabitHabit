@@ -156,7 +156,8 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         df.dateFormat = "LLLL dd, yyyy"
         let imageText: String = df.string(from: todayDate)
         let imageToAdd: UIImage = self.textToImage(drawText: imageText, inImage: image, atPoint: CGPoint(x: 100, y: 100))
-        UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.append(ImageDatePair(image: imageToAdd, date: todayDate))
+        let insertionElement: ImageDatePair = ImageDatePair(image: imageToAdd, date: todayDate)
+        UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.insert(insertionElement, at: UtilityClass.habitNameUpdateDict[self.habitForImage!.habit]!.insertionIndexOf(insertionElement, isOrderedBefore: { $0.compare($1) }))
         guard let imageData = imageToAdd.jpegData(compressionQuality: UtilityClass.compressionRate) else { return }
         let randomNumber: Int = Int.random(in: 0..<1_000_000)
         self.storage.child(self.databaseUsernameKey).child("Habit").child(self.habitForImage!.habit).child(String(randomNumber)).putData(imageData, metadata: nil, completion: {
@@ -182,10 +183,10 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
                             self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedImageUrls").setValue(currentUncheckedURLS.joined(separator: ","))
                             var currentDates = habitFromDatabase!.dates
                             currentDates.append(todayDate)
-                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(self.stringifyDateArray(dates: currentDates).joined(separator: ","))
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("dates").setValue(Habit.convertDateListToStringList(dates: currentDates).joined(separator: ","))
                             var uncheckedDates = habitFromDatabase!.uncheckedDates
                             uncheckedDates.append(todayDate)
-                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedDates").setValue(self.stringifyDateArray(dates: uncheckedDates).joined(separator: ","))
+                            self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("uncheckedDates").setValue(Habit.convertDateListToStringList(dates: currentDates).joined(separator: ","))
                             if currentDates.count == 1 {
                                 self.database.child(self.databaseUsernameKey).child("Habit").child(child.key).child("streak").setValue(String(1))
                             } else if currentDates.count >= 2 {
@@ -224,14 +225,6 @@ extension NewHomeViewController: UITableViewDataSource, UITableViewDelegate, Hab
         UIGraphicsEndImageContext()
         
         return newImage!
-    }
-    
-    private func stringifyDateArray(dates: [Date]) -> [String] {
-        var result: [String] = []
-        for date in dates {
-            result.append(date.description)
-        }
-        return result
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
