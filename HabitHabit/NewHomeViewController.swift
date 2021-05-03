@@ -22,6 +22,8 @@ class NewHomeViewController: UIViewController {
     private let storage = Storage.storage().reference()
     private let database: DatabaseReference = Database.database().reference()
     private let databaseUsernameKey: String = UserDefaults.standard.string(forKey: "kUsername") ?? "USERNAME_DATABASE_KEY_ERROR"
+    private var landingButton: UIButton?
+    private var landingButtonClicked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,16 +56,54 @@ class NewHomeViewController: UIViewController {
                 }
             }
             self.habitsList = tempHabitList
+            self.addHabitButtonViewIfNeeded()
+        }
+    }
+    
+    private func addHabitButtonViewIfNeeded() -> Void {
+        if self.habitsList.count == 0 {
+            self.habitTableView.isHidden = true
+            if self.landingButton == nil {
+                self.landingButtonClicked = false
+                self.landingButton = UIButton(frame: CGRect(x: self.view.center.x - (self.view.frame.width / 4), y: self.view.center.y - (self.view.frame.width / 4), width: self.view.frame.width / 2, height: 50))
+                self.landingButton?.setTitle("Add a Habit", for: .normal)
+                self.landingButton?.backgroundColor = UIColor.habit.orange
+                self.landingButton?.tintColor = .white
+                self.landingButton?.addTarget(self, action: #selector(self.addHabitLandingButtonPressed(_:)), for: .touchUpInside)
+                self.view.addSubview(self.landingButton!)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    if !self.landingButtonClicked {
+                        let pulse = ButtonPulseAnimation(numberOfPulses: 3, radius: 200, position: self.landingButton!.center)
+                        pulse.animationDuration = 0.5
+                        pulse.backgroundColor = UIColor.habit.orange.cgColor
+                        self.view.layer.insertSublayer(pulse, below: self.view.layer)
+                    }
+                }
+            }
+        } else {
+            if self.landingButton != nil {
+                self.landingButton!.removeFromSuperview()
+                self.landingButton = nil
+            }
+            self.habitTableView.isHidden = false
             self.habitTableView.reloadData()
         }
     }
     
-    @IBAction func onPressPlus(_ sender: Any) {
+    private func addHabitHelper() -> Void {
+        self.landingButtonClicked = true
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
         let habitManagerView = storyboard.instantiateViewController(withIdentifier: "HabitSettingsVCID")
         self.present(habitManagerView, animated:true, completion:nil)
     }
     
+    @objc private func addHabitLandingButtonPressed(_ sender: Any) -> Void {
+        self.addHabitHelper()
+    }
+    
+    @IBAction func onPressPlus(_ sender: Any) {
+        self.addHabitHelper()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "habitPressSegue",
