@@ -14,6 +14,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     private var onLoginSegment: Bool = true
     private let loginSuccessSegue: String = "LoginSuccessSegue"
+    private let performOnboardingSegue: String = "PerformOnboardingSegue"
     private let database: DatabaseReference = Database.database().reference()
     
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
@@ -54,7 +55,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             if let error = error, authResult == nil {
                 self.loginAttempt(success: false, errorMessage: error.localizedDescription, usernameKey: nil)
             } else {
-                let username: String = user.profile.givenName + user.profile.familyName
+                let username: String = "\(user.profile.givenName ?? "No First Name") \(user.profile.familyName ?? "No Last Name")"
                 self.loginAttempt(success: true, errorMessage: nil, usernameKey: username)
             }
         }
@@ -111,6 +112,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         } else if !self.onLoginSegment && self.confirmPasswordField?.text != self.passwordField?.text {
             self.loginStatus?.text = "Sign Up Failed: Please ensure the Password matches the Confirmed Password"
             return false
+        } else if !self.onLoginSegment && self.usernameField?.text?.contains(" ") ?? false {
+            self.loginStatus?.text = "Sign Up Failed: No spaces are allowed in the username"
+            return false
         }
         return true
     }
@@ -123,12 +127,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             let defaults: UserDefaults = UserDefaults.standard
             self.loginStatus?.text = "Login Success"
             defaults.setValue(usernameKey!, forKey: "kUsername")
-            print("USERNAME LINE 125: \(usernameKey!)")
             UtilityClass.loadDataForThePeerScreen(username: usernameKey!)
             UtilityClass.saveHabitUpdateImages(username: usernameKey!)
             UtilityClass.saveProfileImage(username: usernameKey!)
             UtilityClass.getPrivacyStatus(username: usernameKey!)
-            performSegue(withIdentifier: self.loginSuccessSegue, sender: nil)
+            self.database.child(usernameKey!).child("AccountStatus").observeSingleEvent(of: .value) {
+                snapshot in
+                self.performSegue(withIdentifier: snapshot.exists() ? self.loginSuccessSegue : self.performOnboardingSegue, sender: nil)
+            }
         }
     }
     

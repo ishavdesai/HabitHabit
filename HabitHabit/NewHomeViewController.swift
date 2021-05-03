@@ -34,19 +34,9 @@ class NewHomeViewController: UIViewController {
         }
         habitTableView.delegate = self
         habitTableView.dataSource = self
-        
         self.tabBarItem.title = "New Home"
         navigationController?.navigationBar.prefersLargeTitles = true
-        //        navigationItem.largeTitleDisplayMode = .never
-        
-        // let now = Date()
-        // let df = DateFormatter()
-        // df.dateFormat = "LLLL dd, yyyy"
         self.navigationItem.title = "Habits"
-        //
-        //        habitsList.append(Habit(habit: "Wake Up Early", streak: 3, dates: []))
-        //        habitsList.append(Habit(habit: "Go for a run", streak: 1, dates: []))
-        
         self.populateHabits()
     }
     
