@@ -44,6 +44,8 @@
 		CE185282263278D700CB994A /* UIDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE185281263278D700CB994A /* UIDesign.swift */; };
 		CE1852862632AA9000CB994A /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1852852632AA8F00CB994A /* GenericTableViewCell.swift */; };
 		CEAA4C6826424DEA00D4B88D /* TutorialTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA4C6726424DEA00D4B88D /* TutorialTipsViewController.swift */; };
+		CEAA4C6B2643400800D4B88D /* OnboardingPFPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA4C6A2643400700D4B88D /* OnboardingPFPViewController.swift */; };
+		CEAA4C6E264348DE00D4B88D /* OnboardingFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA4C6D264348DE00D4B88D /* OnboardingFriendsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		CE185281263278D700CB994A /* UIDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDesign.swift; sourceTree = "<group>"; };
 		CE1852852632AA8F00CB994A /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		CEAA4C6726424DEA00D4B88D /* TutorialTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialTipsViewController.swift; sourceTree = "<group>"; };
+		CEAA4C6A2643400700D4B88D /* OnboardingPFPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPFPViewController.swift; sourceTree = "<group>"; };
+		CEAA4C6D264348DE00D4B88D /* OnboardingFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFriendsViewController.swift; sourceTree = "<group>"; };
 		FEE583D82C09C3D40DFC59B1 /* Pods-HabitHabit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHabit.debug.xcconfig"; path = "Target Support Files/Pods-HabitHabit/Pods-HabitHabit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +139,8 @@
 				CE185281263278D700CB994A /* UIDesign.swift */,
 				91E1240E2623B6EF00048BB3 /* AboutFriendViewController.swift */,
 				91CB0F4D263F9A45005C8F86 /* OnboardingViewController.swift */,
+				CEAA4C6D264348DE00D4B88D /* OnboardingFriendsViewController.swift */,
+				CEAA4C6A2643400700D4B88D /* OnboardingPFPViewController.swift */,
 				91303B69263752FC009B275D /* FriendRequestTableViewCell.swift */,
 				9197B17A26294536007B5A35 /* NameHabit.swift */,
 				91614E0726327BAD00EF55D5 /* UtilityClass.swift */,
@@ -323,11 +329,13 @@
 				91614E0826327BAD00EF55D5 /* UtilityClass.swift in Sources */,
 				91CB0F55263FC707005C8F86 /* ButtonPulseAnimation.swift in Sources */,
 				91CB0F4E263F9A45005C8F86 /* OnboardingViewController.swift in Sources */,
+				CEAA4C6E264348DE00D4B88D /* OnboardingFriendsViewController.swift in Sources */,
 				91303B6A263752FC009B275D /* FriendRequestTableViewCell.swift in Sources */,
 				913305CE260E9E200062DD7E /* PeerTableViewController.swift in Sources */,
 				91330418260E6C780062DD7E /* LoginViewController.swift in Sources */,
 				91330414260E6C780062DD7E /* AppDelegate.swift in Sources */,
 				0CB0548A2613DA9000912B0E /* HabitTableViewCell.swift in Sources */,
+				CEAA4C6B2643400800D4B88D /* OnboardingPFPViewController.swift in Sources */,
 				91E1240C2623993200048BB3 /* HabitBuddiesManagerViewController.swift in Sources */,
 				917E278F26122DEE00E6D920 /* Habit.swift in Sources */,
 				912992C42624DCE80097DB7D /* HabitImageCircleCollectionViewCell.swift in Sources */,

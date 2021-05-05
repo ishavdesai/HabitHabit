@@ -38,8 +38,8 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     private func setupTextForOnboarding() -> Void {
-        self.titleText = ["Welcome To HabitHabit!", "Achieve Goals", "Features"]
-        self.subtitleText = ["Hi \(self.databaseUsernameKey)! Thank you for downloading HabitHabit!", "Here at HabitHabit, we hope to help you achieve your goals and help you keep yourself accountable. Work hard and accomplish your goals!", "Add habits, track them with pictures, and add friends and help hold each other accountable!"]
+        self.titleText = ["Welcome To HabitHabit!", "Achieve your goals.", "Ready to start?"]
+        self.subtitleText = ["Hi \(self.databaseUsernameKey)! Thank you for downloading HabitHabit!", "HabitHabit is a social habit tracker in which users approve successful completions of each others habits!", "Add habits, track them with pictures, and add friends and help hold each other accountable!"]
     }
     
     
@@ -63,11 +63,17 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         let initialPage = 0
         let page1 = TutorialTipsViewController(titleText: self.titleText[0], subtitleText: self.subtitleText[0], button: UIButton())
         let page2 = TutorialTipsViewController(titleText: self.titleText[1], subtitleText: self.subtitleText[1], button: UIButton())
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let pfpVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPFPVCID")
+        let friendsVC = storyboard.instantiateViewController(withIdentifier: "OnboardingFriendsVCID")
         let page3 = TutorialTipsViewController(titleText: self.titleText[2], subtitleText: self.subtitleText[2], button: self.segueButton)
                 
         // add the individual viewControllers to the pageViewController
         self.pages.append(page1)
         self.pages.append(page2)
+        self.pages.append(pfpVC)
+        self.pages.append(friendsVC)
         self.pages.append(page3)
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
 
