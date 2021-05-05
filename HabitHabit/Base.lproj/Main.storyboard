@@ -190,7 +190,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LHh-bh-Dcc">
-                                <rect key="frame" x="10" y="145" width="394" height="668"/>
+                                <rect key="frame" x="10" y="93" width="394" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitCell" rowHeight="100" id="Lre-6I-Ycs" customClass="HabitTableViewCell" customModule="HabitHabit" customModuleProvider="target">
@@ -1243,7 +1243,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xKT-1x-ks6"/>
+        <segue reference="TaT-Bz-ec4"/>
         <segue reference="rQw-II-25O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.91372549020000005" green="0.3294117647" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
