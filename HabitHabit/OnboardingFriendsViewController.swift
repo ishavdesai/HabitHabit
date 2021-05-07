@@ -129,6 +129,10 @@ class OnboardingFriendsViewController: UIViewController, UITableViewDelegate, UI
             self.statusLabel.textColor = .systemRed
             self.statusLabel.text = "\(username) has already sent you a friend request. Respond to the friend request on the friend request page"
             return
+        } else if self.databaseUsernameKey == username {
+            self.statusLabel.textColor = .systemRed
+            self.statusLabel.text = "You can't add yourself as a friend"
+            return
         }
         self.database.child(username).observeSingleEvent(of: .value) {
             snapshot in
@@ -188,15 +192,5 @@ class OnboardingFriendsViewController: UIViewController, UITableViewDelegate, UI
             destination.username = nameSelected
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

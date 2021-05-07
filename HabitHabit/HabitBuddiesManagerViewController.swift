@@ -137,6 +137,10 @@ class HabitBuddiesManagerViewController: UIViewController, UITableViewDelegate, 
             self.statusLabel.textColor = .systemRed
             self.statusLabel.text = "\(username) has already sent you a friend request. Respond to the friend request on the friend request page"
             return
+        } else if self.databaseUsernameKey == username {
+            self.statusLabel.textColor = .systemRed
+            self.statusLabel.text = "You can't add yourself as a friend."
+            return
         }
         self.database.child(username).observeSingleEvent(of: .value) {
             snapshot in

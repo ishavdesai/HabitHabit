@@ -30,9 +30,7 @@ class NewHomeViewController: UIViewController {
         self.view.backgroundColor = UIColor.habit.purple
         self.database.child(self.databaseUsernameKey).observeSingleEvent(of: .value) {
             snapshot in
-            if !snapshot.exists() {
-                self.database.child(self.databaseUsernameKey).setValue(["AccountStatus":"AccountCreated"])
-            }
+            self.database.child(self.databaseUsernameKey).child("AccountStatus").setValue("AccountCreated")
         }
         habitTableView.delegate = self
         habitTableView.dataSource = self
